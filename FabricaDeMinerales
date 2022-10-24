@@ -1,0 +1,33 @@
+package tp;
+
+import tp.Mineral.tipoDeMineral;
+
+public class FabricaDeMinerales {
+	
+	public Mineral crear(tipoDeMineral tipoMineral) {
+		if(tipoMineral == null) {
+			//throw an exception bc tipoMineral shouldn't be null
+		}
+		else if(tipoMineral == tipoDeMineral.COBRE) {
+			return new Mineral(tipoDeMineral.COBRE,30,'C');
+		}
+		else if(tipoMineral == tipoDeMineral.BRONCE) {
+			return new Mineral(tipoDeMineral.BRONCE,60,'B');
+		}
+		else if(tipoMineral == tipoDeMineral.HIERRO) {
+			return new Mineral(tipoDeMineral.HIERRO,50,'H');
+		}
+		else if(tipoMineral == tipoDeMineral.PLATA) {
+			return new Mineral(tipoDeMineral.PLATA,150,'P');
+		}
+		else if(tipoMineral == tipoDeMineral.ORO) {
+			return new Mineral(tipoDeMineral.ORO,300,'O');
+		}
+		else if(tipoMineral == tipoDeMineral.DIAMANTE) {
+			return new Mineral(tipoDeMineral.DIAMANTE,675,'D');
+		}
+		else {
+			//throw an exception for invalid type
+		}
+	}
+}
