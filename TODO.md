@@ -5,15 +5,17 @@ Te amo pelotudo :P
 
 ## Pendientes
 
--Pensar las pruebas (global, ambos)
--Implementar las tiendas y la estación de ventas (Clari)
--Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Clari)
--Interacción con las tiendas (Clari)
+* Pensar las pruebas (global, ambos)
+* Implementar las tiendas y la estación de ventas (Clari)
+* Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Clari)
+* Interacción con las tiendas (Clari)
+* Límite de inventario (no se puede exceder)
+* No se puede mover hacia arriba en ciertos bloques (en la mayoría)
 
 ## Terminadas
--Mejorar la implementación del terreno (Fran)
--Mejorar las partes que tienen muchos if (Clari)
--Implementar el movimiento (Fran)
+* Mejorar la implementación del terreno (Fran)
+* Mejorar las partes que tienen muchos if (Clari)
+* Implementar el movimiento (Fran)
 
 # Cosas a mencionar:
 * El manejo de la ubicacion del pj esta rarazo, pero con la implementacion actual era eso o dos loops que borren al pj anterior.
