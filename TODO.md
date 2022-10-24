@@ -1,4 +1,8 @@
-$ Hola
+# Tareas Fran
+
+## Pendientes
+
+## Terminadas
 
 
 # Cosas a mencionar:
