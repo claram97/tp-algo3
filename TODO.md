@@ -11,6 +11,7 @@ Te amo pelotudo :P
 * Interacción con las tiendas (Clari)
 * Límite de inventario (no se puede exceder)
 * No se puede mover hacia arriba en ciertos bloques (en la mayoría)
+* Cuando se compra con un valor predeterminado, solo se gasta la plata necesaria.
 
 ## Terminadas
 * Mejorar la implementación del terreno (Fran)
