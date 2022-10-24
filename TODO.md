@@ -3,14 +3,14 @@ Las tareas son para cualquiera a menos que la tarea especifique quién debería 
 Pasarlas a la sección de terminadas al finalizar para motivarnos.
 Te amo pelotudo :P
 
-### Pendientes
+## Pendientes
 
 -Pensar las pruebas (global, ambos)
 -Implementar las tiendas y la estación de ventas (Clari)
 -Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Clari)
 -Interacción con las tiendas (Clari)
 
-### Terminadas
+## Terminadas
 -Mejorar la implementación del terreno (Fran)
 -Mejorar las partes que tienen muchos if (Clari)
 -Implementar el movimiento (Fran)
