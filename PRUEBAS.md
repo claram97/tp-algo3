@@ -11,3 +11,5 @@
 * Probar que al vender minerales, estos se eliminan correctamente.
 * Probar que al vender minerales se gana la plata correspondiente.
 * Probar que al comprar una mejora, la misma se aplica correctamente.
+* Límite de inventario (no se puede exceder)
+* No se puede mover hacia arriba en ciertos bloques (en la mayoría)
