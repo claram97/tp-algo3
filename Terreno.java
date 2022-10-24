@@ -55,8 +55,10 @@ public class Terreno {
 			System.out.print("\n");
 		}
 		System.out.print('\n');
-		
-		
+	}
+	
+	public void romperBloque(int x, int y) {
+		terreno[x][y] = new Aire();
 	}
 	
 	
