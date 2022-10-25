@@ -15,19 +15,10 @@ public class Juego {
 	}
 	
 	private void interaccionBloques() {
-		this.terreno.romperBloque(jugador.getY(), jugador.getX());
+		this.terreno.romperBloque(jugador.getPosicion());
 	}
 
-	private boolean jugadorDebeCaer(){
-		jugador.setY(jugador.getY()+1);
-		boolean cae = false;
-		if(terreno.casilleroVacio(jugador.getPosicion())){
-			cae = true;
-		}
-		jugador.setY(jugador.getY()-1);
-		return cae;
-	}
-	
+
 	private estadoDelJuego estadoJuego(){
 		if(jugador.seEstrello() || jugador.seQuedoSinCombustible()){
 			return estadoDelJuego.PERDIDO;
@@ -39,17 +30,20 @@ public class Juego {
 	
 	public void gameLoop() {
 		terreno.imprimirTerreno(this.jugador);
+		AccionJugador control = new AccionJugador(jugador, terreno);
 		Scanner input = new Scanner(System.in);
 		
 		while(estadoJuego == estadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
-			jugador.mover(movimiento);
-			//Acá habría que ver cómo armar un contador que cuente la altura de la que cae e implementar la función que calcula el daño según la altura :P
-			while(jugadorDebeCaer()){
-				jugador.caer();
-			}
+			control.moverPJ(movimiento);
 			interaccionBloques();
+			//Acá habría que ver cómo armar un contador que cuente la altura de la que cae e implementar la función que calcula el daño según la altura :P
+//			No funciona bien
+//			while(jugadorDebeCaer()){
+//				jugador.caer();
+//			}
 			terreno.imprimirTerreno(jugador);
+			jugador.mostrarInventario();
 		}
 	}
 	

@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class Terreno {
 	private Bloque[][] terreno;
+	private int ancho;
+	private int alto;
 	
 	private Bloque ponerBloque() {
 		Random rand = new Random();
@@ -23,16 +25,27 @@ public class Terreno {
 	}
 	
 	public boolean casilleroVacio(Posicion posicion) {
-		return(terreno[posicion.getPosicionX()][posicion.getPosicionY()] instanceof Aire);
+		if(posicion.getPosicionY() == this.alto - 1) {
+			return false;
+		}
+		
+		return(terreno[posicion.getPosicionY()][posicion.getPosicionX ()].getTipo() == tipoDeBloque.AIRE);
 	}
 	
-	public Terreno() {
-		terreno = new Bloque[10][10];
-		for(int i = 0; i < 10; i++) {
-			terreno[0][i] = new Aire();
+	public Bloque devolverBloque(Posicion pos) {
+		return(terreno[pos.getPosicionY()][pos.getPosicionX()]);
+	}
+	
+	public Terreno(int alto, int ancho) {
+		this.alto = alto;
+		this.ancho = ancho;
+		
+		terreno = new Bloque[alto][ancho];
+		for(int k = 0; k < ancho; k++) {
+			terreno[0][k] = new Aire();
 		}
-		for(int i = 1; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
+		for(int i = 1; i < alto; i++) {
+			for(int j = 0; j < ancho; j++) {
 				terreno[i][j] = ponerBloque();
 			}
 		}
@@ -44,8 +57,8 @@ public class Terreno {
 		int x = pj.getX();
 		int y = pj.getY();
 		
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
+		for(int i = 0; i < this.alto; i++) {
+			for(int j = 0; j < this.ancho; j++) {
 				if(j == x && i == y) {
 					System.out.print(' ');
 					System.out.print(pj.getLetra());
@@ -61,8 +74,9 @@ public class Terreno {
 		System.out.print('\n');
 	}
 	
-	public void romperBloque(int x, int y) {
-		terreno[x][y] = new Aire();
+	//No se porque esto queda bien asi invertido aaaaaaa.
+	public void romperBloque(Posicion posicion) {
+		terreno[posicion.getPosicionY()][posicion.getPosicionX()] = new Aire();
 	}
 	
 	

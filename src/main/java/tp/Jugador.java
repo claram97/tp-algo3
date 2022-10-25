@@ -10,12 +10,11 @@ public class Jugador implements Bloque{
 	Posicion posicion;
 	int capacidadTanque;
 	int resistencia; //a mayor resistencia, menos vida pierde, después lo implementamos bien :P
+	int maxInventario;
 	int maxHP;
 	
 	public Jugador(int tamanioTerreno) {
-		if(hp < 0 || nivelCombustible < 0 || tamanioTerreno < 0) {
-			//throw an exception
-		}
+		//Faltaria la excepcion para tamaño terreno
 		this.nivelCombustible = 10;
 		this.mineralesRecolectados = new ArrayList<Bloque>();
 		this.posicion = new Posicion(tamanioTerreno/2, 0);
@@ -23,40 +22,36 @@ public class Jugador implements Bloque{
 		this.capacidadTanque = 10;
 		this.hp = 10;
 		this.resistencia = 10; //no se que valores le vamos a poner a esto, después lo charlamos bien :P
+		this.maxInventario = 10;
 		this.maxHP = 10;
 	}
 	
-	public void caer() {
-		this.posicion.setPosicionY(this.posicion.getPosicionY() + 1);
-	}
-	
-	
 	//Hay que mover y aparte hay que ir restando el combustible, y si está usando el taladro debería perder hp :P
 	//Evidentemente el 10 esta hardcodeado, faltarian unas constantes.
-	public void mover(char movimiento) {
-		if(movimiento == 'W' && this.posicion.getPosicionY() > 0) {
-			this.posicion.setPosicionY(this.posicion.getPosicionY()-1);
-		}
-		else if(movimiento == 'A' && this.posicion.getPosicionX() > 0) {
-			this.posicion.setPosicionX(this.posicion.getPosicionX()-1);
-		}
-		else if(movimiento == 'S' && this.posicion.getPosicionY() < 10) {
-			this.posicion.setPosicionY(this.posicion.getPosicionY() + 1);
-		}
-		else if(movimiento == 'D' && this.posicion.getPosicionX() < 10) {
-			this.posicion.setPosicionX(this.posicion.getPosicionX()+1);
-		} else {
-			//Excepcion.
-		}
-	}
+	
 	
 	//Supongo que la idea sería armar algún tipo de loop para vender los minerales, cuestión que vaya recibiendo
 	//de a uno hasta que ese loop se termine y los vaya buscando de a uno y eliminándolos :P
+	//Habria que revisar esto. el juego original creo que te permite vender de a uno pero nunca use eso :p.
 	public void venderMinerales(Bloque mineral) {
 		if(mineralesRecolectados.contains(mineral)) {
 			this.mineralesRecolectados.remove(mineral);
 		}
 		this.dinero += mineral.getPrecio();
+	}
+	
+	public void agregarInventario(Bloque mineral) {
+		if(mineralesRecolectados.size() < this.maxInventario) {
+			mineralesRecolectados.add(mineral);
+		}
+	}
+	
+	//Mas que nada para chequear el funcionamiento, quizas inventario sea una clase aparte. No lo se.
+	public void mostrarInventario() {
+		for(Bloque b: mineralesRecolectados) {
+			System.out.print(" | " + b.getLetra());
+		}
+		System.out.print('\n');
 	}
 
 	public int getPrecio() {
@@ -84,7 +79,7 @@ public class Jugador implements Bloque{
 	}
 	
 	public boolean seQuedoSinCombustible() {
-		return this.nivelCombustible == 0;
+		return this.nivelCombustible <= 0;
 	}
 	
 	public int nivelDeCombustible() {
@@ -101,7 +96,7 @@ public class Jugador implements Bloque{
 	private boolean tieneSuficienteDinero(int dinero){
 		return (this.dinero >= dinero);
 	}
-	
+
 	public void cargarCombustible(int cantidadCombustible,int cantidadDePlata) {
 		if(tieneSuficienteDinero(cantidadDePlata)){
 			if(cantidadCombustible + this.nivelCombustible >= this.capacidadTanque){
@@ -127,6 +122,10 @@ public class Jugador implements Bloque{
 
 	public void setY(int i) {
 		this.posicion.setPosicionY(i);
+	}
+
+	public void setX(int i) {
+		this.posicion.setPosicionX(i);
 	}
 
 	
