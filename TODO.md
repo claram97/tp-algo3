@@ -18,6 +18,10 @@ Te amo pelotudo :P
 * Leer el código de mi rama, seguro tenés que cambiar la creación de Jugador porque le cambié el constructor y hay cosas comentadas en el código que hay que mejorar o implementar así que podés mirarlas y tratar de solucionarlas :P corte búsqueda del tesoro juju (Fran)
 * Actualizar bien los valores de cada tipo de bloque: Hierro 30, Bronce 60, Plata 100, Oro 150, Diamante 300, Aire y Tierra hasta que lo tengamos mejor implementado valen 0 :P (Fran)
 * La nafta vale $1 :P creo que puse 5, después lo actualizo (Clari)
+* Hay que ver cuánta nafta gasta cuando se mueve :P creo que $1 x bloque
+* Las reparaciones valen $10 x hp creo :P
+* Opciones de nafta: 5, 10, 25, 50, full
+* Opciones de reparación: 50, 100, 200, 500, total
 
 ## Terminadas
 * Mejorar la implementación del terreno (Fran)
