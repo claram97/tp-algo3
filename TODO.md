@@ -7,11 +7,10 @@ Te amo pelotudo :P
 
 * Pensar las pruebas (global, ambos)
 * Implementar las tiendas y la estación de ventas (Clari)
-* Cuando se pasa por arriba de un bloque, se tiene que transformar en aire
+* Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Fran)
 * Interacción con las tiendas (Clari)
-* Límite de inventario (no se puede exceder)
-* No se puede mover hacia arriba en ciertos bloques (en la mayoría)
-* Cuando se compra con un valor predeterminado, solo se gasta la plata necesaria.
+* Límite de inventario (no se puede exceder) (Clari)
+* No se puede mover hacia arriba a menos que el bloque sea aire. (Fran)
 
 ## Terminadas
 * Mejorar la implementación del terreno (Fran)
