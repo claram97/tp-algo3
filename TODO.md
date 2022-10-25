@@ -26,7 +26,7 @@ Te amo pelotudo :P
 * Opciones de reparación: 50, 100, 200, 500, total
 * Ponerle al jugador un vector para las mejoras que se usan una vez, como el tanque extra, la dinamita, los explosivos y el teleport.
 
-#### Mejoras (Clari):
+### Mejoras (Clari):
 -Tanque extra para refill: sale 2000 y te llena 25L
 -Mayor resistencia
 -Mas cantidad de vida
