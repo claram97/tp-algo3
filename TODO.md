@@ -28,11 +28,17 @@ Te amo pelotudo :P
 
 ### Mejoras (Clari):
 -Tanque extra para refill: sale 2000 y te llena 25L
+
 -Mayor resistencia
+
 -Mas cantidad de vida
+
 -Mayor cantidad de nafta
+
 -Dinamita: 2000, elimina un área a definir
+
 -Explosivos: 5000, eliminan un área a definir (mayor a la de la dinamita)
+
 -Teleport: 2000, te transporta a la superficie (en un lugar random)
 
 ## Terminadas
