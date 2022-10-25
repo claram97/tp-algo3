@@ -1,15 +1,13 @@
 package tp;
 
-
 public class Mineral implements Bloque {
-	public enum tipoDeMineral{COBRE,BRONCE,PLATA,ORO,HIERRO,DIAMANTE};
 	//Diamante debería ser inusual :P
-	private tipoDeMineral tipoMineral;
+	private tipoDeBloque tipoMineral;
 	private int precio;
 	private Posicion posicion;
 	private char letra;
 	
-	public Mineral(tipoDeMineral tipoMineral,int precio,char letra) {
+	public Mineral(tipoDeBloque tipoMineral,int precio,char letra) {
 		this.precio = precio;
 		this.tipoMineral = tipoMineral;
 		this.letra = letra;
@@ -20,7 +18,7 @@ public class Mineral implements Bloque {
 		return this.precio;
 	}
 	
-	public tipoDeMineral getTipo() {
+	public tipoDeBloque getTipo() {
 		return this.tipoMineral;
 	}
 	
@@ -28,4 +26,3 @@ public class Mineral implements Bloque {
 		return this.letra;
 	}
 }
-

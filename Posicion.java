@@ -12,28 +12,22 @@ public class Posicion {
 		this.posicionY = posicionY;
 	}
 	
-	//No sé si es lo mejor que pude hacer :P
-	public int getCoordenada(String posicion) {
-		if(posicion == "X") {
-			return this.posicionX;
-		}
-		else if(posicion == "Y") {
-			return this.posicionY;
-		}
-		return -1; //este -1 está porque aun no le puse una excepción :P
-		//throw an exception
+	public int getPosicionX() {
+		return posicionX;
 	}
 
-	//No sé si es lo mejor que pude hacer :P
-	public void setCoordenada(String posicion,int valor) {
-		if((posicion != "X" && posicion != "Y") || valor < 0) {
-			//throw an exception
-		}
-		if(posicion == "X") {
-			this.posicionX = valor;
-		}
-		else if(posicion == "Y") {
-			this.posicionY = valor;
-		}
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
 	}
+
+	public int getPosicionY() {
+		return posicionY;
+	}
+
+	public void setPosicionY(int posicionY) {
+		this.posicionY = posicionY;
+	}
+	
+	
+	
 }

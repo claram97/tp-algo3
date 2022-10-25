@@ -2,7 +2,7 @@ package tp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador {
+public class Jugador implements Bloque{
 	int hp;
 	int nivelCombustible;
 	List<Bloque> mineralesRecolectados;
@@ -16,24 +16,28 @@ public class Jugador {
 		this.hp = hp;
 		this.nivelCombustible = nivelCombustible;
 		this.mineralesRecolectados = new ArrayList<Bloque>();
-		this.posicion = new Posicion(tamanioTerreno/2,0);
+		this.posicion = new Posicion(tamanioTerreno/2, 0); // deberia ser (x ; y) pero la matriz imprime (y ; x)
+		//0 (j ; i) mejor dicho.
 		//la onda es posicionar al bicho en el medio del terreno :P
 		this.dinero = 20;
 	}
 	
 	//Hay que mover y aparte hay que ir restando el combustible, y si está usando el taladro debería perder hp :P
+	//Evidentemente el 10 esta hardcodeado, faltarian unas constantes.
 	public void mover(char movimiento) {
-		if(movimiento == 'W') {
-			
+		if(movimiento == 'W' && this.posicion.getPosicionY() > 0) {
+			this.posicion.setPosicionY(this.posicion.getPosicionY()-1);
 		}
-		else if(movimiento == 'A') {
-			
+		else if(movimiento == 'A' && this.posicion.getPosicionX() > 0) {
+			this.posicion.setPosicionX(this.posicion.getPosicionX()-1);
 		}
-		else if(movimiento == 'S') {
-			
+		else if(movimiento == 'S' && this.posicion.getPosicionY() < 10) {
+			this.posicion.setPosicionY(this.posicion.getPosicionY() + 1);
 		}
-		else if(movimiento == 'D') {
-			
+		else if(movimiento == 'D' && this.posicion.getPosicionX() < 10) {
+			this.posicion.setPosicionX(this.posicion.getPosicionX()+1);
+		} else {
+			//Excepcion.
 		}
 	}
 	
@@ -44,6 +48,26 @@ public class Jugador {
 			this.mineralesRecolectados.remove(mineral);
 		}
 		this.dinero += mineral.getPrecio();
+	}
+
+	public int getPrecio() {
+		return -1;
+	}
+
+	public tipoDeBloque getTipo() {
+		return tipoDeBloque.AIRE;
+	}
+
+	public char getLetra() {
+		return '&';
+	}
+
+	public int getX() {
+		return this.posicion.getPosicionX();
+	}
+	
+	public int getY() {
+		return this.posicion.getPosicionY();
 	}
 	
 }
