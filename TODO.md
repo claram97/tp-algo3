@@ -27,19 +27,13 @@ Te amo pelotudo :P
 * Ponerle al jugador un vector para las mejoras que se usan una vez, como el tanque extra, la dinamita, los explosivos y el teleport.
 
 ### Mejoras (Clari):
--Tanque extra para refill: sale 2000 y te llena 25L
-
--Mayor resistencia
-
--Mas cantidad de vida
-
--Mayor cantidad de nafta
-
--Dinamita: 2000, elimina un área a definir
-
--Explosivos: 5000, eliminan un área a definir (mayor a la de la dinamita)
-
--Teleport: 2000, te transporta a la superficie (en un lugar random)
+* Tanque extra para refill: sale 2000 y te llena 25L
+* Mayor resistencia
+* Mas cantidad de vida
+* Mayor cantidad de nafta
+* Dinamita: 2000, elimina un área a definir
+* Explosivos: 5000, eliminan un área a definir (mayor a la de la dinamita)
+* Teleport: 2000, te transporta a la superficie (en un lugar random)
 
 ## Terminadas
 * Mejorar la implementación del terreno (Fran)
