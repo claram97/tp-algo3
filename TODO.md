@@ -1,26 +1,22 @@
 # Tareas
 Las tareas son para cualquiera a menos que la tarea especifique quién debería realizarla.
 Pasarlas a la sección de terminadas al finalizar para motivarnos.
-Te amo pelotudo :P
+Te amo pelotudo :P, Te amo boba <3
 
 ## Mejoras y cosas que hay que agregar
-
-
 
 ## Pendientes
 
 * Pensar las pruebas (global, ambos)
 * Implementar las tiendas y la estación de ventas (Clari)
-* Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Fran)
 * Interacción con las tiendas (Clari)
-* Límite de inventario inicial: 7 (Clari)
-* No se puede mover hacia arriba a menos que el bloque sea aire. (Fran)
-* Leer el código de mi rama, seguro tenés que cambiar la creación de Jugador porque le cambié el constructor y hay cosas comentadas en el código que hay que mejorar o implementar así que podés mirarlas y tratar de solucionarlas :P corte búsqueda del tesoro juju (Fran)
-* Actualizar bien los valores de cada tipo de bloque: Hierro 30, Bronce 60, Plata 100, Oro 150, Diamante 300, Aire y Tierra hasta que lo tengamos mejor implementado valen 0 :P (Fran)
+* Límite de inventario inicial: 7 (Clari) *Anduve tocando esto, :p. Igual hay que hacer mas cosas con el inventario*
+* Jugador es larga comparado al resto, pero no se donde cortarla (Fran).
+* Hay que pasar todo a constantes antes de que sea una paja
 * La nafta vale $1 :P creo que puse 5, después lo actualizo (Clari)
 
 ### Clari:
-* Hay que ver cuánta nafta gasta cuando se mueve :P creo que $1 x bloque
+* Hay que ver cuánta nafta gasta cuando se mueve :P creo que $1 x bloque *Esto igual esta sujeto a cambiar varias veces*
 * Las reparaciones valen $10 x hp creo :P
 * Opciones de nafta: 5, 10, 25, 50, full
 * Opciones de reparación: 50, 100, 200, 500, total
@@ -41,6 +37,8 @@ Te amo pelotudo :P
 * Mejorar las partes que tienen muchos if (Clari)
 * Implementar el movimiento (Fran)
 * Cuando se compra con un valor predeterminado, solo se gasta la plata necesaria. (Clari, aunque todavía falta un toque juju)
+* Jugador ya "cae", no puede subir cuando tiene un bloque por encima y agrega bloques a su inventario.
+* Pase la interaccion jugador-terreno a una nueva clase, aparte de jugador.
 
 # Cosas a mencionar:
 * El manejo de la ubicacion del pj esta rarazo, pero con la implementacion actual era eso o dos loops que borren al pj anterior.
