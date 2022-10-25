@@ -13,7 +13,7 @@ Te amo pelotudo :P
 * Implementar las tiendas y la estación de ventas (Clari)
 * Cuando se pasa por arriba de un bloque, se tiene que transformar en aire (Fran)
 * Interacción con las tiendas (Clari)
-* Límite de inventario (no se puede exceder) (Clari)
+* Límite de inventario inicial: 7 (Clari)
 * No se puede mover hacia arriba a menos que el bloque sea aire. (Fran)
 * Leer el código de mi rama, seguro tenés que cambiar la creación de Jugador porque le cambié el constructor y hay cosas comentadas en el código que hay que mejorar o implementar así que podés mirarlas y tratar de solucionarlas :P corte búsqueda del tesoro juju (Fran)
 * Actualizar bien los valores de cada tipo de bloque: Hierro 30, Bronce 60, Plata 100, Oro 150, Diamante 300, Aire y Tierra hasta que lo tengamos mejor implementado valen 0 :P (Fran)
