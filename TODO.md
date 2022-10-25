@@ -34,6 +34,7 @@ Te amo pelotudo :P
 * Dinamita: 2000, elimina un área a definir
 * Explosivos: 5000, eliminan un área a definir (mayor a la de la dinamita)
 * Teleport: 2000, te transporta a la superficie (en un lugar random)
+* Hull repair nanobots: 7500 por 30 de vida anytime anywhere
 
 ## Terminadas
 * Mejorar la implementación del terreno (Fran)
