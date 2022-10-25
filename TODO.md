@@ -24,7 +24,10 @@ Te amo pelotudo :P
 * Las reparaciones valen $10 x hp creo :P
 * Opciones de nafta: 5, 10, 25, 50, full
 * Opciones de reparación: 50, 100, 200, 500, total
-* -Tanque extra para refill: sale 2000 y te llena 25L
+* Ponerle al jugador un vector para las mejoras que se usan una vez, como el tanque extra, la dinamita, los explosivos y el teleport.
+
+#### Mejoras (Clari):
+-Tanque extra para refill: sale 2000 y te llena 25L
 -Mayor resistencia
 -Mas cantidad de vida
 -Mayor cantidad de nafta
