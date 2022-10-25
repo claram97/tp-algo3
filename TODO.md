@@ -17,6 +17,7 @@ Te amo pelotudo :P
 * Mejorar la implementación del terreno (Fran)
 * Mejorar las partes que tienen muchos if (Clari)
 * Implementar el movimiento (Fran)
+* Cuando se compra con un valor predeterminado, solo se gasta la plata necesaria. (Clari, aunque todavía falta un toque juju)
 
 # Cosas a mencionar:
 * El manejo de la ubicacion del pj esta rarazo, pero con la implementacion actual era eso o dos loops que borren al pj anterior.
