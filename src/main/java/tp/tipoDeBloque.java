@@ -1,6 +1,6 @@
 package tp;
 
-public enum tipoDeBloque {
+public enum TipoDeBloque {
 	AIRE,
 	TIERRA,
 	COBRE,
