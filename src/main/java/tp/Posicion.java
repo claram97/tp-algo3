@@ -16,18 +16,27 @@ public class Posicion {
 		return posicionX;
 	}
 
-	public void setPosicionX(int posicionX) {
-		this.posicionX = posicionX;
-	}
-
 	public int getPosicionY() {
 		return posicionY;
 	}
 
+	public Posicion get() {
+		return this;
+	}
+	
+	public void setPosicionX(int posicionX) {
+		this.posicionX = posicionX;
+	}
+	
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
 	
+	
+	public void set(int posicionX, int posicionY) {
+		this.setPosicionX(posicionX);
+		this.setPosicionY(posicionY);
+	}
 	
 	
 }
