@@ -1,7 +1,7 @@
 # Tareas
 Las tareas son para cualquiera a menos que la tarea especifique quién debería realizarla.
 Pasarlas a la sección de terminadas al finalizar para motivarnos.
-Te amo pelotudo :P, Te amo boba <3
+Te amo pelotudo :P, Te amo boba <3, Yo te amo mas idiota unu
 
 ## Mejoras y cosas que hay que agregar
 
