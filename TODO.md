@@ -9,18 +9,18 @@ Te amo pelotudo :P, Te amo boba <3
 
 * Pensar las pruebas (global, ambos)
 * Implementar las tiendas y la estación de ventas (Clari)
-* Interacción con las tiendas (Clari)
+* Interacción con las tiendas (Fran, hacelo vos, solo para la EstacionDeServicio, la EstacionDeReparacion va a ser igual casi, por ahora pensaba hacerlas similares con copypaste y después ver qué onda con algún patrón de diseño para refactorizarlo, si lo tengo que hacer yo me mato xfa grax)
+* Interacción con la tienda de mejoras extras (Si querés intentarlo no me ofendo)
 * Límite de inventario inicial: 7 (Clari) *Anduve tocando esto, :p. Igual hay que hacer mas cosas con el inventario*
 * Jugador es larga comparado al resto, pero no se donde cortarla (Fran).
 * Hay que pasar todo a constantes antes de que sea una paja
-* La nafta vale $1 :P creo que puse 5, después lo actualizo (Clari)
 
 ### Clari:
 * Hay que ver cuánta nafta gasta cuando se mueve :P creo que $1 x bloque *Esto igual esta sujeto a cambiar varias veces*
 * Las reparaciones valen $10 x hp creo :P
 * Opciones de nafta: 5, 10, 25, 50, full
 * Opciones de reparación: 50, 100, 200, 500, total
-* Ponerle al jugador un vector para las mejoras que se usan una vez, como el tanque extra, la dinamita, los explosivos y el teleport.
+
 
 ### Mejoras (Clari):
 * Tanque extra para refill: sale 2000 y te llena 25L
@@ -39,6 +39,7 @@ Te amo pelotudo :P, Te amo boba <3
 * Cuando se compra con un valor predeterminado, solo se gasta la plata necesaria. (Clari, aunque todavía falta un toque juju)
 * Jugador ya "cae", no puede subir cuando tiene un bloque por encima y agrega bloques a su inventario.
 * Pase la interaccion jugador-terreno a una nueva clase, aparte de jugador.
+* La nafta vale $1 :P creo que puse 5, después lo actualizo (Clari)
 
 # Cosas a mencionar:
 * El manejo de la ubicacion del pj esta rarazo, pero con la implementacion actual era eso o dos loops que borren al pj anterior.
