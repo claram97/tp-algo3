@@ -3,7 +3,7 @@ package tp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador implements Bloque, Entidad{
+public class Jugador implements Bloque{
 	int hp;
 	int nivelCombustible;
 	int dinero;
@@ -78,6 +78,8 @@ public class Jugador implements Bloque, Entidad{
 		return '&';
 	}
 
+	
+	//Se puede cambiar getX y getY por getPosicion.getX()
 	public int getX() {
 		return this.posicion.getPosicionX();
 	}
@@ -90,6 +92,7 @@ public class Jugador implements Bloque, Entidad{
 		return this.posicion;
 	}
 	
+	
 	public boolean seQuedoSinCombustible() {
 		return this.nivelCombustible <= 0;
 	}
@@ -98,6 +101,7 @@ public class Jugador implements Bloque, Entidad{
 		return this.nivelCombustible;
 	}
 	
+	//-------------- Creo que implemente esto mismo pero en EstacionDeServicio. No lo habia visto --------------------------------------
 	//Esta función está acá por si se cargó menos combustible del que se pidió (por ej cuando te faltan 3L para llenar el tanque pero le das click a la opción de 5L, solo te carga 3L y te cobra los 3L)
 	//aunque quizás esto debería estar en EstacionDeServicio tmb no sé shoro
 	//la onda es que esto hace tipo una regla de 3 simple :P
@@ -108,10 +112,12 @@ public class Jugador implements Bloque, Entidad{
 		return cantidadCargada * cantidadDePlata / cantidadCombustible;
 	}
 	
+	//
 	private boolean tieneSuficienteDinero(int dinero){
 		return (this.dinero >= dinero);
 	}	
 	
+	//
 	public void cargarCombustible(int cantidadCombustible,int cantidadDePlata) {
 		if(tieneSuficienteDinero(cantidadDePlata)){
 			if(cantidadCombustible + this.nivelCombustible >= this.capacidadTanque){
@@ -160,17 +166,17 @@ public class Jugador implements Bloque, Entidad{
 	public int getNivelCombustible() {
 		return this.nivelCombustible;
 	}
-
-
-	@Override
-	public void interactuar(Jugador jugador) {
-		// TODO Auto-generated method stub
+	
+	public int getHp() {
+		return hp;
 	}
 
-	@Override
-	public TipoEntidad getTipoEntidad() {
-		return TipoEntidad.JUGADOR;
+	public int getMaxHP() {
+		return maxHP;
 	}
 	
+	public void repararDmg(int vidaSumar) {
+		this.hp += vidaSumar;
+	}	
 }
 
