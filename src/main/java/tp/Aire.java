@@ -1,9 +1,9 @@
 package tp;
 
-public class Aire implements Bloque{
+public class Aire implements Bloque, Entidad{
 
-	public tipoDeBloque getTipo() {
-		return tipoDeBloque.AIRE;
+	public TipoDeBloque getTipo() {
+		return TipoDeBloque.AIRE;
 	}
 
 	public int getPrecio() {
@@ -12,6 +12,20 @@ public class Aire implements Bloque{
 
 	public char getLetra() {
 		return ' ';
+	}
+
+	@Override
+	public void interactuar(Jugador jugador) {
+	}
+
+	@Override
+	public Posicion getPosicion() {
+		return null;
+	}
+
+	@Override
+	public TipoEntidad getTipoEntidad() {
+		return TipoEntidad.AIRE;
 	}
 
 }

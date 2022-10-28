@@ -3,6 +3,7 @@ package tp;
 import java.util.Random;
 
 public class Terreno {
+	private Entidad[] suelo;
 	private Bloque[][] terreno;
 	private int ancho;
 	private int alto;
@@ -10,17 +11,17 @@ public class Terreno {
 	private Bloque ponerBloque() {
 		Random rand = new Random();
 		int valor = rand.nextInt(100);
-
-		if(valor > 0 && valor < 35) {
+		
+		if(valor > 0 && valor < 60) {
 			return new Tierra();
-		} else if(valor >= 35 && valor < 60) {
-			return FabricaDeMinerales.crear(tipoDeBloque.COBRE);
 		} else if(valor >= 60 && valor < 80) {
-			return FabricaDeMinerales.crear(tipoDeBloque.PLATA);
-		} else if(valor >= 80 && valor < 90) {
-			return FabricaDeMinerales.crear(tipoDeBloque.ORO);
+			return FabricaDeMinerales.crear(TipoDeBloque.COBRE);
+		} else if(valor >= 80 && valor < 92) {
+			return FabricaDeMinerales.crear(TipoDeBloque.PLATA);
+		} else if(valor >= 92 && valor < 98) {
+			return FabricaDeMinerales.crear(TipoDeBloque.ORO);
 		} else {
-			return FabricaDeMinerales.crear(tipoDeBloque.DIAMANTE);
+			return FabricaDeMinerales.crear(TipoDeBloque.DIAMANTE);
 		}
 	}
 	
@@ -29,7 +30,7 @@ public class Terreno {
 			return false;
 		}
 		
-		return(terreno[posicion.getPosicionY()][posicion.getPosicionX ()].getTipo() == tipoDeBloque.AIRE);
+		return(terreno[posicion.getPosicionY()][posicion.getPosicionX ()].getTipo() == TipoDeBloque.AIRE);
 	}
 	
 	public Bloque devolverBloque(Posicion pos) {
@@ -41,9 +42,15 @@ public class Terreno {
 		this.ancho = ancho;
 		
 		terreno = new Bloque[alto][ancho];
+		suelo = new Entidad[ancho];
 		for(int k = 0; k < ancho; k++) {
+			suelo[k] = new Aire();
 			terreno[0][k] = new Aire();
 		}
+		
+		var ypf = new EstacionDeServicio(this.ancho);
+		this.suelo[ypf.getPosicion().getPosicionX()] = ypf;
+		
 		for(int i = 1; i < alto; i++) {
 			for(int j = 0; j < ancho; j++) {
 				terreno[i][j] = ponerBloque();
@@ -57,9 +64,22 @@ public class Terreno {
 		int x = pj.getX();
 		int y = pj.getY();
 		
-		for(int i = 0; i < this.alto; i++) {
+		for(int k = 0; k < this.ancho; k++) {
+			if(y == 0 && k == x) {
+				System.out.print(' ');
+				System.out.print(pj.getLetra());
+				System.out.print(' ');
+			} else {
+				System.out.print(' ');
+				System.out.print(suelo[k].getLetra());
+				System.out.print(' ');
+			}
+		}
+		System.out.print('\n');
+		
+		for(int i = 1; i < this.alto; i++) {
 			for(int j = 0; j < this.ancho; j++) {
-				if(j == x && i == y) {
+				if(x > 0 && (j == x && i == y)) {
 					System.out.print(' ');
 					System.out.print(pj.getLetra());
 					System.out.print(' ');
@@ -79,6 +99,9 @@ public class Terreno {
 		terreno[posicion.getPosicionY()][posicion.getPosicionX()] = new Aire();
 	}
 	
+	public Entidad[] getSuelo(){
+		return this.suelo;
+	}
 	
 	
 }

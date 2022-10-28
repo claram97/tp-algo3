@@ -3,7 +3,7 @@ package tp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador implements Bloque{
+public class Jugador implements Bloque, Entidad{
 	int hp;
 	int nivelCombustible;
 	int dinero;
@@ -101,7 +101,10 @@ public class Jugador implements Bloque{
 	//Esta función está acá por si se cargó menos combustible del que se pidió (por ej cuando te faltan 3L para llenar el tanque pero le das click a la opción de 5L, solo te carga 3L y te cobra los 3L)
 	//aunque quizás esto debería estar en EstacionDeServicio tmb no sé shoro
 	//la onda es que esto hace tipo una regla de 3 simple :P
-	private int calcularGasto(int cantidadCargada, int cantidadCombustible, int cantidadDePlata) {	
+	private int calcularGasto(int cantidadCargada, int cantidadCombustible, int cantidadDePlata) {
+		if(cantidadCargada <= 0) {
+			return 0;
+		}
 		return cantidadCargada * cantidadDePlata / cantidadCombustible;
 	}
 	
@@ -148,6 +151,25 @@ public class Jugador implements Bloque{
 
 	public void setX(int i) {
 		this.posicion.setPosicionX(i);
+	}
+
+	public int getCapacidadTanque() {
+		return this.capacidadTanque;
+	}
+	
+	public int getNivelCombustible() {
+		return this.nivelCombustible;
+	}
+
+
+	@Override
+	public void interactuar(Jugador jugador) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public TipoEntidad getTipoEntidad() {
+		return TipoEntidad.JUGADOR;
 	}
 	
 }

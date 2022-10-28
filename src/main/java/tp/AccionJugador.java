@@ -33,7 +33,11 @@ public class AccionJugador {
 	}
 	
 	private void taladrar(Posicion pos) {
-		if(terreno.casilleroVacio(pos) || terreno.devolverBloque(pos).getTipo() == tipoDeBloque.TIERRA) {
+		if(terreno.casilleroVacio(pos) || terreno.devolverBloque(pos).getTipo() == TipoDeBloque.TIERRA) {
+			return;
+		}
+		
+		if(pj.getY() == 0 && terreno.getSuelo()[pj.getX()].getTipoEntidad() == TipoEntidad.TIENDA) {
 			return;
 		}
 		
@@ -62,6 +66,12 @@ public class AccionJugador {
 		
 		pj.setX(nueva.getPosicionX());
 		pj.setY(nueva.getPosicionY());
+		
+		if(pj.getY() == 0) {
+			if(terreno.getSuelo()[pj.getX()].getTipoEntidad() == TipoEntidad.TIENDA) {
+				terreno.getSuelo()[pj.getX()].interactuar(pj);
+			}
+		}
 		
 		if(movimiento != 'W') {
 			caer();

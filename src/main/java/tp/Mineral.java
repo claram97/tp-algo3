@@ -2,12 +2,12 @@ package tp;
 
 public class Mineral implements Bloque {
 	//Diamante debería ser inusual :P
-	private tipoDeBloque tipoMineral;
+	private TipoDeBloque tipoMineral;
 	private int precio;
 	private Posicion posicion;
 	private char letra;
 	
-	public Mineral(tipoDeBloque tipoMineral,int precio,char letra) {
+	public Mineral(TipoDeBloque tipoMineral,int precio,char letra) {
 		this.precio = precio;
 		this.tipoMineral = tipoMineral;
 		this.letra = letra;
@@ -18,7 +18,7 @@ public class Mineral implements Bloque {
 		return this.precio;
 	}
 	
-	public tipoDeBloque getTipo() {
+	public TipoDeBloque getTipo() {
 		return this.tipoMineral;
 	}
 	
