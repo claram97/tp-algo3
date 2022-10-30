@@ -20,16 +20,17 @@ public class Jugador implements Bloque{
 	boolean teleport;
 	int cantidadHRN; //los hull repair nanobots :P
 	
+	
 	public Jugador(int tamanioTerreno) {
 		//Faltaria la excepcion para tamaño terreno
 		this.nivelCombustible = 10;
 		this.mineralesRecolectados = new ArrayList<>();
-		this.posicion = new Posicion(tamanioTerreno/2, 0);
+		this.posicion = new Posicion((int)(tamanioTerreno*0.5), 0);
 		this.dinero = 20;
 		this.capacidadTanque = 10;
 		this.hp = 10;
 		this.resistencia = 10; //no se que valores le vamos a poner a esto, después lo charlamos bien :P
-		this.maxInventario = 10;
+		this.maxInventario = 7;
 		this.maxHP = 10;
 		this.tanqueExtra = false;
 		this.teleport = false;
@@ -177,6 +178,10 @@ public class Jugador implements Bloque{
 	
 	public void repararDmg(int vidaSumar) {
 		this.hp += vidaSumar;
-	}	
+	}
+
+	public int getCantidadDeMinerales() {
+		return this.mineralesRecolectados.size();
+	}
 }
 
