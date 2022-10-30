@@ -2,6 +2,6 @@ package tp;
 
 public interface Bloque {
 	public int getPrecio();
-	public tipoDeBloque getTipo();
+	public TipoDeBloque getTipo();
 	public char getLetra();
 }

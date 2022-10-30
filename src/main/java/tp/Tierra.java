@@ -14,8 +14,8 @@ public class Tierra implements Bloque{
 		return -1;
 	}
 
-	public tipoDeBloque getTipo() {
-		return tipoDeBloque.TIERRA;
+	public TipoDeBloque getTipo() {
+		return TipoDeBloque.TIERRA;
 	}
 
 	public char getLetra() {
