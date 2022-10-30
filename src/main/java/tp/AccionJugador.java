@@ -78,6 +78,23 @@ public class AccionJugador {
 			caer();
 		}
 	}
+	
+	public void utilizarMejoraJugador(char letra) {
+		int i = 0;
+		boolean utilizado = false;
+		while(i < this.pj.getMejoras().size() && !utilizado) {
+			if(this.pj.getMejoras().get(i).letra == letra) {
+				this.pj.getMejoras().get(i).utilizar(this.pj);
+			}
+		}
+		this.pj.eliminarMejora(this.pj.getMejoras().get(i));
+	}
+	
+	//Estas hay que ver donde las guardamos o qué :P
+	public void utilizarMejoraTerreno(char letra) {
+		
+	}
+		
 		
 	
 }

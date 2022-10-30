@@ -3,7 +3,17 @@ package tp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador implements Bloque{
+import tp.Mejoras.MejoraDeJugador;
+
+public class Jugador implements Bloque {
+	private static int COMBUSTIBLE_INICIAL = 6;
+	private static int MAX_COMBUSTIBLE_INICIAL = 10;
+	private static int HP_INICIAL = 10;
+	private static int MAX_HP_INICIAL = 7;
+	private static int DINERO_INICIAL = 20;
+	private static int RESISTENCIA_INICIAL = 10; //no se que valor le vamos a poner a esto, después lo charlamos bien :P
+	private static int MAX_INVENTARIO_INICIAL = 7;
+	
 	int hp;
 	int nivelCombustible;
 	int dinero;
@@ -13,30 +23,20 @@ public class Jugador implements Bloque{
 	int resistencia; //a mayor resistencia, menos vida pierde, después lo implementamos bien :P
 	int maxInventario;
 	int maxHP;
-	//las mejoras, para mí hay que hacer algo con esto porque sino cada vez que metes una mejora hay que hacer una banda de cambios
-	boolean tanqueExtra;
-	int cantidadDinamita;
-	int cantidadExplosivos;
-	boolean teleport;
-	int cantidadHRN; //los hull repair nanobots :P
-	
+	List<MejoraDeJugador> mejoras;
 	
 	public Jugador(int tamanioTerreno) {
 		//Faltaria la excepcion para tamaño terreno
-		this.nivelCombustible = 10;
+		this.nivelCombustible = Jugador.COMBUSTIBLE_INICIAL;
+		this.capacidadTanque = Jugador.MAX_COMBUSTIBLE_INICIAL;
+		this.hp = Jugador.HP_INICIAL;
+		this.maxHP = Jugador.MAX_HP_INICIAL;
+		this.dinero = Jugador.DINERO_INICIAL;
+		this.resistencia = Jugador.RESISTENCIA_INICIAL; 
+		this.maxInventario = Jugador.MAX_INVENTARIO_INICIAL;
+		this.mejoras = new ArrayList<>();
 		this.mineralesRecolectados = new ArrayList<>();
-		this.posicion = new Posicion((int)(tamanioTerreno*0.5), 0);
-		this.dinero = 20;
-		this.capacidadTanque = 10;
-		this.hp = 10;
-		this.resistencia = 10; //no se que valores le vamos a poner a esto, después lo charlamos bien :P
-		this.maxInventario = 7;
-		this.maxHP = 10;
-		this.tanqueExtra = false;
-		this.teleport = false;
-		this.cantidadDinamita = 0;
-		this.cantidadExplosivos = 0;
-		this.cantidadHRN = 0;
+		this.posicion = new Posicion(tamanioTerreno/2, 0);
 	}
 	
 	//Hay que mover y aparte hay que ir restando el combustible, y si está usando el taladro debería perder hp :P
@@ -120,11 +120,11 @@ public class Jugador implements Bloque{
 	
 	//
 	public void cargarCombustible(int cantidadCombustible,int cantidadDePlata) {
-		if(tieneSuficienteDinero(cantidadDePlata)){
+		if(this.tieneSuficienteDinero(cantidadDePlata)){
 			if(cantidadCombustible + this.nivelCombustible >= this.capacidadTanque){
 				int cantidadCargada = this.capacidadTanque - this.nivelCombustible;
 				this.nivelCombustible = this.capacidadTanque;
-				//Acá necesitamos hacer la cuenta de lo que efectivamente
+				//Acá necesitamos hacer la cuenta de lo que efectivamente gastó según lo que cargó
 				this.pagar(this.calcularGasto(cantidadCargada,cantidadCombustible,cantidadDePlata));
 			}
 			int cantidadCargada = cantidadCombustible;
@@ -179,9 +179,68 @@ public class Jugador implements Bloque{
 	public void repararDmg(int vidaSumar) {
 		this.hp += vidaSumar;
 	}
-
+	
 	public int getCantidadDeMinerales() {
 		return this.mineralesRecolectados.size();
 	}
-}
+	
+	public List<MejoraDeJugador> getMejoras() {
+		return this.mejoras;
+	}
+	
+	//Estas funciones actualizan el máximo y el nivel actual también, viola el SRP?
+	public void setCapacidadDelTanque(int capacidad) {
+		if(capacidad > this.capacidadTanque) {
+			this.capacidadTanque = capacidad;
+			this.nivelCombustible = capacidad;
+		}
+		else {
+			//throw exception
+		}
+	}
+	
+	public void setMaxVida(int maxVida) {
+		if(maxVida > this.maxHP) {
+			this.maxHP = maxVida;
+			this.hp = maxVida;
+		}
+		else {
+			//throw exception
+		}
+	}
+	
+	public void setMaxInventario(int maxVida) {
+		if(maxVida > this.maxHP) {
+			this.maxHP = maxVida;
+			this.hp = maxVida;
+		}
+		else {
+			//throw exception
+		}
+	}
+	
+	public void setResistencia(int resistencia) {
+		if(resistencia > this.resistencia) {
+			this.resistencia = resistencia;
+		}
+		else {
+			//throw exception
+		}
+	}
+	
+	public void setHP(int healthPoints) {
+		if((this.hp + healthPoints) > this.maxHP) {
+			this.hp = this.maxHP;
+		}
+		else{
+			this.hp += healthPoints;
+		}
+	}
+	
+	public void eliminarMejora(MejoraDeJugador mejora) {
+		if(this.mejoras.contains(mejora)) {
+			mejoras.remove(mejora);
+		}
+	}
 
+}
