@@ -13,7 +13,6 @@ public class MejoraTanqueExtra extends MejoraDeJugador {
 	}
 
 	public void utilizar(Jugador jugador) {
-		//Cuando se utiliza no gasta la plata, lo paga cuando lo compra
 		jugador.cargarCombustible(cantidadCombustible,0);
 	}
 

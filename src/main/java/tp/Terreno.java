@@ -52,6 +52,8 @@ public class Terreno {
 		this.suelo[ypf.getPosicion().getPosicionX()] = ypf;
 		var mecanico = new EstacionDeReparacion(this.ancho);
 		this.suelo[mecanico.getPosicion().getPosicionX()] = mecanico;
+		var tiendita = new TiendaDeMejoras(ancho);
+		this.suelo[tiendita.getPosicion().getPosicionX()] = tiendita;
 		
 		for(int i = 1; i < alto; i++) {
 			for(int j = 0; j < ancho; j++) {

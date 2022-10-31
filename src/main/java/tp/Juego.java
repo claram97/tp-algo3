@@ -24,6 +24,7 @@ public class Juego {
 		return estadoDelJuego.JUGANDO;
 	}
 	
+	//Esto probablemente se pueda poner mas bonito, Diego uso un diccionario por ej.
 	private int difX(char mov) {
 		if(mov == 'A') {
 			return -1;

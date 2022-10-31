@@ -94,7 +94,4 @@ public class AccionJugador {
 	public void utilizarMejoraTerreno(char letra) {
 		
 	}
-		
-		
-	
 }
