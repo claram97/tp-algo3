@@ -80,6 +80,9 @@ public class Juego {
 				acciones.add(accion);
 			} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
 				acciones.add(mejoraJugador(movimiento));
+			} else if(movimiento == 'X') {
+				AccionItemTerreno accion = new AccionItemTerreno(new MejoraDinamita(movimiento, terreno, jugador));
+				acciones.add(accion);
 			}
 			
 			//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
