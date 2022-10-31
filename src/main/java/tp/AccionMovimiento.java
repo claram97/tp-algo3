@@ -1,14 +1,14 @@
 package tp;
 
 
-public class AccionJugador {
+public class AccionMovimiento implements Accion{
 	//No se si sera mucho que reciba a ambos, pero no se me ocurre otra forma por ahora.
 	private Jugador pj;
 	private Terreno terreno;
 	int dx;
 	int dy;
 	
-	public AccionJugador(Jugador pj, Terreno terreno, int dx, int dy) {
+	public AccionMovimiento(Jugador pj, Terreno terreno, int dx, int dy) {
 		this.pj = pj;
 		this.terreno = terreno;
 		this.dy = dy;
@@ -43,11 +43,9 @@ public class AccionJugador {
 		if(terreno.casilleroVacio(pos) || terreno.devolverBloque(pos).getTipo() == TipoDeBloque.TIERRA) {
 			return;
 		}
-		
 		if(pj.getY() == 0 && terreno.getSuelo()[pj.getX()].getTipoEntidad() == TipoEntidad.TIENDA) {
 			return;
 		}
-		
 		pj.agregarInventario(terreno.devolverBloque(pos));
 	}
 	
@@ -59,11 +57,9 @@ public class AccionJugador {
 				//Falta excepcion para que no se escape por los bordes
 			}
 		}
-		
 		if(this.dx != 0) {
 			nueva.setPosicionX(this.pj.getX() + dx);
 		}
-		
 		taladrar(nueva);
 		pj.setX(nueva.getPosicionX());
 		pj.setY(nueva.getPosicionY());
@@ -73,25 +69,8 @@ public class AccionJugador {
 				terreno.getSuelo()[pj.getX()].interactuar(pj);
 			}
 		}
-		
 		if(this.dy >= 0) {
 			caer();
 		}
-	}
-	
-	public void utilizarMejoraJugador(char letra) {
-		int i = 0;
-		boolean utilizado = false;
-		while(i < this.pj.getMejoras().size() && !utilizado) {
-			if(this.pj.getMejoras().get(i).letra == letra) {
-				this.pj.getMejoras().get(i).utilizar(this.pj);
-			}
-		}
-		this.pj.eliminarMejora(this.pj.getMejoras().get(i));
-	}
-	
-	//Estas hay que ver donde las guardamos o qué :P
-	public void utilizarMejoraTerreno(char letra) {
-		
 	}
 }
