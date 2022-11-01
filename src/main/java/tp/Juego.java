@@ -3,15 +3,20 @@ package tp;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tp.Mejoras.*;
+
+
 public class Juego {
-	Terreno terreno;
+	Suelo suelo;
+	PisoSuperior tiendas;
 	Jugador jugador;
 	enum estadoDelJuego{JUGANDO,PERDIDO,GANADO};
 	estadoDelJuego estadoJuego;
 	
-	public Juego(Terreno terreno, Jugador jugador) {
-		this.terreno = terreno;
+	public Juego(Suelo suelo, PisoSuperior tiendas, Jugador jugador) {
+		this.suelo = suelo;
 		this.jugador = jugador;
+		this.tiendas = tiendas;
 		this.estadoJuego = estadoDelJuego.JUGANDO;
 	}
 	
@@ -24,6 +29,7 @@ public class Juego {
 		return estadoDelJuego.JUGANDO;
 	}
 	
+	//Esto probablemente se pueda poner mas bonito, Diego uso un diccionario por ej.
 	private int difX(char mov) {
 		if(mov == 'A') {
 			return -1;
@@ -44,24 +50,51 @@ public class Juego {
 		}
 	}
 	
+	//Ahora deja utilizar libremente cada mejora. Hay que completar la implementacion de la lista de mejoras en jugador y agregar las restricciones aca.
+	private AccionItem mejoraJugador(char tecla) {
+		AccionItem accion;
+		if(tecla == 'F') {
+			accion = new AccionItem(jugador, new MejoraTanqueExtra());
+		} else if(tecla == 'Q') {
+			accion = new AccionItem(jugador, new MejoraTeleport());
+		} else if(tecla == 'R') {
+			accion = new AccionItem(jugador, new MejoraHullRepairNanobots());
+		} else {
+			accion = null;
+		}
+		return accion;
+	}
+	
 	
 	public void gameLoop() {
-		terreno.imprimirTerreno(this.jugador);
+		Terreno terreno = new Terreno(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
 		Scanner input = new Scanner(System.in);
-		ArrayList<AccionJugador> acciones;
-		
+		var acciones = new ArrayList<Accion>();
 		while(estadoJuego == estadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
-			int dx = difX(movimiento);
-			int dy = difY(movimiento);
-			var accion = new AccionJugador(jugador, terreno, dx, dy);
-			accion.aplicar();
-			terreno.romperBloque(jugador.getPosicion());
-			//Acá habría que ver cómo armar un contador que cuente la altura de la que cae e implementar la función que calcula el daño según la altura :P
-//			No funciona bien
-//			while(jugadorDebeCaer()){
-//				jugador.caer();
-//			}
+			
+			//Ahora lee caracteres y quizas quedo medio croto, pero esto se puede trasladar facil a un Map o algo.
+			if(movimiento == 'W' || movimiento == 'S' || movimiento == 'A' || movimiento == 'D') {
+				int dx = difX(movimiento);
+				int dy = difY(movimiento);
+				var accion = new AccionMovimiento(jugador, suelo, tiendas, dx, dy);
+				acciones.add(accion);
+			} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
+				acciones.add(mejoraJugador(movimiento));
+			} else if(movimiento == 'X') {
+				AccionItemTerreno accion = new AccionItemTerreno(new MejoraDinamita(movimiento, suelo, jugador));
+				acciones.add(accion);
+			}
+			
+			//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
+			if(acciones.size() > 0) {
+				if(acciones.get(0) != null) {
+					acciones.get(0).aplicar();
+				}
+				acciones.remove(0);
+			}
+			
+			suelo.destruirBloque(jugador.getPosicion());
 			terreno.imprimirTerreno(jugador);
 			jugador.mostrarInventario();
 		}
