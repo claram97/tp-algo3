@@ -38,5 +38,12 @@ public class Posicion {
 		this.setPosicionY(posicionY);
 	}
 	
+	public boolean esPosicionIgual(Posicion pos2) {
+		if(this.posicionX == pos2.posicionX && this.posicionY == pos2.posicionY) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 }

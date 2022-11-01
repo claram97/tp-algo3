@@ -4,17 +4,19 @@ package tp;
 public class AccionMovimiento implements Accion{
 	//No se si sera mucho que reciba a ambos, pero no se me ocurre otra forma por ahora.
 	private Jugador pj;
-	private Terreno terreno;
+	Suelo suelo;
+	PisoSuperior tiendas;
 	int dx;
 	int dy;
 	
-	public AccionMovimiento(Jugador pj, Terreno terreno, int dx, int dy) {
+	public AccionMovimiento(Jugador pj, Suelo suelo, PisoSuperior tiendas, int dx, int dy) {
 		this.pj = pj;
-		this.terreno = terreno;
-		this.dy = dy;
+		this.suelo = suelo;
+		this.tiendas = tiendas;
 		this.dx = dx;
+		this.dy = dy;
 	}
-	
+
 	private boolean chocaArriba() {
 		if(pj.getY() == 0) {
 			return false;
@@ -22,7 +24,7 @@ public class AccionMovimiento implements Accion{
 			//No se si son punteros o que pero si ponia Posicion actual = pj.getPosicion()
 			//Funcionaba como si actual fuera un puntero a pj.
 		Posicion arriba = new Posicion(pj.getX(), pj.getY() - 1);
-		if(terreno.casilleroVacio(arriba)) {
+		if(suelo.casilleroVacio(arriba)) {
 				return false;
 		}
 
@@ -32,7 +34,7 @@ public class AccionMovimiento implements Accion{
 	private void caer() {
 		if(pj.getY() < Main.ALTURA) {
 			Posicion debajo = new Posicion(pj.getX(), pj.getY() + 1);
-			while(terreno.casilleroVacio(debajo) && pj.getY() < Main.ALTURA - 2) {
+			while(suelo.casilleroVacio(debajo) && pj.getY() < Main.ALTURA - 2) {
 				pj.setY(pj.getY() + 1);
 				debajo.setPosicionY(debajo.getPosicionY() + 1);
 			}
@@ -40,13 +42,15 @@ public class AccionMovimiento implements Accion{
 	}
 	
 	private void taladrar(Posicion pos) {
-		if(terreno.casilleroVacio(pos) || terreno.devolverBloque(pos).getTipo() == TipoDeBloque.TIERRA) {
+		if(suelo.casilleroVacio(pos) || suelo.getBloque(pos).getTipo() == TipoDeBloque.TIERRA) {
 			return;
 		}
-		if(pj.getY() == 0 && terreno.getSuelo()[pj.getX()].getTipoEntidad() == TipoEntidad.TIENDA) {
-			return;
+		if(this.tiendas != null) {
+			if(pj.getY() == 0 && tiendas.colisionEntidad(pos).getTipoEntidad() == TipoEntidad.TIENDA) {
+				return;
+			}
 		}
-		pj.agregarInventario(terreno.devolverBloque(pos));
+		pj.agregarInventario(suelo.getBloque(pos));
 	}
 	
 	public void aplicar() {		
@@ -60,13 +64,14 @@ public class AccionMovimiento implements Accion{
 		if(this.dx != 0) {
 			nueva.setPosicionX(this.pj.getX() + dx);
 		}
+		
 		taladrar(nueva);
 		pj.setX(nueva.getPosicionX());
 		pj.setY(nueva.getPosicionY());
 		
-		if(pj.getY() == 0) {
-			if(terreno.getSuelo()[pj.getX()].getTipoEntidad() == TipoEntidad.TIENDA) {
-				terreno.getSuelo()[pj.getX()].interactuar(pj);
+		if(pj.getY() == 0 && this.tiendas != null) {
+			if(tiendas.colisionEntidad(pj.getPosicion()) != null) {
+				tiendas.colisionEntidad(pj.getPosicion()).interactuar(pj);
 			}
 		}
 		if(this.dy >= 0) {

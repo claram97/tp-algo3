@@ -7,14 +7,16 @@ import tp.Mejoras.*;
 
 
 public class Juego {
-	Terreno terreno;
+	Suelo suelo;
+	PisoSuperior tiendas;
 	Jugador jugador;
 	enum estadoDelJuego{JUGANDO,PERDIDO,GANADO};
 	estadoDelJuego estadoJuego;
 	
-	public Juego(Terreno terreno, Jugador jugador) {
-		this.terreno = terreno;
+	public Juego(Suelo suelo, PisoSuperior tiendas, Jugador jugador) {
+		this.suelo = suelo;
 		this.jugador = jugador;
+		this.tiendas = tiendas;
 		this.estadoJuego = estadoDelJuego.JUGANDO;
 	}
 	
@@ -65,10 +67,9 @@ public class Juego {
 	
 	
 	public void gameLoop() {
-		terreno.imprimirTerreno(this.jugador);
+		Terreno terreno = new Terreno(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
 		Scanner input = new Scanner(System.in);
 		var acciones = new ArrayList<Accion>();
-		
 		while(estadoJuego == estadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
 			
@@ -76,12 +77,12 @@ public class Juego {
 			if(movimiento == 'W' || movimiento == 'S' || movimiento == 'A' || movimiento == 'D') {
 				int dx = difX(movimiento);
 				int dy = difY(movimiento);
-				var accion = new AccionMovimiento(jugador, terreno, dx, dy);
+				var accion = new AccionMovimiento(jugador, suelo, tiendas, dx, dy);
 				acciones.add(accion);
 			} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
 				acciones.add(mejoraJugador(movimiento));
 			} else if(movimiento == 'X') {
-				AccionItemTerreno accion = new AccionItemTerreno(new MejoraDinamita(movimiento, terreno, jugador));
+				AccionItemTerreno accion = new AccionItemTerreno(new MejoraDinamita(movimiento, suelo, jugador));
 				acciones.add(accion);
 			}
 			
@@ -93,13 +94,7 @@ public class Juego {
 				acciones.remove(0);
 			}
 			
-			
-			terreno.romperBloque(jugador.getPosicion());
-			//Acá habría que ver cómo armar un contador que cuente la altura de la que cae e implementar la función que calcula el daño según la altura :P
-//			No funciona bien
-//			while(jugadorDebeCaer()){
-//				jugador.caer();
-//			}
+			suelo.destruirBloque(jugador.getPosicion());
 			terreno.imprimirTerreno(jugador);
 			jugador.mostrarInventario();
 		}

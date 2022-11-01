@@ -25,7 +25,7 @@ public class Jugador implements Bloque {
 	int maxHP;
 	List<MejoraDeJugador> mejoras;
 	
-	public Jugador(int tamanioTerreno) {
+	public Jugador(int posX, int posY) {
 		//Faltaria la excepcion para tamaño terreno
 		this.nivelCombustible = Jugador.COMBUSTIBLE_INICIAL;
 		this.capacidadTanque = Jugador.MAX_COMBUSTIBLE_INICIAL;
@@ -36,7 +36,7 @@ public class Jugador implements Bloque {
 		this.maxInventario = Jugador.MAX_INVENTARIO_INICIAL;
 		this.mejoras = new ArrayList<>();
 		this.mineralesRecolectados = new ArrayList<>();
-		this.posicion = new Posicion(tamanioTerreno/2, 0);
+		this.posicion = new Posicion(posX, posY);
 	}
 	
 	//Hay que mover y aparte hay que ir restando el combustible, y si está usando el taladro debería perder hp :P

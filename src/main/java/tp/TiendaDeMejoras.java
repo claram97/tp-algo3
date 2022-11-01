@@ -18,15 +18,15 @@ public class TiendaDeMejoras implements Entidad{
 	//Fijate que en todos los casos siempre hay 6 opciones, las 6 opciones valen siempre lo mismo, no más cambia
 	//la capacidad total del tanque, el máximo del inventario o el máximo de la vida.
 	private void inicializarMejoras() {
-		this.mejoras.put("I1", new MejoraMaxInventario(15,750));
+		this.mejoras.put("I1",new MejoraMaxInventario(15,750));
 		this.mejoras.put("I2",new MejoraMaxInventario(25,2000));
 		this.mejoras.put("I3",new MejoraMaxInventario(40,5000));
 		this.mejoras.put("I4",new MejoraMaxInventario(60,20000));
 		this.mejoras.put("I5",new MejoraMaxInventario(70,100000));
 		this.mejoras.put("I6",new MejoraMaxInventario(120,150000));
 				
-		this.mejoras.put("V1", new MejoraMaxVida(17,750));
-		this.mejoras.put("V2", new MejoraMaxVida(30,2000));
+		this.mejoras.put("V1",new MejoraMaxVida(17,750));
+		this.mejoras.put("V2",new MejoraMaxVida(30,2000));
 		this.mejoras.put("V3",new MejoraMaxVida(50,5000));
 		this.mejoras.put("V4",new MejoraMaxVida(80,20000));
 		this.mejoras.put("V5",new MejoraMaxVida(120,100000));
@@ -61,7 +61,7 @@ public class TiendaDeMejoras implements Entidad{
 	}
 	
 	public TiendaDeMejoras(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.6), 0);
+		this.posicion = new Posicion((int)(tamanioTerreno * 0.9), 0);
 		this.mejoras = new HashMap<>();
 		this.inicializarMejoras();
 	}

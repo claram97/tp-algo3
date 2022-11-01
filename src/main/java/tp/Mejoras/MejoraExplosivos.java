@@ -1,11 +1,13 @@
 package tp.Mejoras;
 
 import tp.Jugador;
+import tp.Suelo;
 import tp.Terreno;
 
 public class MejoraExplosivos extends MejoraDeTerreno {
-	public MejoraExplosivos(char letra, Terreno terreno, Jugador pj) {
-		super(letra, terreno, pj);
+
+	public MejoraExplosivos(char letra, Suelo suelo, Jugador pj) {
+		super(letra, suelo, pj);
 		// TODO Auto-generated constructor stub
 	}
 

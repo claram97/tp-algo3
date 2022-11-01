@@ -1,17 +1,18 @@
 package tp.Mejoras;
 
 import tp.Jugador;
+import tp.Suelo;
 import tp.Terreno;
 
 public abstract class MejoraDeTerreno {
 	public char letra;
-	private Terreno terreno;
 	private Jugador pj;
+	private Suelo suelo;
 	
-	public MejoraDeTerreno(char letra, Terreno terreno, Jugador pj) {
+	public MejoraDeTerreno(char letra, Suelo suelo, Jugador pj) {
 		super();
 		this.letra = letra;
-		this.terreno = terreno;
+		this.suelo = suelo;
 		this.pj = pj;
 	}
 
