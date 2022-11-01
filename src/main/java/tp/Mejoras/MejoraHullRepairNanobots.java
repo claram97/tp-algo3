@@ -13,7 +13,7 @@ public class MejoraHullRepairNanobots extends MejoraDeJugador {
 	
 	public void utilizar(Jugador jugador) {
 		jugador.setHP(MejoraHullRepairNanobots.VIDA_REGENERADA);
-		jugador.pagar(MejoraHullRepairNanobots.VALOR);
+		jugador.hacerCompra(MejoraHullRepairNanobots.VALOR);
 	}
 	
 }

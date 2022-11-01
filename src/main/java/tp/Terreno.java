@@ -25,16 +25,7 @@ public class Terreno {
 			if(pj.getPosicion().getPosicionX() == i && pj.getPosicion().getPosicionY() == 0) {
 				System.out.print(this.pj.getLetra());
 			} else{
-				boolean encontrado = false;
-				for(Entidad e: tiendas.devolverTiendas()) {
-					if(e.getPosicion().getPosicionX() == i) {
-						System.out.print(e.getLetra());
-						encontrado = true;
-					}
-				}
-				if(!encontrado) {
-					System.out.print(' ');
-				}
+				System.out.print(tiendas.devolverTiendas().get(i).getLetra());
 			}
 			System.out.print(' ');
 		}

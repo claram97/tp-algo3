@@ -8,14 +8,19 @@ public class PisoSuperior {
 	
 	public PisoSuperior(int ancho, EstacionDeServicio ypf, EstacionDeReparacion mecanico, TiendaDeMejoras mejoras) {
 		var tiendas = new ArrayList<Entidad>();
+		
+		for(int i = 0; i < ancho; i++) {
+			tiendas.add(new Aire());
+		}
+		
 		if(ypf != null) {
-			tiendas.add(ypf);
+			tiendas.add(ypf.getPosicion().getPosicionX(), ypf);
 		}
 		if(mecanico != null) {
-			tiendas.add(mecanico);
+			tiendas.add(mecanico.getPosicion().getPosicionX(), mecanico);
 		}
 		if(mejoras != null) {
-			tiendas.add(mejoras);
+			tiendas.add(mejoras.getPosicion().getPosicionX(), mejoras);
 		}
 		this.tiendas = tiendas;
 		this.ancho = ancho;
@@ -23,11 +28,7 @@ public class PisoSuperior {
 	
 	public Entidad colisionEntidad(Posicion pos) {
 		if(this.tiendas != null) {
-			for(Entidad e: tiendas) {
-				if(e.getPosicion().esPosicionIgual(pos)) {
-					return e;
-				}
-			}
+			return tiendas.get(pos.getPosicionX());
 		}
 		return null;
 	}

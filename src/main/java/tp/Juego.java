@@ -70,6 +70,7 @@ public class Juego {
 		Terreno terreno = new Terreno(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
 		Scanner input = new Scanner(System.in);
 		var acciones = new ArrayList<Accion>();
+		terreno.imprimirTerreno(jugador);
 		while(estadoJuego == estadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
 			

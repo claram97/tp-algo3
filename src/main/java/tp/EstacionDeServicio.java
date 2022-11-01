@@ -22,11 +22,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 			return (capacidadTanque - cantidadActual) * PRECIO_COMBUSTIBLE;
 		}
 		
-		if(litrosDisponibles.get(i) > capacidadTanque - cantidadActual) {
-			return (capacidadTanque - cantidadActual) * PRECIO_COMBUSTIBLE;
-		}
-		
-		return litrosDisponibles.get(i) * PRECIO_COMBUSTIBLE;
+		return cantidadCombustible * PRECIO_COMBUSTIBLE;
 	}
 	
 	public int cantidadDeCombustible(int cantidadDinero) {
@@ -40,20 +36,19 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		System.out.println("Cantidad: ");
 	}
 	
-	//esto está todo muy mal armado xdddd muy mal la lógica y encima no chequeo que si es 0 no tiene que cargar 0 tiene que cargar full AAAAA
-	public void vender(Jugador jugador) {
-		prompt_nafta();
-		Scanner sc = new Scanner(System.in);
-		int cantidad = sc.nextInt(); //Falta chequeo.
+	public void vender(Jugador jugador, int cantidad) {
 		int precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.getNivelCombustible());
 		if(precio == -1) return;
-		
 		jugador.cargarCombustible(cantidadDeCombustible(precio), precio);
 	}
 
 	@Override
 	public void interactuar(Jugador jugador) {
-		vender(jugador);
+		prompt_nafta();
+		Scanner sc = new Scanner(System.in);
+		int cantidad = sc.nextInt(); //Falta chequeo.
+
+		vender(jugador, cantidad);
 	}
 
 	@Override

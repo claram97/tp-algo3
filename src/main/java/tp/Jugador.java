@@ -79,7 +79,6 @@ public class Jugador implements Bloque {
 		return '&';
 	}
 
-	
 	//Se puede cambiar getX y getY por getPosicion.getX()
 	public int getX() {
 		return this.posicion.getPosicionX();
@@ -93,7 +92,6 @@ public class Jugador implements Bloque {
 		return this.posicion;
 	}
 	
-	
 	public boolean seQuedoSinCombustible() {
 		return this.nivelCombustible <= 0;
 	}
@@ -102,50 +100,32 @@ public class Jugador implements Bloque {
 		return this.nivelCombustible;
 	}
 	
-	//-------------- Creo que implemente esto mismo pero en EstacionDeServicio. No lo habia visto --------------------------------------
-	//Esta función está acá por si se cargó menos combustible del que se pidió (por ej cuando te faltan 3L para llenar el tanque pero le das click a la opción de 5L, solo te carga 3L y te cobra los 3L)
-	//aunque quizás esto debería estar en EstacionDeServicio tmb no sé shoro
-	//la onda es que esto hace tipo una regla de 3 simple :P
 	private int calcularGasto(int cantidadCargada, int cantidadCombustible, int cantidadDePlata) {
 		if(cantidadCargada <= 0) {
 			return 0;
 		}
-		return cantidadCargada * cantidadDePlata / cantidadCombustible;
+		return (cantidadCargada * cantidadDePlata) / cantidadCombustible;
 	}
 	
-	//
-	private boolean tieneSuficienteDinero(int dinero){
-		return (this.dinero >= dinero);
-	}	
 	
-	//
-	public void cargarCombustible(int cantidadCombustible,int cantidadDePlata) {
-		if(this.tieneSuficienteDinero(cantidadDePlata)){
-			if(cantidadCombustible + this.nivelCombustible >= this.capacidadTanque){
-				int cantidadCargada = this.capacidadTanque - this.nivelCombustible;
-				this.nivelCombustible = this.capacidadTanque;
-				//Acá necesitamos hacer la cuenta de lo que efectivamente gastó según lo que cargó
-				this.pagar(this.calcularGasto(cantidadCargada,cantidadCombustible,cantidadDePlata));
-			}
-			int cantidadCargada = cantidadCombustible;
-			this.nivelCombustible += cantidadCombustible;
-			this.pagar(this.calcularGasto(cantidadCargada,cantidadCombustible,cantidadDePlata));
+	public void cargarCombustible(int cantidadCombustible, int cantidadDePlata) {
+		int faltante = this.capacidadTanque - this.nivelCombustible;
+		//Ternario de abajo:
+		//Si faltante es menor a cantidadCombustible --> cantidadCargar = faltante.
+		//Si cantidad de combustible es menor --> cantidadCargar = cantidadCombustible.
+		int cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
+		if(hacerCompra(this.calcularGasto(cantidadCargar, cantidadCombustible, cantidadDePlata))) {
+			this.nivelCombustible += cantidadCargar;
 		}
 	}
 	
-	//corte esto debería recibir la cantidad y devolver una cantidad de carga :P se supone que se elige con un click pero no sé a
-	public CantidadDeCarga cargarCombustible() {
-		//Acá se supone que el jugador elige la cantidad de carga y la devuelve, por ahora puede hacerse por pantalla supongo :P
-		return CantidadDeCarga.FULL; //no mas para q ande :P
-	}
-	
-	public void pagar(int cantidadDePlata) {
-		if((this.dinero-=cantidadDePlata) >= 0) {
-			this.dinero -= cantidadDePlata;
+	public boolean hacerCompra(int gasto) {
+		if(gasto > this.dinero) {
+			return false;
 		}
-		else {
-			//throw exception
-		}
+		
+		this.dinero -= gasto;
+		return true;
 	}
 	
 	public boolean seEstrello() {

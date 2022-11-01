@@ -70,7 +70,7 @@ public class AccionMovimiento implements Accion{
 		pj.setY(nueva.getPosicionY());
 		
 		if(pj.getY() == 0 && this.tiendas != null) {
-			if(tiendas.colisionEntidad(pj.getPosicion()) != null) {
+			if(tiendas.colisionEntidad(pj.getPosicion()).getTipoEntidad() == TipoEntidad.TIENDA) {
 				tiendas.colisionEntidad(pj.getPosicion()).interactuar(pj);
 			}
 		}

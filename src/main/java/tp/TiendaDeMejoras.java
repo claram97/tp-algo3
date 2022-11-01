@@ -100,29 +100,30 @@ public class TiendaDeMejoras implements Entidad{
 	
 	
 	//Tenemos que ver bien cómo el Jugador elige la mejora
-	public void vender(Jugador jugador) {
-		Scanner input = new Scanner(System.in);
-		promptMejoras();
-		char opcion = input.next().charAt(0);
-	
-		promptOpciones(opcion);
-		int tier = input.nextInt();
+	public void vender(Jugador jugador, String codigo) {
+		MejoraInstantanea mejora = this.mejoras.get(codigo);
 		
-		MejoraInstantanea mejora = this.mejoras.get(codigoMejora(opcion, tier));
 		if(mejora == null) {
 			System.out.println("No tenemos esa mejora o ya la vendimos :(");
 			return;
 		}
 		
 		mejora.utilizar(jugador);
-		jugador.pagar(mejora.valor);
+		jugador.hacerCompra(mejora.valor);
 		eliminarMejora(mejora);
 		
 	}
 
 	@Override
 	public void interactuar(Jugador jugador) {
-		vender(jugador);
+		Scanner input = new Scanner(System.in);
+		promptMejoras();
+		char opcion = input.next().charAt(0);
+	
+		promptOpciones(opcion);
+		int tier = input.nextInt();
+		String codigo = codigoMejora(opcion, tier);
+		vender(jugador, codigo);
 	}
 
 	@Override

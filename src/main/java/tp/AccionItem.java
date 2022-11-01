@@ -22,7 +22,7 @@ public class AccionItem implements Accion{
 		}
 		this.pj.eliminarMejora(this.pj.getMejoras().get(i));
 	}
-	
+			
 	@Override
 	public void aplicar() {
 		mejora.utilizar(pj);
