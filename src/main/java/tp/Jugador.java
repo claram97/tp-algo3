@@ -3,7 +3,7 @@ package tp;
 import java.util.ArrayList;
 import java.util.List;
 
-import tp.Mejoras.MejoraDeJugador;
+import tp.Mejoras.Usable;
 
 public class Jugador implements Bloque {
 	private static int COMBUSTIBLE_INICIAL = 6;
@@ -23,7 +23,7 @@ public class Jugador implements Bloque {
 	int resistencia; //a mayor resistencia, menos vida pierde, después lo implementamos bien :P
 	int maxInventario;
 	int maxHP;
-	List<MejoraDeJugador> mejoras;
+	List<Usable> mejoras;
 	
 	public Jugador(int posX, int posY) {
 		//Faltaria la excepcion para tamaño terreno
@@ -39,13 +39,11 @@ public class Jugador implements Bloque {
 		this.posicion = new Posicion(posX, posY);
 	}
 	
-	//Hay que mover y aparte hay que ir restando el combustible, y si está usando el taladro debería perder hp :P
-	//Evidentemente el 10 esta hardcodeado, faltarian unas constantes.
 	
+	//------------------------------------------------
+	//          MINERALES / INVENTARIO
+	//------------------------------------------------
 	
-	//Supongo que la idea sería armar algún tipo de loop para vender los minerales, cuestión que vaya recibiendo
-	//de a uno hasta que ese loop se termine y los vaya buscando de a uno y eliminándolos :P
-	//Habria que revisar esto. el juego original creo que te permite vender de a uno pero nunca use eso :p.
 	public void venderMinerales(Bloque mineral) {
 		if(mineralesRecolectados.contains(mineral)) {
 			this.mineralesRecolectados.remove(mineral);
@@ -66,7 +64,15 @@ public class Jugador implements Bloque {
 		}
 		System.out.print('\n');
 	}
+	
+	public int getCantidadDeMinerales() {
+		return this.mineralesRecolectados.size();
+	}
 
+	//------------------------------------------------
+	//          INTERFAZ BLOQUE
+	//------------------------------------------------
+	
 	public int getPrecio() {
 		return -1;
 	}
@@ -79,6 +85,10 @@ public class Jugador implements Bloque {
 		return '&';
 	}
 
+	//------------------------------------------------
+	//          	POSICION
+	//------------------------------------------------
+	
 	//Se puede cambiar getX y getY por getPosicion.getX()
 	public int getX() {
 		return this.posicion.getPosicionX();
@@ -92,52 +102,25 @@ public class Jugador implements Bloque {
 		return this.posicion;
 	}
 	
-	public boolean seQuedoSinCombustible() {
-		return this.nivelCombustible <= 0;
-	}
-	
-	public int nivelDeCombustible() {
-		return this.nivelCombustible;
-	}
-	
-	private int calcularGasto(int cantidadCargada, int cantidadCombustible, int cantidadDePlata) {
-		if(cantidadCargada <= 0) {
-			return 0;
-		}
-		return (cantidadCargada * cantidadDePlata) / cantidadCombustible;
-	}
-	
-	
-	public void cargarCombustible(int cantidadCombustible, int cantidadDePlata) {
-		int faltante = this.capacidadTanque - this.nivelCombustible;
-		//Ternario de abajo:
-		//Si faltante es menor a cantidadCombustible --> cantidadCargar = faltante.
-		//Si cantidad de combustible es menor --> cantidadCargar = cantidadCombustible.
-		int cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
-		if(hacerCompra(this.calcularGasto(cantidadCargar, cantidadCombustible, cantidadDePlata))) {
-			this.nivelCombustible += cantidadCargar;
-		}
-	}
-	
-	public boolean hacerCompra(int gasto) {
-		if(gasto > this.dinero) {
-			return false;
-		}
-		
-		this.dinero -= gasto;
-		return true;
-	}
-	
-	public boolean seEstrello() {
-		return this.hp == 0;
-	}
-
 	public void setY(int i) {
 		this.posicion.setPosicionY(i);
 	}
 
 	public void setX(int i) {
 		this.posicion.setPosicionX(i);
+	}
+
+	
+	//------------------------------------------------
+	//          	COMBUSTIBLE
+	//------------------------------------------------
+	
+	public boolean seQuedoSinCombustible() {
+		return this.nivelCombustible <= 0;
+	}
+	
+	public int nivelDeCombustible() {
+		return this.nivelCombustible;
 	}
 
 	public int getCapacidadTanque() {
@@ -148,24 +131,15 @@ public class Jugador implements Bloque {
 		return this.nivelCombustible;
 	}
 	
-	public int getHp() {
-		return hp;
-	}
-
-	public int getMaxHP() {
-		return maxHP;
-	}
-	
-	public void repararDmg(int vidaSumar) {
-		this.hp += vidaSumar;
-	}
-	
-	public int getCantidadDeMinerales() {
-		return this.mineralesRecolectados.size();
-	}
-	
-	public List<MejoraDeJugador> getMejoras() {
-		return this.mejoras;
+	public void cargarCombustible(int cantidadCombustible, int cantidadDePlata) {
+		int faltante = this.capacidadTanque - this.nivelCombustible;
+		//Ternario de abajo:
+		//Si faltante es menor a cantidadCombustible --> cantidadCargar = faltante.
+		//Si cantidad de combustible es menor --> cantidadCargar = cantidadCombustible.
+		int cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
+		if(hacerCompra(this.calcularGasto(cantidadCargar, cantidadCombustible, cantidadDePlata))) {
+			this.nivelCombustible += cantidadCargar;
+		}
 	}
 	
 	//Estas funciones actualizan el máximo y el nivel actual también, viola el SRP?
@@ -179,6 +153,50 @@ public class Jugador implements Bloque {
 		}
 	}
 	
+	
+	
+	//------------------------------------------------
+	//          		DINERO
+	//------------------------------------------------
+	
+	private int calcularGasto(int cantidadCargada, int cantidadCombustible, int cantidadDePlata) {
+		if(cantidadCargada <= 0) {
+			return 0;
+		}
+		return (cantidadCargada * cantidadDePlata) / cantidadCombustible;
+	}
+	
+	
+	public boolean hacerCompra(int gasto) {
+		if(gasto > this.dinero) {
+			return false;
+		}
+		
+		this.dinero -= gasto;
+		return true;
+	}
+	
+	//------------------------------------------------
+	//          		HP
+	//------------------------------------------------
+	
+	public boolean seEstrello() {
+		return this.hp == 0;
+	}
+
+
+	public int getHp() {
+		return hp;
+	}
+
+	public int getMaxHP() {
+		return maxHP;
+	}
+	
+	public void repararDmg(int vidaSumar) {
+		this.hp += vidaSumar;
+	}
+	
 	public void setMaxVida(int maxVida) {
 		if(maxVida > this.maxHP) {
 			this.maxHP = maxVida;
@@ -189,6 +207,34 @@ public class Jugador implements Bloque {
 		}
 	}
 	
+	public void agregarHP(int healthPoints) {
+		if((this.hp + healthPoints) > this.maxHP) {
+			this.hp = this.maxHP;
+		}
+		else{
+			this.hp += healthPoints;
+		}
+	}
+	
+	//------------------------------------------------
+	//          		MEJORAS
+	//------------------------------------------------
+
+	
+	public List<Usable> getMejoras() {
+		return this.mejoras;
+	}
+	
+	public boolean tieneUsable(Usable item) {
+		for(Usable u :this.mejoras) {
+			if(u.getTipo() == item.getTipo()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
 	public void setMaxInventario(int maxVida) {
 		if(maxVida > this.maxHP) {
 			this.maxHP = maxVida;
@@ -196,6 +242,12 @@ public class Jugador implements Bloque {
 		}
 		else {
 			//throw exception
+		}
+	}
+	
+	public void eliminarMejora(Usable mejora) {
+		if(this.mejoras.contains(mejora)) {
+			mejoras.remove(mejora);
 		}
 	}
 	
@@ -208,19 +260,7 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-	public void setHP(int healthPoints) {
-		if((this.hp + healthPoints) > this.maxHP) {
-			this.hp = this.maxHP;
-		}
-		else{
-			this.hp += healthPoints;
-		}
-	}
+
 	
-	public void eliminarMejora(MejoraDeJugador mejora) {
-		if(this.mejoras.contains(mejora)) {
-			mejoras.remove(mejora);
-		}
-	}
 
 }

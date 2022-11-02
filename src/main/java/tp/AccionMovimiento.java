@@ -74,6 +74,9 @@ public class AccionMovimiento implements Accion{
 				tiendas.colisionEntidad(pj.getPosicion()).interactuar(pj);
 			}
 		}
+		
+		suelo.destruirBloque(pj.getPosicion());
+		
 		if(this.dy >= 0) {
 			caer();
 		}

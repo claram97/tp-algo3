@@ -7,12 +7,14 @@ import tp.Mejoras.MejoraCapacidadDelTanque;
 import tp.Mejoras.MejoraInstantanea;
 import tp.Mejoras.MejoraMaxInventario;
 import tp.Mejoras.MejoraMaxVida;
+import tp.Mejoras.Usable;
 
 import java.util.HashMap;
 
 public class TiendaDeMejoras implements Entidad{
 	Posicion posicion;
 	Map<String, MejoraInstantanea> mejoras;
+	Map<String, Usable> usables;
 	
 	//Para mí hay que refactorizar esto, no estaría mal crear una factory o algo :P
 	//Fijate que en todos los casos siempre hay 6 opciones, las 6 opciones valen siempre lo mismo, no más cambia
@@ -50,6 +52,10 @@ public class TiendaDeMejoras implements Entidad{
 		this.mejoras.put(new MejoraDeResistencia(100));
 		this.mejoras.put(new MejoraDeResistencia(150));
 */
+	}
+	
+	private void inicializarUsables() {
+//		this.usables.put("D", )
 	}
 	
 	//Acá hay que chequear qué mejora/s eliminar, porque por ejemplo si comprás el tanque de 25 ya no vas a comprar el de 15
@@ -109,7 +115,7 @@ public class TiendaDeMejoras implements Entidad{
 		}
 		
 		mejora.utilizar(jugador);
-		jugador.hacerCompra(mejora.valor);
+		jugador.hacerCompra(mejora.getValor());
 		eliminarMejora(mejora);
 		
 	}

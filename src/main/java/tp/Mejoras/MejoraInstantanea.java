@@ -7,4 +7,6 @@ public abstract class MejoraInstantanea {
 	public int valor;
 	
 	public abstract void utilizar(Jugador jugador);
+	
+	public abstract int getValor();
 }

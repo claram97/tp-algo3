@@ -4,17 +4,19 @@ import tp.Mejoras.MejoraDeTerreno;
 
 public class AccionItemTerreno implements Accion{
 	MejoraDeTerreno mejora;
+	Jugador jugador;
 	
-	public AccionItemTerreno(MejoraDeTerreno mejora) {
+	public AccionItemTerreno(Jugador pj,MejoraDeTerreno mejora) {
 		super();
+		this.jugador = pj;
 		this.mejora = mejora;
 	}
 
-
-
 	@Override
 	public void aplicar() {
-		mejora.utilizar();
+		if(jugador.tieneUsable(mejora)) {
+			mejora.utilizar(jugador);
+		}
 	}
 
 }

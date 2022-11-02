@@ -17,4 +17,9 @@ public class MejoraMaxVida extends MejoraInstantanea {
 	public void utilizar(Jugador jugador) {
 		jugador.setMaxVida(super.cantidadAMejorar);
 	}
+
+	@Override
+	public int getValor() {
+		return this.valor;
+	}
 }

@@ -17,4 +17,9 @@ public class MejoraDeResistencia extends MejoraInstantanea {
 	public void utilizar(Jugador jugador) {
 		jugador.setResistencia(super.cantidadAMejorar);
 	}
+
+	@Override
+	public int getValor() {
+		return this.valor;
+	}
 }

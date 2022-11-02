@@ -37,5 +37,7 @@ public class JugadorTest {
         int despues = jugador.getCantidadDeMinerales();
         assertEquals(antes,despues);
     }
+    
+    
 
 }
