@@ -1,6 +1,5 @@
 package tp;
 
-
 public class AccionMovimiento implements Accion{
 	//No se si sera mucho que reciba a ambos, pero no se me ocurre otra forma por ahora.
 	private Jugador pj;
@@ -21,8 +20,6 @@ public class AccionMovimiento implements Accion{
 		if(pj.getY() == 0) {
 			return false;
 		}
-			//No se si son punteros o que pero si ponia Posicion actual = pj.getPosicion()
-			//Funcionaba como si actual fuera un puntero a pj.
 		Posicion arriba = new Posicion(pj.getX(), pj.getY() - 1);
 		if(suelo.casilleroVacio(arriba)) {
 				return false;
@@ -30,15 +27,22 @@ public class AccionMovimiento implements Accion{
 
 		return true;
 	}
-
-	private void caer() {
+	
+	private int calcularDanio(int altura) {
+		return (int)(altura * 0.02);
+	}
+	
+	private int caer() {
+		int altura = 0;
 		if(pj.getY() < Main.ALTURA) {
 			Posicion debajo = new Posicion(pj.getX(), pj.getY() + 1);
 			while(suelo.casilleroVacio(debajo) && pj.getY() < Main.ALTURA - 2) {
 				pj.setY(pj.getY() + 1);
 				debajo.setPosicionY(debajo.getPosicionY() + 1);
+				altura++;
 			}
 		}
+		return this.calcularDanio(altura);
 	}
 	
 	private void taladrar(Posicion pos) {
@@ -57,7 +61,8 @@ public class AccionMovimiento implements Accion{
 		Posicion nueva = new Posicion(pj.getX(), pj.getY());
 		if(this.dy != 0) {
 			if(this.dy > 0 || !chocaArriba()) {
-				nueva.setPosicionY(this.pj.getY() + dy); //Si se le pasa un valor negativo deberia funcionar igual.
+				nueva.setPosicionY(this.pj.getY() + dy);
+				//Si se le pasa un valor negativo deberia funcionar igual.
 				//Falta excepcion para que no se escape por los bordes
 			}
 		}
@@ -78,7 +83,8 @@ public class AccionMovimiento implements Accion{
 		suelo.destruirBloque(pj.getPosicion());
 		
 		if(this.dy >= 0) {
-			caer();
+			this.pj.recibirDanio(this.caer());
 		}
+		this.pj.gastarCombustible(1);
 	}
 }

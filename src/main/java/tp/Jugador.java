@@ -9,7 +9,7 @@ public class Jugador implements Bloque {
 	private static int COMBUSTIBLE_INICIAL = 6;
 	private static int MAX_COMBUSTIBLE_INICIAL = 10;
 	private static int HP_INICIAL = 10;
-	private static int MAX_HP_INICIAL = 7;
+	private static int MAX_HP_INICIAL = 10;
 	private static int DINERO_INICIAL = 20;
 	private static int RESISTENCIA_INICIAL = 10; //no se que valor le vamos a poner a esto, después lo charlamos bien :P
 	private static int MAX_INVENTARIO_INICIAL = 7;
@@ -234,11 +234,14 @@ public class Jugador implements Bloque {
 		return false;
 	}
 	
+	public void agregarUsable(Usable item) {
+		this.mejoras.add(item);
+	}
+	
 
-	public void setMaxInventario(int maxVida) {
-		if(maxVida > this.maxHP) {
-			this.maxHP = maxVida;
-			this.hp = maxVida;
+	public void setMaxInventario(int maxInventario) {
+		if(maxInventario > this.maxInventario) {
+			this.maxInventario = maxInventario;
 		}
 		else {
 			//throw exception
@@ -260,7 +263,26 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-
+	public void gastarCombustible(int cantidad) {
+		if(cantidad <= 0) {
+			//throw exception
+		}
+		if(cantidad <= this.nivelCombustible){
+			this.nivelCombustible -= cantidad;
+		}
+	}
 	
+	public void recibirDanio(int danio) {
+		if(danio < 0) {
+			//throw an exception
+		}
+		else if(danio > this.hp) {
+			this.hp = 0;	
+		}
+		else{
+			this.hp -= danio;
+		}
+	}
 
 }
+

@@ -25,5 +25,10 @@ public class MejoraHullRepairNanobots implements Usable {
 	public TipoUsable getTipo() {
 		return TipoUsable.REPAIR;
 	}
+
+	@Override
+	public int getCosto() {
+		return VALOR;
+	}
 	
 }

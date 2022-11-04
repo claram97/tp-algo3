@@ -9,7 +9,8 @@ public class Main {
 		var ypf = new EstacionDeServicio(ANCHO);
 		var mecanico = new EstacionDeReparacion(ANCHO);
 		var tiendita = new TiendaDeMejoras(ANCHO);
-		PisoSuperior tiendas = new PisoSuperior(ANCHO, ypf, mecanico, tiendita);
+		var tiendaConsumibles = new TiendaDeConsumibles(ANCHO);
+		PisoSuperior tiendas = new PisoSuperior(ANCHO, ypf, mecanico, tiendita, tiendaConsumibles);
 		Jugador pj = new Jugador(5, 0);
 		Juego juego = new Juego(suelo, tiendas, pj);
 		System.out.println("Holaaaaaaa");

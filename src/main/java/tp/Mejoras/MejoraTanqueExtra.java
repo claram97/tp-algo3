@@ -25,4 +25,9 @@ public class MejoraTanqueExtra implements Usable {
 		return TipoUsable.TANQUE_EXTRA;
 	}
 
+	@Override
+	public int getCosto() {
+		return VALOR;
+	}
+
 }

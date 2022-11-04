@@ -10,4 +10,5 @@ public interface Usable {
 	
 	public TipoUsable getTipo();
 	
+	public int getCosto();	
 }

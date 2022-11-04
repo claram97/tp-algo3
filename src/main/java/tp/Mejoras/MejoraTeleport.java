@@ -23,6 +23,11 @@ public class MejoraTeleport implements Usable {
 	public TipoUsable getTipo() {
 		return TipoUsable.TELEPORT;
 	}
+
+	@Override
+	public int getCosto() {
+		return VALOR;
+	}
 }
 
 //No sigue ninguna interfaz :(

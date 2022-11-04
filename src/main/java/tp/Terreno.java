@@ -46,6 +46,9 @@ public class Terreno {
 			System.out.print("\n");
 		}
 		System.out.print('\n');
+		
+		System.out.println("Nivel de nafta: " + pj.getNivelCombustible());
+		System.out.println("Nivel de vida: " + pj.getHp());
 	}
 	
 }

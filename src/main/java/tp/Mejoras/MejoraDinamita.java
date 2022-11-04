@@ -37,4 +37,9 @@ public class MejoraDinamita extends MejoraDeTerreno {
 	public TipoUsable getTipo() {
 		return TipoUsable.DINAMITA;
 	}
+
+	@Override
+	public int getCosto() {
+		return VALOR;
+	}
 }

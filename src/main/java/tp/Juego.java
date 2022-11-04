@@ -104,6 +104,9 @@ public class Juego {
 			realizarAccion(acciones);
 			terreno.imprimirTerreno(jugador);
 			jugador.mostrarInventario();
+//			if(jugador.seQuedoSinCombustible()) {
+//				estadoJuego = estadoDelJuego.PERDIDO;
+//			}
 		}
 	}
 	

@@ -6,7 +6,7 @@ public class PisoSuperior {
 	ArrayList<Entidad> tiendas;
 	private int ancho;
 	
-	public PisoSuperior(int ancho, EstacionDeServicio ypf, EstacionDeReparacion mecanico, TiendaDeMejoras mejoras) {
+	public PisoSuperior(int ancho, EstacionDeServicio ypf, EstacionDeReparacion mecanico, TiendaDeMejoras mejoras, TiendaDeConsumibles consumibles) {
 		var tiendas = new ArrayList<Entidad>();
 		
 		for(int i = 0; i < ancho; i++) {
@@ -22,6 +22,10 @@ public class PisoSuperior {
 		if(mejoras != null) {
 			tiendas.add(mejoras.getPosicion().getPosicionX(), mejoras);
 		}
+		if(consumibles != null) {
+			tiendas.add(consumibles.getPosicion().getPosicionX(), consumibles);
+		}
+		
 		this.tiendas = tiendas;
 		this.ancho = ancho;
 	}

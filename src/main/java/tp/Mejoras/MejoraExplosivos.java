@@ -30,4 +30,9 @@ public class MejoraExplosivos extends MejoraDeTerreno {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getCosto() {
+		return VALOR;
+	}
 }

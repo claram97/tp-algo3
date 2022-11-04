@@ -54,10 +54,6 @@ public class TiendaDeMejoras implements Entidad{
 */
 	}
 	
-	private void inicializarUsables() {
-//		this.usables.put("D", )
-	}
-	
 	//Acá hay que chequear qué mejora/s eliminar, porque por ejemplo si comprás el tanque de 25 ya no vas a comprar el de 15
 	//PIENSO QUE quizás no hay que borrarlas, sino que simplemente según la mejora que se quiere comprar, se chequea el nivel que tiene el jugador
 	//y no se deja comprar lo que no se deba comprar
