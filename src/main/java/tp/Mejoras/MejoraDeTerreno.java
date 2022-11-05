@@ -4,19 +4,16 @@ import tp.Jugador;
 import tp.Suelo;
 import tp.Terreno;
 
-public abstract class MejoraDeTerreno {
+public abstract class MejoraDeTerreno implements Usable{
 	public char letra;
-	private Jugador pj;
 	private Suelo suelo;
 	
-	public MejoraDeTerreno(char letra, Suelo suelo, Jugador pj) {
+	public MejoraDeTerreno(char letra, Suelo suelo) {
 		super();
 		this.letra = letra;
 		this.suelo = suelo;
-		this.pj = pj;
 	}
 
-	public abstract void utilizar();
 	
 }
 

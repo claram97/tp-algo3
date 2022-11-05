@@ -17,6 +17,9 @@ public class MejoraMaxInventario extends MejoraInstantanea {
 	public void utilizar(Jugador jugador) {
 		jugador.setMaxInventario(super.cantidadAMejorar);
 	}
-	
 
+	@Override
+	public int getValor() {
+		return this.valor;
+	}
 }

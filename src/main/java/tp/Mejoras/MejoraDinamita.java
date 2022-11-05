@@ -10,16 +10,14 @@ public class MejoraDinamita extends MejoraDeTerreno {
 	public static char LETRA = 'X';
 	
 	private Suelo suelo;
-	private Jugador pj;
 	
-	public MejoraDinamita(char letra, Suelo suelo, Jugador pj) {
-		super(letra, suelo, pj);
-		this.pj = pj;
+	public MejoraDinamita(char letra, Suelo suelo) {
+		super(letra, suelo);
 		this.suelo = suelo;
 	}
-		
+
 	@Override
-	public void utilizar() {
+	public void utilizar(Jugador pj) {
 		Posicion actual = pj.getPosicion();
 		Posicion aRomper = new Posicion(0, 0);
 		for(int i = -1; i < 2; i++) {
@@ -28,5 +26,20 @@ public class MejoraDinamita extends MejoraDeTerreno {
 				suelo.destruirBloque(aRomper);
 			}
 		}
+	}
+
+	@Override
+	public char getLetra() {
+		return LETRA;
+	}
+
+	@Override
+	public TipoUsable getTipo() {
+		return TipoUsable.DINAMITA;
+	}
+
+	@Override
+	public int getCosto() {
+		return VALOR;
 	}
 }

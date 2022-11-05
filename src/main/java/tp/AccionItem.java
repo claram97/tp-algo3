@@ -1,13 +1,13 @@
 package tp;
 
-import tp.Mejoras.MejoraDeJugador;
+import tp.Mejoras.Usable;
 import tp.Mejoras.MejoraDeTerreno;
 
 public class AccionItem implements Accion{
 	private Jugador pj;
-	private MejoraDeJugador mejora;
+	private Usable mejora;
 	
-	public AccionItem(Jugador pj, MejoraDeJugador mejora) {
+	public AccionItem(Jugador pj, Usable mejora) {
 		this.pj = pj;
 		this.mejora = mejora;
 	}
@@ -16,15 +16,17 @@ public class AccionItem implements Accion{
 		int i = 0;
 		boolean utilizado = false;
 		while(i < this.pj.getMejoras().size() && !utilizado) {
-			if(this.pj.getMejoras().get(i).letra == letra) {
+			if(this.pj.getMejoras().get(i).getLetra() == letra) {
 				this.pj.getMejoras().get(i).utilizar(this.pj);
 			}
 		}
 		this.pj.eliminarMejora(this.pj.getMejoras().get(i));
 	}
-	
+			
 	@Override
 	public void aplicar() {
-		mejora.utilizar(pj);
+		if(pj.tieneUsable(mejora)) {
+			mejora.utilizar(pj);
+		}
 	}
 }

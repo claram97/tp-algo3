@@ -65,38 +65,48 @@ public class Juego {
 		return accion;
 	}
 	
+	public void convertirInput(char movimiento, ArrayList<Accion> acciones) {
+		//Ahora lee caracteres y quizas quedo medio croto, pero esto se puede trasladar facil a un Map o algo.
+		if(movimiento == 'W' || movimiento == 'S' || movimiento == 'A' || movimiento == 'D') {
+			int dx = difX(movimiento);
+			int dy = difY(movimiento);
+			var accion = new AccionMovimiento(jugador, suelo, tiendas, dx, dy);
+			acciones.add(accion);
+		} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
+			acciones.add(mejoraJugador(movimiento));
+		} else if(movimiento == 'X') {
+			AccionItemTerreno accion = new AccionItemTerreno(jugador, new MejoraDinamita(movimiento, suelo));
+			acciones.add(accion);
+		}
+	}
+	
+	//Para poder realizar pruebas.
+	public void realizarAccion(ArrayList<Accion> acciones) {
+		//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
+		if(acciones.size() > 0) {
+			if(acciones.get(0) != null) {
+				acciones.get(0).aplicar();
+			}
+			acciones.remove(0);
+		}
+	}
+	
+	
 	
 	public void gameLoop() {
 		Terreno terreno = new Terreno(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
 		Scanner input = new Scanner(System.in);
 		var acciones = new ArrayList<Accion>();
+		terreno.imprimirTerreno(jugador);
 		while(estadoJuego == estadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
-			
-			//Ahora lee caracteres y quizas quedo medio croto, pero esto se puede trasladar facil a un Map o algo.
-			if(movimiento == 'W' || movimiento == 'S' || movimiento == 'A' || movimiento == 'D') {
-				int dx = difX(movimiento);
-				int dy = difY(movimiento);
-				var accion = new AccionMovimiento(jugador, suelo, tiendas, dx, dy);
-				acciones.add(accion);
-			} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
-				acciones.add(mejoraJugador(movimiento));
-			} else if(movimiento == 'X') {
-				AccionItemTerreno accion = new AccionItemTerreno(new MejoraDinamita(movimiento, suelo, jugador));
-				acciones.add(accion);
-			}
-			
-			//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
-			if(acciones.size() > 0) {
-				if(acciones.get(0) != null) {
-					acciones.get(0).aplicar();
-				}
-				acciones.remove(0);
-			}
-			
-			suelo.destruirBloque(jugador.getPosicion());
+			convertirInput(movimiento, acciones);
+			realizarAccion(acciones);
 			terreno.imprimirTerreno(jugador);
 			jugador.mostrarInventario();
+//			if(jugador.seQuedoSinCombustible()) {
+//				estadoJuego = estadoDelJuego.PERDIDO;
+//			}
 		}
 	}
 	
