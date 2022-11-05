@@ -17,20 +17,21 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		this.sc = null;
 	}
 	
-	//No sé si está bien esto así xd hay que re-factorizarlo seguro seguro
-	public int cantidadDeDinero(int cantidadCombustible, int capacidadTanque, int cantidadActual) {
-		if(!litrosDisponibles.contains(cantidadCombustible)) return -1; //Excepciones je!
-
-		int i = litrosDisponibles.indexOf(cantidadCombustible);
+	public float cantidadDeDinero(float cantidadCombustible, float capacidadTanque, float cantidadActual) {
+		if(!litrosDisponibles.contains((int)cantidadCombustible)) {
+			return -1;
+			//throw exception
+		}
+		int i = litrosDisponibles.indexOf((int)cantidadCombustible);
 		if(litrosDisponibles.get(i) == 100) {
-			return (capacidadTanque - cantidadActual) * PRECIO_COMBUSTIBLE;
+			return (capacidadTanque - cantidadActual) * EstacionDeServicio.PRECIO_COMBUSTIBLE;
 		}
 		
-		return cantidadCombustible * PRECIO_COMBUSTIBLE;
+		return cantidadCombustible * EstacionDeServicio.PRECIO_COMBUSTIBLE;
 	}
 	
-	public int cantidadDeCombustible(int cantidadDinero) {
-		return cantidadDinero/PRECIO_COMBUSTIBLE;
+	public float cantidadDeCombustible(float cantidadDinero) {
+		return cantidadDinero/EstacionDeServicio.PRECIO_COMBUSTIBLE;
 	}
 	
 	private void prompt_nafta() {
@@ -40,9 +41,11 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		System.out.println("Cantidad: ");
 	}
 	
-	public void vender(Jugador jugador, int cantidad) {
-		int precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.getNivelCombustible());
-		if(precio == -1) return;
+	public void vender(Jugador jugador, float cantidad) {
+		float precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.nivelDeCombustible());
+		if(precio == -1) {
+			return;
+		}
 		jugador.cargarCombustible(cantidadDeCombustible(precio), precio);
 	}
 
