@@ -88,7 +88,7 @@ public class AccionMovimiento implements Accion{
 		if(this.dy >= 0) {
 			this.pj.recibirDanio(this.caer());
 		}
-		this.pj.gastarCombustible(1);
+		this.pj.gastarCombustible((float)0.25);
 		return true;
 	}
 }
