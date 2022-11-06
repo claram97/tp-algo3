@@ -1,8 +1,8 @@
 package tp;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class EstacionDeReparacionTest {
 	private static final int PRECIO_REPARACION = 15;

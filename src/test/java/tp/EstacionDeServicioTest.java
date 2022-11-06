@@ -1,9 +1,9 @@
 package tp;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class EstacionDeServicioTest {
 
@@ -16,7 +16,7 @@ public class EstacionDeServicioTest {
 		//100 por ahora significa llenar el tanque, no 100 litros.
 		estacion.vender(jugador, 100);
 		
-		assertEquals(10, jugador.getNivelCombustible());
+		assertEquals(10, jugador.nivelDeCombustible());
 		
 	}
 	
@@ -27,7 +27,7 @@ public class EstacionDeServicioTest {
 		jugador.dinero = 100;
 		var estacion = new EstacionDeServicio(10);
 		estacion.vender(jugador, 5);
-		boolean naftaCorrecta = (jugador.getNivelCombustible() == 5);
+		boolean naftaCorrecta = (jugador.nivelDeCombustible() == 5);
 		boolean plataCorrecta = (jugador.dinero == 95);
 		
 		assertTrue(naftaCorrecta && plataCorrecta);
@@ -43,7 +43,7 @@ public class EstacionDeServicioTest {
 		var estacion = new EstacionDeServicio(10);
 		estacion.vender(jugador, 10);
 		
-		boolean naftaCorrecta = (jugador.getNivelCombustible() == 0);
+		boolean naftaCorrecta = (jugador.nivelDeCombustible() == 0);
 		boolean plataCorrecta = (jugador.dinero == 0);
 		
 		assertTrue(naftaCorrecta && plataCorrecta);
@@ -60,7 +60,7 @@ public class EstacionDeServicioTest {
 		var estacion = new EstacionDeServicio(10);
 		estacion.vender(jugador, 10);
 		
-		boolean naftaCorrecta = (jugador.getNivelCombustible() == 0);
+		boolean naftaCorrecta = (jugador.nivelDeCombustible() == 0);
 		boolean plataCorrecta = (jugador.dinero == 3);
 		
 		assertTrue(naftaCorrecta && plataCorrecta);
@@ -76,7 +76,7 @@ public class EstacionDeServicioTest {
 		var estacion = new EstacionDeServicio(10);
 		estacion.vender(jugador, 33);
 		
-		boolean naftaCorrecta = (jugador.getNivelCombustible() == 1);
+		boolean naftaCorrecta = (jugador.nivelDeCombustible() == 1);
 		boolean plataCorrecta = (jugador.dinero == 100);
 		
 		assertTrue(naftaCorrecta && plataCorrecta);

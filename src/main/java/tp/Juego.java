@@ -83,11 +83,9 @@ public class Juego {
 	//Para poder realizar pruebas.
 	public void realizarAccion(ArrayList<Accion> acciones) {
 		//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
-		if(acciones.size() > 0) {
-			if(acciones.get(0) != null) {
-				acciones.get(0).aplicar();
-			}
-			acciones.remove(0);
+		for(Accion a: acciones) {
+			a.aplicar();
+			acciones.remove(a);
 		}
 	}
 	
