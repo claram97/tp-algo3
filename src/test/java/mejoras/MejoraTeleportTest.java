@@ -1,13 +1,13 @@
 package mejoras;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import jugador.AccionItem;
 import jugador.Jugador;
 import jugador.Posicion;
-
 
 public class MejoraTeleportTest {
 
@@ -17,7 +17,7 @@ public class MejoraTeleportTest {
     	jugador.setY(10);
     	Usable mejoraTeleport = new MejoraTeleport();
     	mejoraTeleport.utilizar(jugador);
-    	assertEquals(jugador.getY(),0);
+    	assertEquals(jugador.getY(), 0);
     }
     
     //Este test falla y ni idea por qué jeje
@@ -26,11 +26,10 @@ public class MejoraTeleportTest {
     	Jugador jugador = new Jugador(5,0,10,10);
     	jugador.setX(9);
     	jugador.setY(10);
-    	Posicion posicionAnterior = jugador.getPosicion();
+    	Posicion posicionAnterior = new Posicion(jugador.getX(), jugador.getY());
     	Usable mejoraTeleport = new MejoraTeleport();
     	mejoraTeleport.utilizar(jugador);
-    	Posicion nuevaPosicion = jugador.getPosicion();
-    	assertFalse(posicionAnterior.esPosicionIgual(nuevaPosicion));
+    	assertFalse(posicionAnterior.esPosicionIgual(jugador.getPosicion()));
     }
 
 }

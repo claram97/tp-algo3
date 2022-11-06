@@ -56,6 +56,7 @@ public class Terreno {
 		
 		System.out.println("Nivel de nafta: " + pj.nivelDeCombustible());
 		System.out.println("Nivel de vida: " + pj.getHp());
+		System.out.println("Dinero: $" + pj.getDinero());
 	}
 	
 	public int getAlto() {

@@ -1,11 +1,11 @@
 package jugador;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import mejoras.MejoraTeleport;
 import mejoras.Usable;
@@ -103,18 +103,18 @@ public class JugadorTest {
     @Test
     public void noSePuedeActualizarCapacidadDelTanquePorUnaMenorALaActual() {
     	Jugador jugador = new Jugador(5,0,10,10);
-    	float antes = jugador.getCapacidadTanque();
+    	double antes = jugador.getCapacidadTanque();
     	jugador.agregarCapacidadAlTanque(10);
-    	float despues = jugador.getCapacidadTanque();
+    	double despues = jugador.getCapacidadTanque();
     	assertEquals(antes,despues);
     }
     
     @Test
     public void sePuedeActualizarCapacidadDelTanquePorUnaMayorALaActual() {
     	Jugador jugador = new Jugador(5,0,10,10);
-    	float antes = jugador.getCapacidadTanque();
+    	double antes = jugador.getCapacidadTanque();
     	jugador.agregarCapacidadAlTanque(20);
-    	float despues = jugador.getCapacidadTanque();
+    	double despues = jugador.getCapacidadTanque();
     	assertNotEquals(antes,despues);
     }
     
@@ -159,9 +159,9 @@ public class JugadorTest {
     @Test
     public void elCombustibleSeGastaCorrectamente() {
        	Jugador jugador = new Jugador(5,0,10,10);
-    	float antes = jugador.nivelDeCombustible();
+    	double antes = jugador.nivelDeCombustible();
     	jugador.gastarCombustible(5);
-    	float despues = jugador.nivelDeCombustible();
+    	double despues = jugador.nivelDeCombustible();
     	assertNotEquals(antes,despues);
     }
     

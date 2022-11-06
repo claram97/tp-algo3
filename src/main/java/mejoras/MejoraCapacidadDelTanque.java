@@ -3,18 +3,22 @@ package mejoras;
 import jugador.Jugador;
 
 public class MejoraCapacidadDelTanque extends MejoraInstantanea {
+	private double cantidad;
 	
-	public MejoraCapacidadDelTanque(int cantidad, int valor) {
+	public MejoraCapacidadDelTanque(double cantidad, int valor) {
 		if(cantidad > 0 && valor > 0) {
-			super.cantidadAMejorar = cantidad;
+			super.cantidadAMejorar = (int) cantidad;
 			super.valor = valor;
+			this.cantidad = cantidad;
 		}
 		else {
-			//throw an exception
+			super.cantidadAMejorar = 0;
+			super.valor = 0;
+			this.cantidad = 0;
 		}
 	}
 	public void utilizar(Jugador jugador) {
-		jugador.agregarCapacidadAlTanque(super.cantidadAMejorar);
+		jugador.agregarCapacidadAlTanque(this.cantidad);
 	}
 	@Override
 	public int getValor() {

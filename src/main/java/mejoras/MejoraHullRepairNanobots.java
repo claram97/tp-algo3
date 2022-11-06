@@ -13,7 +13,6 @@ public class MejoraHullRepairNanobots implements Usable {
 	
 	public void utilizar(Jugador jugador) {
 		jugador.agregarHP(MejoraHullRepairNanobots.VIDA_REGENERADA);
-		jugador.hacerCompra(MejoraHullRepairNanobots.VALOR);
 	}
 
 	@Override

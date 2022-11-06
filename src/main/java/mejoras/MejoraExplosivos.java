@@ -1,20 +1,20 @@
 package mejoras;
 
 import jugador.Jugador;
+import jugador.Posicion;
 import terreno.Suelo;
-import terreno.Terreno;
 
 public class MejoraExplosivos extends MejoraDeTerreno {
-
-	public MejoraExplosivos(char letra, Suelo suelo, Jugador pj) {
-		super(letra, suelo);
-		// TODO Auto-generated constructor stub
-	}
-
 	public static int VALOR = 5000;
 	public static char LETRA = 'C';
 	
-
+	private Suelo suelo;
+	
+	public MejoraExplosivos(Suelo suelo, Jugador pj) {
+		super(LETRA, suelo);
+		this.suelo = suelo;
+	}
+	
 	@Override
 	public char getLetra() {
 		return LETRA;
@@ -27,8 +27,14 @@ public class MejoraExplosivos extends MejoraDeTerreno {
 
 	@Override
 	public void utilizar(Jugador jugador) {
-		// TODO Auto-generated method stub
-		
+		Posicion actual = jugador.getPosicion();
+		Posicion aRomper = new Posicion(0, 0);
+		for(int i = -2; i < 3; i++) {
+			for(int j = -2; j < 3; j++) {
+				aRomper.set(actual.getX() + i, actual.getY() + j);
+				suelo.destruirBloque(aRomper);
+			}
+		}
 	}
 
 	@Override

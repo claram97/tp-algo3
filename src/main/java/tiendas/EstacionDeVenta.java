@@ -9,15 +9,13 @@ import terreno.TipoEntidad;
 
 public class EstacionDeVenta implements Entidad {
 	public Posicion posicion;
-	private static final String RESPUESTA_AFIRMATIVA = "S";
+	private static final char RESPUESTA_AFIRMATIVA = 'S';
 	private static final char LETRA = '/';
 	private Scanner sc;
-	String respuesta;
 	
 	public EstacionDeVenta(int tamanioTerreno) {
 		this.posicion = new Posicion((int)(tamanioTerreno * 0.4), 0);
 		this.sc = null;
-		this.respuesta = null;
 	}
 	
 	public void prompt_mensaje_venta() {
@@ -28,8 +26,8 @@ public class EstacionDeVenta implements Entidad {
 	public void interactuar(Jugador jugador) {
 		prompt_mensaje_venta();
 		this.sc = new Scanner(System.in);
-		this.respuesta = sc.next();
-		if(this.respuesta == EstacionDeVenta.RESPUESTA_AFIRMATIVA) {
+		char respuesta = sc.next().charAt(0);
+		if(respuesta == RESPUESTA_AFIRMATIVA) {
 			comprar(jugador);
 		}
 	}

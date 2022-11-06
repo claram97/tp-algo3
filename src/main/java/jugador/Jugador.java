@@ -17,11 +17,11 @@ public class Jugador implements Bloque {
 	private static final char LETRA = '&';
 	
 	private int hp;
-	private float nivelCombustible;
+	private double nivelCombustible;
 	private int dinero;
 	private List<Mineral> mineralesRecolectados;
 	private Posicion posicion;
-	private int capacidadTanque;
+	private double capacidadTanque;
 	private int maxInventario;
 	private int maxHP;
 	private List<Usable> mejoras;
@@ -89,6 +89,10 @@ public class Jugador implements Bloque {
 	public int getCantidadDeMinerales() {
 		return this.mineralesRecolectados.size();
 	}
+	
+	public int getMaxInventario() {
+		return this.maxInventario;
+	}
 
 	//------------------------------------------------
 	//          INTERFAZ BLOQUE
@@ -136,42 +140,44 @@ public class Jugador implements Bloque {
 		return this.nivelDeCombustible() <= 0;
 	}
 	
-	public float nivelDeCombustible() {
+	public double nivelDeCombustible() {
 		return this.nivelCombustible;
 	}
 
-	public float getCapacidadTanque() {
+	public double getCapacidadTanque() {
 		return this.capacidadTanque;
 	}
 	
-	public void cargarCombustible(float cantidadCombustible, float cantidadDePlata) {
-		float faltante = this.capacidadTanque - this.nivelCombustible;
+	public void cargarCombustible(double cantidadCombustible, double cantidadDePlata) {
+		double faltante = this.capacidadTanque - this.nivelCombustible;
 		//Ternario de abajo:
 		//Si faltante es menor a cantidadCombustible --> cantidadCargar = faltante.
 		//Si cantidad de combustible es menor --> cantidadCargar = cantidadCombustible.
-		float cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
+		double cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
 		if(hacerCompra(this.calcularGasto(cantidadCargar, cantidadCombustible, cantidadDePlata))) {
 			this.nivelCombustible += cantidadCargar;
 		}
 	}
 	
 	//Estas funciones actualizan el máximo y el nivel actual también, viola el SRP?
-	public void agregarCapacidadAlTanque(int capacidad) {
-		if(capacidad < 0) {
+	public void agregarCapacidadAlTanque(double cantidad) {
+		if(cantidad < 0) {
 			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
 		}
 		
-		this.setCapacidadDelTanque(capacidad);
-		this.setNivelDeCombustible(capacidad);
+		this.setCapacidadDelTanque(cantidad);
+		this.setNivelDeCombustible(cantidad);
 		
 	}
 	
-	public void setCapacidadDelTanque(int capacidad) {
+	public void setCapacidadDelTanque(double capacidad) {
 		if(capacidad < 0) {
 			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+			return;
 		}
 		if(capacidad < this.capacidadTanque) {
 			//throw an exception (no deberíamos achicar el tanque) -> esta excepción consistiría en tirar un mensaje por pantalla quizás?
+			return;
 		}
 		this.capacidadTanque = capacidad;
 	}
@@ -181,15 +187,15 @@ public class Jugador implements Bloque {
 	//          		DINERO
 	//------------------------------------------------
 	
-	private float calcularGasto(float cantidadCargada, float cantidadCombustible, float cantidadDePlata) {
-		if(cantidadCargada <= 0) {
+	private double calcularGasto(double cantidadCargar, double cantidadCombustible, double cantidadDePlata) {
+		if(cantidadCargar <= 0) {
 			return 0;
 		}
-		return (cantidadCargada * cantidadDePlata) / cantidadCombustible;
+		return (cantidadCargar * cantidadDePlata) / cantidadCombustible;
 	}
 	
 	
-	public boolean hacerCompra(float gasto) {
+	public boolean hacerCompra(double gasto) {
 		if(gasto > this.dinero) {
 			return false;
 		}
@@ -292,7 +298,7 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-	public void gastarCombustible(float cantidad) {
+	public void gastarCombustible(double cantidad) {
 		if(cantidad <= 0) {
 			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
 		}
@@ -316,7 +322,7 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-	public void setNivelDeCombustible(int nivelDeCombustible) {
+	public void setNivelDeCombustible(double nivelDeCombustible) {
 		if(nivelDeCombustible < 0) {
 			//throw an exception
 		}

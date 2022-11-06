@@ -22,7 +22,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		this.sc = null;
 	}
 	
-	public float cantidadDeDinero(float cantidadCombustible, float capacidadTanque, float cantidadActual) {
+	public double cantidadDeDinero(double cantidadCombustible, double capacidadTanque, double cantidadActual) {
 		if(!LITROS_DISPONIBLES.contains((int)cantidadCombustible)) {
 			return -1;
 			//throw exception
@@ -35,7 +35,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		return cantidadCombustible * EstacionDeServicio.PRECIO_COMBUSTIBLE;
 	}
 	
-	public float cantidadDeCombustible(float cantidadDinero) {
+	public double cantidadDeCombustible(double cantidadDinero) {
 		return cantidadDinero/EstacionDeServicio.PRECIO_COMBUSTIBLE;
 	}
 	
@@ -47,7 +47,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 	}
 	
 	public void vender(Jugador jugador, float cantidad) {
-		float precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.nivelDeCombustible());
+		double precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.nivelDeCombustible());
 		if(precio == -1) {
 			return;
 		}

@@ -1,9 +1,9 @@
 package tiendas;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import jugador.Jugador;
 
@@ -18,7 +18,7 @@ public class EstacionDeServicioTest {
 		//100 por ahora significa llenar el tanque, no 100 litros.
 		estacion.vender(jugador, 100);
 		
-		assertEquals(10, jugador.nivelDeCombustible());
+		assertEquals(10.0, jugador.nivelDeCombustible(), 0.01);
 		
 	}
 	
