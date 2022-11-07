@@ -1,6 +1,5 @@
 package jugador;
 
-import mejoras.MejoraDeTerreno;
 import mejoras.Usable;
 
 public class AccionItem implements Accion{
@@ -16,6 +15,7 @@ public class AccionItem implements Accion{
 	public boolean aplicar() {
 		if(pj.tieneUsable(mejora)) {
 			mejora.utilizar(pj);
+			pj.eliminarMejora(mejora);
 			return true;
 		}
 		return false;

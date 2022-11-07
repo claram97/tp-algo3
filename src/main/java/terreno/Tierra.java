@@ -6,7 +6,6 @@ public class Tierra implements Bloque{
 	private static final char LETRA = 'T';
 	private Posicion posicion;
 	
-
 	public Tierra() {
 		this.posicion = null;
 	}

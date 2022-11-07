@@ -2,15 +2,17 @@ package terreno;
 
 import jugador.Jugador;
 import jugador.Posicion;
+import mejoras.Usable;
+import minerales.Mineral;
 
-public class Terreno {
+public class Vista {
 	private PisoSuperior tiendas;
 	private Suelo suelo;
 	private Jugador pj;
 	private int ancho;
 	private int alto;
 
-	public Terreno(PisoSuperior tiendas, Suelo suelo, Jugador pj, int ancho, int alto) {
+	public Vista(PisoSuperior tiendas, Suelo suelo, Jugador pj, int ancho, int alto) {
 		if(tiendas == null || suelo == null || pj == null) {
 			//throw an exception
 		}
@@ -54,17 +56,24 @@ public class Terreno {
 		}
 		System.out.print('\n');
 		
-		System.out.println("Nivel de nafta: " + pj.nivelDeCombustible());
-		System.out.println("Nivel de vida: " + pj.getHp());
+		System.out.print("Nivel de nafta: " + String.format("%.02f", pj.nivelDeCombustible()));
+		System.out.println("\t\t Nivel de vida: " + pj.getHp());
 		System.out.println("Dinero: $" + pj.getDinero());
+		System.out.print("Minerales recolectados: ");
+		for(Mineral actual: pj.getMinerales()) {
+			System.out.print('|');
+			System.out.print(actual.getLetra());
+			System.out.print('|');
+		}
+		System.out.print('\n');
+		
+		System.out.print("Consumibles en el inventario: ");
+		for(Usable actual: pj.getMejoras()) {
+			System.out.print('|');
+			System.out.print(actual.getLetra());
+			System.out.print('|');
+		}
+		System.out.print('\n');
 	}
-	
-	public int getAlto() {
-		return this.alto;
-	}
-	
-	public int getAncho() {
-		return this.ancho;
-	}
-	
+		
 }

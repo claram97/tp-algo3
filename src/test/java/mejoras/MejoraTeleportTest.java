@@ -20,7 +20,6 @@ public class MejoraTeleportTest {
     	assertEquals(jugador.getY(), 0);
     }
     
-    //Este test falla y ni idea por qué jeje
     @Test
     public void seTeletransporta() {
     	Jugador jugador = new Jugador(5,0,10,10);

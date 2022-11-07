@@ -26,5 +26,9 @@ public class Suelo {
 		return config.casilleroVacio(posicion);
 	}
 	
+	public int getAlto() {
+		return config.getAlto();
+	}
+	
 	
 }

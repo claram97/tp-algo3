@@ -1,8 +1,6 @@
 package mejoras;
 
-import jugador.Jugador;
 import terreno.Suelo;
-import terreno.Terreno;
 
 public abstract class MejoraDeTerreno implements Usable{
 	public char letra;

@@ -74,16 +74,8 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-	public void mostrarInventario() {
-		if(this.mineralesRecolectados.size() > 0) {
-			for(Mineral mineral: mineralesRecolectados) {
-				System.out.print(" | " + mineral.getLetra());
-			}
-			System.out.print('\n');
-		}
-		if(this.mineralesRecolectados.size() == 0) {
-			System.out.println("Inventario vacío");
-		}
+	public List<Mineral> getMinerales() {
+		return this.mineralesRecolectados;
 	}
 	
 	public int getCantidadDeMinerales() {
@@ -148,6 +140,17 @@ public class Jugador implements Bloque {
 		return this.capacidadTanque;
 	}
 	
+	
+	public void setNivelDeCombustible(double nivelDeCombustible) {
+		if(nivelDeCombustible < 0) {
+			//throw an exception
+		}
+		if(nivelDeCombustible > this.capacidadTanque) {
+			//throw an exception
+		}
+		this.nivelCombustible = nivelDeCombustible;
+	}
+	
 	public void cargarCombustible(double cantidadCombustible, double cantidadDePlata) {
 		double faltante = this.capacidadTanque - this.nivelCombustible;
 		//Ternario de abajo:
@@ -182,6 +185,19 @@ public class Jugador implements Bloque {
 		this.capacidadTanque = capacidad;
 	}
 	
+	public void gastarCombustible(double cantidad) {
+		if(cantidad <= 0) {
+			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+		}
+		if(cantidad <= this.nivelCombustible){
+			this.nivelCombustible -= cantidad;
+		}
+		if(cantidad > this.nivelCombustible) {
+			this.nivelCombustible = 0;
+		}
+	}
+	
+	
 	
 	//------------------------------------------------
 	//          		DINERO
@@ -203,6 +219,18 @@ public class Jugador implements Bloque {
 		this.dinero -= gasto;
 		return true;
 	}
+	
+	public void setDinero(int dinero) {
+		if(dinero < 0) {
+			//throw an exception
+		}
+		this.dinero = dinero;
+	}
+	
+	public int getDinero() {
+		return this.dinero;
+	}
+
 	
 	//------------------------------------------------
 	//          		HP
@@ -265,6 +293,18 @@ public class Jugador implements Bloque {
 		}
 	}
 	
+	public void recibirDanio(int danio) {
+		if(danio < 0) {
+			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+		}
+		else if(danio > this.hp) {
+			this.hp = 0;	
+		}
+		else{
+			this.hp -= danio;
+		}
+	}
+	
 	//------------------------------------------------
 	//          		MEJORAS
 	//------------------------------------------------
@@ -275,7 +315,12 @@ public class Jugador implements Bloque {
 	}
 	
 	public boolean tieneUsable(Usable item) {
-		return this.mejoras.contains(item);
+		for(Usable usable: this.mejoras) {
+			if(item.getTipo() == usable.getTipo()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void agregarUsable(Usable item) {
@@ -292,56 +337,19 @@ public class Jugador implements Bloque {
 		}
 	}
 	
-	public void eliminarMejora(Usable mejora) {
-		if(this.mejoras.contains(mejora)) {
-			mejoras.remove(mejora);
+	public void eliminarMejora(Usable buscado) {
+		for(int i = 0; i < this.mejoras.size(); i++) {
+			if(mejoras.get(i).getTipo() == buscado.getTipo()) {
+				mejoras.remove(i);
+				return;
+			}
 		}
 	}
 	
-	public void gastarCombustible(double cantidad) {
-		if(cantidad <= 0) {
-			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
-		}
-		if(cantidad <= this.nivelCombustible){
-			this.nivelCombustible -= cantidad;
-		}
-		if(cantidad > this.nivelCombustible) {
-			this.nivelCombustible = 0;
-		}
-	}
+
+
+
 	
-	public void recibirDanio(int danio) {
-		if(danio < 0) {
-			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
-		}
-		else if(danio > this.hp) {
-			this.hp = 0;	
-		}
-		else{
-			this.hp -= danio;
-		}
-	}
-	
-	public void setNivelDeCombustible(double nivelDeCombustible) {
-		if(nivelDeCombustible < 0) {
-			//throw an exception
-		}
-		if(nivelDeCombustible > this.capacidadTanque) {
-			//throw an exception
-		}
-		this.nivelCombustible = nivelDeCombustible;
-	}
-	
-	public void setDinero(int dinero) {
-		if(dinero < 0) {
-			//throw an exception
-		}
-		this.dinero = dinero;
-	}
-	
-	public int getDinero() {
-		return this.dinero;
-	}
 
 }
 

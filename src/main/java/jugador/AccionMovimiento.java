@@ -38,7 +38,7 @@ public class AccionMovimiento implements Accion{
 	}
 	
 	private int calcularDanio(int altura) {
-		return (int)(altura * 0.02);
+		return (int)(altura * 0.02); //<-------------------- Este calculo es muy probable que de 0.
 	}
 	
 	private int caer() {

@@ -16,12 +16,13 @@ import terreno.TipoEntidad;
 
 public class TiendaDeConsumibles implements Entidad {
 	Posicion posicion;
-	Map<String, Usable> usables;
+	Map<Character, Usable> usables;
 	
 	public void inicializarConsumibles() {
-		this.usables.put("R", new MejoraHullRepairNanobots());
-		this.usables.put("X", new MejoraTanqueExtra());
-		this.usables.put("T", new MejoraTeleport());
+		this.usables.put('R', new MejoraHullRepairNanobots());
+		this.usables.put('X', new MejoraTanqueExtra());
+		this.usables.put('T', new MejoraTeleport());
+		this.usables.put('D', new MejoraDinamita(null));
 	}
 	
 	public TiendaDeConsumibles(int ancho) {
@@ -38,7 +39,7 @@ public class TiendaDeConsumibles implements Entidad {
 		System.out.print("Opcion: ");
 	}
 	
-	public void vender(Jugador jugador, String opcion) {
+	public void vender(Jugador jugador, char opcion) {
 		Usable objeto = usables.get(opcion);
 		
 		if(objeto == null) {
@@ -57,9 +58,8 @@ public class TiendaDeConsumibles implements Entidad {
 		Scanner scanner = new Scanner(System.in);
 		prompt_consumibles();
 		char opcion = scanner.next().charAt(0);
-		String str = String.valueOf(opcion);
 		//str es un manejo choto pero no puedo buscar que es mejor.
-		vender(jugador, str);
+		vender(jugador, opcion);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class AccionItemTerreno implements Accion{
 	public boolean aplicar() {
 		if(jugador.tieneUsable(mejora)) {
 			mejora.utilizar(jugador);
+			jugador.eliminarMejora(mejora);
 			return true;
 		}
 		return false;

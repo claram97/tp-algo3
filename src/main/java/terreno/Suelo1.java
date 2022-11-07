@@ -67,4 +67,10 @@ public class Suelo1 implements ConfigSuelo {
 		
 		return(bloques[posicion.getY()][posicion.getX()] instanceof Aire);
 	}
+
+
+	@Override
+	public int getAlto() {
+		return this.alto;
+	}
 }

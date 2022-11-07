@@ -1,8 +1,7 @@
 package tp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import jugador.Accion;
@@ -13,89 +12,55 @@ import jugador.Jugador;
 import mejoras.*;
 import terreno.PisoSuperior;
 import terreno.Suelo;
-import terreno.Terreno;
+import terreno.Vista;
 import tiendas.EstadoDelJuego;
 
-public class Juego { 
+public class Juego {		
 	private Suelo suelo;
 	private PisoSuperior tiendas;
 	private Jugador jugador;
-	private Terreno terreno;
+	private Vista terreno;
 	private Scanner input;
+	private Map<Character, Accion> controles;
 	
 	public Juego(Suelo suelo, PisoSuperior tiendas, Jugador jugador) {
 		this.suelo = suelo;
 		this.jugador = jugador;
 		this.tiendas = tiendas;
 		this.input = null;
-		this.terreno = new Terreno(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
+		this.terreno = new Vista(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
+		
+		//Usa Character de momento pero con JavaFX pasaria a ser KeyCode.
+		final Map<Character, Accion> controles = Map.of(
+				'W', new AccionMovimiento(jugador, suelo, tiendas, 0, -1),
+				'S', new AccionMovimiento(jugador, suelo, tiendas, 0, 1),
+				'D', new AccionMovimiento(jugador, suelo, tiendas, 1, 0),
+				'A', new AccionMovimiento(jugador, suelo, tiendas, -1, 0),
+				'F', new AccionItem(jugador, new MejoraTanqueExtra()),
+				'Q', new AccionItem(jugador, new MejoraTeleport()),
+				'R', new AccionItem(jugador, new MejoraHullRepairNanobots()),
+				'X', new AccionItemTerreno(jugador, new MejoraDinamita(suelo))
+				);
+		this.controles = controles;
 	}
-
+	
 	private EstadoDelJuego estadoJuego(){
 		if(jugador.seEstrello() || jugador.seQuedoSinCombustible()){
 			return EstadoDelJuego.PERDIDO;
 		}
-		if(jugador.getX() == this.terreno.getAlto()) {
+		if(jugador.getY() == suelo.getAlto()) {
 			return EstadoDelJuego.GANADO;
 		}
 		return EstadoDelJuego.JUGANDO;
 	}
-	
-	//Esto probablemente se pueda poner mas bonito, Diego uso un diccionario por ej.
-	private int difX(char mov) {
-		if(mov == 'A') {
-			return -1;
-		} else if(mov == 'D') {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
 
-	private int difY(char mov) {
-		if(mov == 'W') {
-			return -1;
-		} else if(mov == 'S') {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-	
-	//Ahora deja utilizar libremente cada mejora. Hay que completar la implementacion de la lista de mejoras en jugador y agregar las restricciones aca.
-	//Viola el principio de las dependencias explícitas ahre
-	//Necesitamos una listita de Acciones Válidas, como en la Estación de Servicio que tenemos el Array ese con los numeritos viste? :P
-	//Entonces chequeamos de ahí en vez de tener acá jeje
-	private AccionItem mejoraJugador(char tecla) {
-		AccionItem accion;
-		if(tecla == 'F') {
-			accion = new AccionItem(jugador, new MejoraTanqueExtra());
-		} else if(tecla == 'Q') {
-			accion = new AccionItem(jugador, new MejoraTeleport());
-		} else if(tecla == 'R') {
-			accion = new AccionItem(jugador, new MejoraHullRepairNanobots());
-		} else {
-			accion = null;
-		}
-		return accion;
-	}
-	
 	public void convertirInput(char movimiento, ArrayList<Accion> acciones) {
-		//Ahora lee caracteres y quizas quedó medio croto, pero esto se puede trasladar facil a un Map o algo.
-		if(movimiento == 'W' || movimiento == 'S' || movimiento == 'A' || movimiento == 'D') {
-			int dx = difX(movimiento);
-			int dy = difY(movimiento);
-			var accion = new AccionMovimiento(jugador, suelo, tiendas, dx, dy);
-			acciones.add(accion);
-		} else if(movimiento == 'F' || movimiento == 'Q' || movimiento == 'R') {
-			acciones.add(mejoraJugador(movimiento));
-		} else if(movimiento == 'X') {
-			AccionItemTerreno accion = new AccionItemTerreno(jugador, new MejoraDinamita(suelo));
+		Accion accion = controles.get(movimiento);
+		if(accion != null) {
 			acciones.add(accion);
 		}
 	}
 	
-	//Para poder realizar pruebas.
 	public void realizarAccion(ArrayList<Accion> acciones) {
 		//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
 		if(acciones.size() > 0) {
@@ -115,7 +80,6 @@ public class Juego {
 			convertirInput(movimiento, acciones);
 			realizarAccion(acciones);
 			terreno.imprimirTerreno(jugador);
-			jugador.mostrarInventario();
 		}
 	}
 		

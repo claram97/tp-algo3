@@ -3,10 +3,9 @@ package mejoras;
 import jugador.Jugador;
 import jugador.Posicion;
 import terreno.Suelo;
-import terreno.Terreno;
 
 public class MejoraDinamita extends MejoraDeTerreno {
-	public static int VALOR = 2000;
+	public static int VALOR = 20;
 	public static char LETRA = 'X';
 	
 	private Suelo suelo;
