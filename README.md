@@ -12,6 +12,7 @@ Francisquito querido, por favor, mirá la nueva implementación del tp y seguí 
 
 TE RECOMIENDO QUE ESTA LISTA LA TENGAS A MANO Y VAYAS PASANDO ACÁ ABAJO LO QUE YA HAYAS HECHO YA QUE TODAS ESTAS TAREAS TE CORRESPONDEN A VOS PORQUE YO VOY A HACER LO DE LAS EXCEPCIONES!! :DD
 
+### Done or almost done
 * EstacionDeVenta no anda por un tema de strings y no se que, por ahora lo cambie a char y listo, no es algo que sea definitivo encima.
 * Explosivos ahora es dinamita pero + 1 de diametro.
 * Para la posicionVieja de la prueba de MejoraTeleport le asigne una new Posicion(). No se porque funciona asi pero no es la primera vez que me sucede, las variables se tratan como punteros o algo asi, ni idea.
