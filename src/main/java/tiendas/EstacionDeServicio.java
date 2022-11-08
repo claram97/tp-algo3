@@ -46,7 +46,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		System.out.println("Cantidad: ");
 	}
 	
-	public void vender(Jugador jugador, float cantidad) {
+	public void vender(Jugador jugador, double cantidad) {
 		double precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.nivelDeCombustible());
 		if(precio == -1) {
 			return;
@@ -59,7 +59,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		prompt_nafta();
 		this.sc = new Scanner(System.in);
 		this.cantidad = sc.nextInt();
-		if(this.LITROS_DISPONIBLES.contains(this.cantidad)){
+		if(EstacionDeServicio.LITROS_DISPONIBLES.contains(this.cantidad)){
 			vender(jugador,this.cantidad);
 		}
 	}

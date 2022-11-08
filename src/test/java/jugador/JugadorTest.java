@@ -106,7 +106,7 @@ public class JugadorTest {
     	double antes = jugador.getCapacidadTanque();
     	jugador.agregarCapacidadAlTanque(10);
     	double despues = jugador.getCapacidadTanque();
-    	assertEquals(antes,despues);
+    	assertEquals(antes, despues, 0.01);
     }
     
     @Test

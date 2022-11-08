@@ -101,13 +101,8 @@ public class TiendaDeMejoras implements Entidad{
 	
 	
 	//Tenemos que ver bien cómo el Jugador elige la mejora
-	public void vender(Jugador jugador, String codigo) {
-		MejoraInstantanea mejora = this.mejoras.get(codigo);
+	public void vender(Jugador jugador, MejoraInstantanea mejora) {
 		
-		if(mejora == null) {
-			System.out.println("No tenemos esa mejora o ya la vendimos :(");
-			return;
-		}
 		
 		mejora.utilizar(jugador);
 		jugador.hacerCompra(mejora.getValor());
@@ -124,7 +119,14 @@ public class TiendaDeMejoras implements Entidad{
 		promptOpciones(opcion);
 		int tier = input.nextInt();
 		String codigo = codigoMejora(opcion, tier);
-		vender(jugador, codigo);
+		
+		MejoraInstantanea mejora = this.mejoras.get(codigo);
+		if(mejora == null) {
+			System.out.println("No tenemos esa mejora o ya la vendimos :(");
+			return;
+		}
+		
+		vender(jugador, mejora);
 	}
 
 	@Override

@@ -43,7 +43,6 @@ public class TiendaDeConsumibles implements Entidad {
 		Usable objeto = usables.get(opcion);
 		
 		if(objeto == null) {
-			System.out.println("No tenemos ese item");
 			return;
 		}
 		

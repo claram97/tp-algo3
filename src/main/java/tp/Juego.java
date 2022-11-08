@@ -6,20 +6,18 @@ import java.util.Scanner;
 
 import jugador.Accion;
 import jugador.AccionItem;
-import jugador.AccionItemTerreno;
 import jugador.AccionMovimiento;
 import jugador.Jugador;
 import mejoras.*;
 import terreno.PisoSuperior;
 import terreno.Suelo;
 import terreno.Vista;
-import tiendas.EstadoDelJuego;
 
 public class Juego {		
 	private Suelo suelo;
 	private PisoSuperior tiendas;
 	private Jugador jugador;
-	private Vista terreno;
+	private Vista vista;
 	private Scanner input;
 	private Map<Character, Accion> controles;
 	
@@ -28,7 +26,7 @@ public class Juego {
 		this.jugador = jugador;
 		this.tiendas = tiendas;
 		this.input = null;
-		this.terreno = new Vista(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
+		this.vista = new Vista(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
 		
 		//Usa Character de momento pero con JavaFX pasaria a ser KeyCode.
 		final Map<Character, Accion> controles = Map.of(
@@ -39,7 +37,7 @@ public class Juego {
 				'F', new AccionItem(jugador, new MejoraTanqueExtra()),
 				'Q', new AccionItem(jugador, new MejoraTeleport()),
 				'R', new AccionItem(jugador, new MejoraHullRepairNanobots()),
-				'X', new AccionItemTerreno(jugador, new MejoraDinamita(suelo))
+				'X', new AccionItem(jugador, new MejoraDinamita(suelo))
 				);
 		this.controles = controles;
 	}
@@ -53,7 +51,7 @@ public class Juego {
 		}
 		return EstadoDelJuego.JUGANDO;
 	}
-
+	
 	public void convertirInput(char movimiento, ArrayList<Accion> acciones) {
 		Accion accion = controles.get(movimiento);
 		if(accion != null) {
@@ -74,12 +72,12 @@ public class Juego {
 	public void gameLoop() {
 		this.input = new Scanner(System.in);
 		var acciones = new ArrayList<Accion>();
-		terreno.imprimirTerreno(jugador);
+		vista.imprimir(jugador);
 		while(this.estadoJuego() == EstadoDelJuego.JUGANDO) {
 			char movimiento = input.next().charAt(0);
 			convertirInput(movimiento, acciones);
 			realizarAccion(acciones);
-			terreno.imprimirTerreno(jugador);
+			vista.imprimir(jugador);
 		}
 	}
 		

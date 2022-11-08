@@ -18,7 +18,7 @@ public class Jugador implements Bloque {
 	
 	private int hp;
 	private double nivelCombustible;
-	private int dinero;
+	private double dinero;
 	private List<Mineral> mineralesRecolectados;
 	private Posicion posicion;
 	private double capacidadTanque;
@@ -227,7 +227,7 @@ public class Jugador implements Bloque {
 		this.dinero = dinero;
 	}
 	
-	public int getDinero() {
+	public double getDinero() {
 		return this.dinero;
 	}
 
@@ -249,7 +249,7 @@ public class Jugador implements Bloque {
 		return maxHP;
 	}
 	
-	public void repararDmg(float vidaSumar) {
+	public void repararDmg(int vidaSumar) {
 		this.hp += vidaSumar;
 	}
 	

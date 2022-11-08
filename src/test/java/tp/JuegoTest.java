@@ -54,6 +54,7 @@ public class JuegoTest {
 		assertEquals(acciones.size(), 1);
 	}
 	
+	@Test
 	public void recibirMultiplesInputs() {
 		var acciones = new ArrayList<Accion>();
 		Juego juego = new Juego(null, null, null);
@@ -93,6 +94,7 @@ public class JuegoTest {
 		
 		boolean posCorrecta = pj.getPosicion().getY() == 0;
 		boolean cantidadCorrecta = acciones.size() == 4;
+		
 		assertTrue(posCorrecta && cantidadCorrecta);
 	}
 	

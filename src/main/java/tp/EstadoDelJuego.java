@@ -1,4 +1,4 @@
-package tiendas;
+package tp;
 
 public enum EstadoDelJuego {
 	JUGANDO,

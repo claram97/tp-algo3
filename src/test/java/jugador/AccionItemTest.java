@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import jugador.AccionItem;
 import mejoras.MejoraDinamita;
+import mejoras.MejoraTeleport;
 import mejoras.Usable;
 import terreno.ConfigSuelo;
 import terreno.Suelo;
@@ -17,22 +17,68 @@ public class AccionItemTest {
 	@Test
 	public void seAplicaLaMejora() {
 		Jugador jugador = new Jugador(10, 10,10,10);
-		ConfigSuelo configSuelo = new Suelo1(Main.ALTURA,Main.ANCHO);
-		Suelo suelo = new Suelo(configSuelo);
-		Usable mejora = new MejoraDinamita(suelo);
+		Usable mejora = new MejoraTeleport();
 		jugador.agregarUsable(mejora);
-		AccionItem accionItem = new AccionItem(jugador,mejora);
-		assertEquals(true,accionItem.aplicar());
+		AccionItem accionItem = new AccionItem(jugador, mejora);
+		assertEquals(true, accionItem.aplicar());
 	}
 	
+	@Test
 	public void noSeAplicaLaMejora() {
+		Jugador jugador = new Jugador(10,10,10,10);
+		Usable mejora = new MejoraTeleport();
+		AccionItem accionItem = new AccionItem(jugador, mejora);
+		assertEquals(false, accionItem.aplicar());
+	}
+	
+	@Test
+	public void seGastaElItem() {
+		Jugador jugador = new Jugador(5, 5,10,10);
+		Usable mejora = new MejoraTeleport();
+		jugador.agregarUsable(mejora);
+		AccionItem accion = new AccionItem(jugador, mejora);
+		
+		int cantidadVieja = jugador.getMejoras().size();
+		accion.aplicar();
+		int cantidadNueva = jugador.getMejoras().size();
+		
+		assertEquals(cantidadNueva, cantidadVieja - 1);
+	}
+	
+	@Test
+	public void seAplicaLaMejoraConTerreno() {
+		Jugador jugador = new Jugador(10, 10,10,10);
+		ConfigSuelo configSuelo = new Suelo1(Main.ALTURA,Main.ANCHO);
+		Suelo suelo = new Suelo(configSuelo);
+		var mejora = new MejoraDinamita(suelo);
+		jugador.agregarUsable(mejora);
+		AccionItem AccionItem = new AccionItem(jugador,mejora);
+		assertEquals(true, AccionItem.aplicar());
+	}
+	
+	@Test
+	public void noSeAplicaLaMejoraConTerreno() {
 		Jugador jugador = new Jugador(10,10,10,10);
 		ConfigSuelo configSuelo = new Suelo1(Main.ALTURA,Main.ANCHO);
 		Suelo suelo = new Suelo(configSuelo);
-		Usable mejora = new MejoraDinamita(suelo);
-		AccionItem accionItem = new AccionItem(jugador,mejora);
-		assertEquals(false,accionItem.aplicar());
+		var mejora = new MejoraDinamita(suelo);
+		AccionItem AccionItem = new AccionItem(jugador, mejora);
+		assertEquals(false,AccionItem.aplicar());
 	}
+	
+	@Test
+	public void seGastaElItemDeTerreno() {
+		Jugador jugador = new Jugador(5, 5,10,10);
+		ConfigSuelo configSuelo = new Suelo1(Main.ALTURA,Main.ANCHO);
+		Suelo suelo = new Suelo(configSuelo);
+		var mejora = new MejoraDinamita(suelo);
+		jugador.agregarUsable(mejora);
+		AccionItem accion = new AccionItem(jugador, mejora);
+		int cantidadVieja = jugador.getMejoras().size();
+		
+		accion.aplicar();
+	}
+		
 
 }
 

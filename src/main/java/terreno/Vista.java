@@ -25,7 +25,7 @@ public class Vista {
 	}
 
 
-	public void imprimirTerreno(Jugador pj) {
+	public void imprimir(Jugador pj) {
 		int x = pj.getX();
 		int y = pj.getY();
 		
@@ -75,5 +75,4 @@ public class Vista {
 		}
 		System.out.print('\n');
 	}
-		
 }
