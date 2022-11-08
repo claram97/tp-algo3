@@ -18,7 +18,7 @@ public class Jugador implements Bloque {
 	
 	private int hp;
 	private double nivelCombustible;
-	private double dinero;
+	private int dinero;
 	private List<Mineral> mineralesRecolectados;
 	private Posicion posicion;
 	private double capacidadTanque;
@@ -227,7 +227,7 @@ public class Jugador implements Bloque {
 		this.dinero = dinero;
 	}
 	
-	public double getDinero() {
+	public int getDinero() {
 		return this.dinero;
 	}
 
