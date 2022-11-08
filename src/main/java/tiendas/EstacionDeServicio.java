@@ -22,7 +22,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		this.sc = null;
 	}
 	
-	public double cantidadDeDinero(double cantidadCombustible, double capacidadTanque, double cantidadActual) {
+	public double cantidadDeCombustible(double cantidadCombustible, double capacidadTanque, double cantidadActual) {
 		if(!LITROS_DISPONIBLES.contains((int)cantidadCombustible)) {
 			return -1;
 			//throw exception
@@ -32,11 +32,14 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 			return (capacidadTanque - cantidadActual) * EstacionDeServicio.PRECIO_COMBUSTIBLE;
 		}
 		
-		return cantidadCombustible * EstacionDeServicio.PRECIO_COMBUSTIBLE;
+		double faltante = capacidadTanque - cantidadActual;
+		double cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
+		
+		return cantidadCargar;
 	}
 	
-	public double cantidadDeCombustible(double cantidadDinero) {
-		return cantidadDinero/EstacionDeServicio.PRECIO_COMBUSTIBLE;
+	public double cantidadDeDinero(double cantidadDeCombustible) {
+		return cantidadDeCombustible * EstacionDeServicio.PRECIO_COMBUSTIBLE;
 	}
 	
 	private void prompt_nafta() {
@@ -47,11 +50,14 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 	}
 	
 	public void vender(Jugador jugador, double cantidad) {
-		double precio = cantidadDeDinero(cantidad, jugador.getCapacidadTanque(), jugador.nivelDeCombustible());
-		if(precio == -1) {
+		double cantidadCombustible = cantidadDeCombustible(cantidad, jugador.getNave().getCapacidadTanque(), jugador.getNave().getNivelDeCombustible());
+		if(cantidadCombustible == -1) {
 			return;
 		}
-		jugador.cargarCombustible(cantidadDeCombustible(precio), precio);
+		
+		if(jugador.hacerCompra(cantidadCombustible)) {
+			jugador.getNave().cargarCombustible(cantidadCombustible, cantidad);
+		}
 	}
 
 	@Override

@@ -26,7 +26,7 @@ public class Juego {
 		this.jugador = jugador;
 		this.tiendas = tiendas;
 		this.input = null;
-		this.vista = new Vista(tiendas, suelo, jugador, Main.ANCHO, Main.ALTURA);
+		this.vista = new Vista(tiendas, suelo, jugador, jugador.getInventario(), Main.ANCHO, Main.ALTURA);
 		
 		//Usa Character de momento pero con JavaFX pasaria a ser KeyCode.
 		final Map<Character, Accion> controles = Map.of(
@@ -43,7 +43,7 @@ public class Juego {
 	}
 	
 	private EstadoDelJuego estadoJuego(){
-		if(jugador.seEstrello() || jugador.seQuedoSinCombustible()){
+		if(jugador.noPuedeContinuar()){
 			return EstadoDelJuego.PERDIDO;
 		}
 		if(jugador.getY() == suelo.getAlto()) {

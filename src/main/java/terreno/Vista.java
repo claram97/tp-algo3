@@ -1,6 +1,7 @@
 package terreno;
 
 import jugador.Jugador;
+import jugador.Inventario;
 import jugador.Posicion;
 import mejoras.Usable;
 import minerales.Mineral;
@@ -9,10 +10,11 @@ public class Vista {
 	private PisoSuperior tiendas;
 	private Suelo suelo;
 	private Jugador pj;
+	private Inventario inventario;
 	private int ancho;
 	private int alto;
 
-	public Vista(PisoSuperior tiendas, Suelo suelo, Jugador pj, int ancho, int alto) {
+	public Vista(PisoSuperior tiendas, Suelo suelo, Jugador pj, Inventario inventario, int ancho, int alto) {
 		if(tiendas == null || suelo == null || pj == null) {
 			//throw an exception
 		}
@@ -20,6 +22,7 @@ public class Vista {
 		this.tiendas = tiendas;
 		this.suelo = suelo;
 		this.pj = pj;
+		this.inventario = inventario;
 		this.ancho = ancho;
 		this.alto = alto;
 	}
@@ -56,11 +59,11 @@ public class Vista {
 		}
 		System.out.print('\n');
 		
-		System.out.print("Nivel de nafta: " + String.format("%.02f", pj.nivelDeCombustible()));
-		System.out.println("\t\t Nivel de vida: " + pj.getHp());
+		System.out.print("Nivel de nafta: " + String.format("%.02f", pj.getNave().getNivelDeCombustible()));
+		System.out.println("\t\t Nivel de vida: " + pj.getNave().getHP());
 		System.out.println("Dinero: $" + pj.getDinero());
 		System.out.print("Minerales recolectados: ");
-		for(Mineral actual: pj.getMinerales()) {
+		for(Mineral actual: inventario.getMinerales()) {
 			System.out.print('|');
 			System.out.print(actual.getLetra());
 			System.out.print('|');
@@ -68,7 +71,7 @@ public class Vista {
 		System.out.print('\n');
 		
 		System.out.print("Consumibles en el inventario: ");
-		for(Usable actual: pj.getMejoras()) {
+		for(Usable actual: inventario.getUsables()) {
 			System.out.print('|');
 			System.out.print(actual.getLetra());
 			System.out.print('|');

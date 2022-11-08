@@ -14,7 +14,7 @@ public class MejoraCapacidadDelTanqueTest {
 		int capacidadNueva = 80;
 		var mejora = new MejoraCapacidadDelTanque(capacidadNueva, 100);
 		mejora.utilizar(pj);
-		assertTrue(pj.getCapacidadTanque() == capacidadNueva);
+		assertTrue(pj.getNave().getCapacidadTanque() == capacidadNueva);
 	}
 	
 	@Test
@@ -22,9 +22,9 @@ public class MejoraCapacidadDelTanqueTest {
 		Jugador pj = new Jugador(5, 0, 10, 10);
 		int capacidadNueva = -80;
 		var mejora = new MejoraCapacidadDelTanque(capacidadNueva, 100);
-		double capacidadVieja = pj.getCapacidadTanque();
+		double capacidadVieja = pj.getNave().getCapacidadTanque();
 		mejora.utilizar(pj);
-		assertEquals(pj.getCapacidadTanque(), capacidadVieja, 0.01);
+		assertEquals(pj.getNave().getCapacidadTanque(), capacidadVieja, 0.01);
 	}
 	
 	@Test
@@ -32,9 +32,9 @@ public class MejoraCapacidadDelTanqueTest {
 		Jugador pj = new Jugador(5, 0, 10, 10);
 		int capacidadNueva = 5;
 		var mejora = new MejoraCapacidadDelTanque(capacidadNueva, 100);
-		double capacidadVieja = pj.getCapacidadTanque();
+		double capacidadVieja = pj.getNave().getCapacidadTanque();
 		mejora.utilizar(pj);
-		assertEquals(pj.getCapacidadTanque(), capacidadVieja, 0.01);
+		assertEquals(pj.getNave().getCapacidadTanque(), capacidadVieja, 0.01);
 	}
 
 }

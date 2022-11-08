@@ -1,7 +1,6 @@
 package tiendas;
 
 import java.util.Scanner;
-
 import jugador.Jugador;
 import jugador.Posicion;
 import terreno.Entidad;
@@ -28,13 +27,8 @@ public class EstacionDeVenta implements Entidad {
 		this.sc = new Scanner(System.in);
 		char respuesta = sc.next().charAt(0);
 		if(respuesta == RESPUESTA_AFIRMATIVA) {
-			comprar(jugador);
+			vender(jugador);
 		}
-	}
-	
-	
-	public void comprar(Jugador jugador) {
-		jugador.venderMinerales();
 	}
 	
 	public char getLetra() {
@@ -47,6 +41,10 @@ public class EstacionDeVenta implements Entidad {
 	
 	public TipoEntidad getTipoEntidad() {
 		return TipoEntidad.TIENDA;
+	}
+
+	public void vender(Jugador jugador) {
+		jugador.venderMinerales();
 	}
 	
 }

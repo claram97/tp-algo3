@@ -1,6 +1,8 @@
 package tp;
 
+import jugador.Inventario;
 import jugador.Jugador;
+import jugador.Nave;
 import terreno.ConfigPisoSuperior;
 import terreno.ConfigSuelo;
 import terreno.PisoSuperior;
@@ -16,7 +18,7 @@ public class Main {
 		Suelo suelo = new Suelo(configSuelo);
 		ConfigPisoSuperior config = new ConfigPisoSuperior();
 		PisoSuperior pisoSuperior = new PisoSuperior(config);
-		Jugador pj = new Jugador(5, 0,ALTURA,ANCHO);
+		Jugador pj = new Jugador(5, 0, ALTURA, ANCHO);
 		Juego juego = new Juego(suelo,pisoSuperior,pj);
 		System.out.println("El juego está a punto de comenzar...");
 		juego.gameLoop();

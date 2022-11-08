@@ -4,23 +4,24 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import jugador.Inventario;
 import jugador.Jugador;
 
 public class MejoraTanqueExtraTest {
 
 	@Test
 	public void cargaCorrectamente() {
-		Jugador pj = new Jugador(5,0,10,10);
+        Jugador pj = new Jugador(5, 0,10,10);
 		Usable mejora = new MejoraTanqueExtra();
-		pj.setCapacidadDelTanque(100);
-		pj.setNivelDeCombustible(0);
+		pj.getNave().setCapacidadDelTanque(100);
+		pj.getNave().setNivelDeCombustible(0);
 		mejora.utilizar(pj);
-		assertEquals(25 , pj.nivelDeCombustible(), 0.01);
+		assertEquals(25 , pj.getNave().getNivelDeCombustible(), 0.01);
 	}
 	
 	@Test
 	public void elJugadorNoGastaDinero() {
-		Jugador pj = new Jugador(5,0,10,10);
+        Jugador pj = new Jugador(5, 0,10,10);
 		Usable mejora = new MejoraTanqueExtra();
 		int antes = pj.getDinero();
 		mejora.utilizar(pj);

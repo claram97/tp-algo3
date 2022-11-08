@@ -11,19 +11,20 @@ public class MejoraHullRepairNanobotsTest {
 	@Test
 	public void sumaVida() {
 		Jugador jugador = new Jugador(5, 0, 10, 10);
-		jugador.setHP(1);
+		jugador.getNave().setHP(1);
 		var mejora = new MejoraHullRepairNanobots();
 		mejora.utilizar(jugador);
-		assertEquals(jugador.getHp(), jugador.getMaxHP());
+		assertEquals(jugador.getNave().getHP(), jugador.getNave().getMaxHP());
 	}
 	
+	@Test
 	public void sumaCorrectamente() {
 		Jugador jugador = new Jugador(5, 0, 10, 10);
-		jugador.setHP(1);
-		jugador.setMaxHP(100);
+		jugador.getNave().setHP(1);
+		jugador.getNave().setMaxHP(100);
 		var mejora = new MejoraHullRepairNanobots();
 		mejora.utilizar(jugador);
-		assertEquals(jugador.getHp(), 31);
+		assertEquals(jugador.getNave().getHP(), 31);
 	}
 
 }

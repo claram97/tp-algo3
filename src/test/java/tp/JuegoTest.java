@@ -49,7 +49,8 @@ public class JuegoTest {
 	@Test
 	public void recibirInput() {
 		var acciones = new ArrayList<Accion>();
-		Juego juego = new Juego(null, null, null);
+		Jugador pj = new Jugador(2,0,10,10);
+		Juego juego = new Juego(null, null, pj);
 		juego.convertirInput('W', acciones);
 		assertEquals(acciones.size(), 1);
 	}
@@ -57,7 +58,8 @@ public class JuegoTest {
 	@Test
 	public void recibirMultiplesInputs() {
 		var acciones = new ArrayList<Accion>();
-		Juego juego = new Juego(null, null, null);
+		Jugador pj = new Jugador(2,0,10,10);
+		Juego juego = new Juego(null, null, pj);
 		juego.convertirInput('W', acciones);
 		juego.convertirInput('W', acciones);
 		juego.convertirInput('W', acciones);

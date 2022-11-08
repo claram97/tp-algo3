@@ -17,9 +17,9 @@ public class JugadorTest {
 
 	@Test
     public void losMineralesSeAñadenCorrectamente() {
-        Jugador jugador = new Jugador(5, 0,10,10);
-        jugador.agregarInventario(FabricaDeMinerales.crear("Cobre"));
-        assertEquals(jugador.getCantidadDeMinerales(),1);
+        Jugador jugador = new Jugador(5, 0, 10, 10);
+        jugador.observarBloque(FabricaDeMinerales.crear("Cobre"));
+        assertEquals(jugador.getInventario().getCantidadDeMinerales(), 1);
     }
 
 
@@ -27,10 +27,10 @@ public class JugadorTest {
     public void losMineralesSeVendenCorrectamente() {
         Jugador jugador = new Jugador(5, 0,10,10);
         for(int i = 0; i < 5; i++) {
-        	jugador.agregarInventario(new Cobre());
+        	jugador.observarBloque(new Cobre());
         }
-        jugador.venderMinerales();
-        assertEquals(jugador.getCantidadDeMinerales(),0);
+        jugador.getInventario().venderMinerales();
+        assertEquals(jugador.getInventario().getCantidadDeMinerales(), 0);
     }
 
     @Test
@@ -38,11 +38,11 @@ public class JugadorTest {
         Jugador jugador = new Jugador(5, 0,10,10);
         Mineral cobre = FabricaDeMinerales.crear("Cobre");
         for(int i = 0; i < 7; i++) {
-            jugador.agregarInventario(cobre);
+            jugador.observarBloque(cobre);
         }
-        int antes = jugador.getCantidadDeMinerales();
-        jugador.agregarInventario(cobre);
-        int despues = jugador.getCantidadDeMinerales();
+        int antes = jugador.getInventario().getCantidadDeMinerales();
+        jugador.observarBloque(cobre);
+        int despues = jugador.getInventario().getCantidadDeMinerales();
         assertEquals(antes,despues);
     }
    
@@ -53,14 +53,14 @@ public class JugadorTest {
     
     @Test
     public void sePuedeHacerCompra() {
-    	Jugador jugador = new Jugador(5,0,10,10);
+    	Jugador jugador = new Jugador(5, 0, 10, 10);
     	jugador.setDinero(120);
     	assertTrue(jugador.hacerCompra(110));
     }
     
     @Test
     public void noSePuedeHacerCompra() {
-    	Jugador jugador = new Jugador(5,0,10,10);
+        Jugador jugador = new Jugador(5, 0,10,10);
     	jugador.setDinero(100);
     	assertFalse(jugador.hacerCompra(110));
     }
@@ -78,15 +78,15 @@ public class JugadorTest {
     
     @Test
     public void jugadorSinCombustible() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	jugador.gastarCombustible(jugador.nivelDeCombustible());
-    	assertTrue(jugador.seQuedoSinCombustible());
+    	Nave nave = new Nave();    	
+    	nave.gastarCombustible(nave.getNivelDeCombustible());
+    	assertTrue(nave.seQuedoSinCombustible());
     }
     
     @Test
     public void jugadorTieneCombustible() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	assertFalse(jugador.seQuedoSinCombustible());
+    	Nave nave = new Nave();
+    	assertFalse(nave.seQuedoSinCombustible());
     }
         
     @Test
@@ -102,45 +102,45 @@ public class JugadorTest {
     
     @Test
     public void noSePuedeActualizarCapacidadDelTanquePorUnaMenorALaActual() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	double antes = jugador.getCapacidadTanque();
-    	jugador.agregarCapacidadAlTanque(10);
-    	double despues = jugador.getCapacidadTanque();
+    	Nave nave = new Nave();
+    	double antes = nave.getCapacidadTanque();
+    	nave.agregarCapacidadAlTanque(10);
+    	double despues = nave.getCapacidadTanque();
     	assertEquals(antes, despues, 0.01);
     }
     
     @Test
     public void sePuedeActualizarCapacidadDelTanquePorUnaMayorALaActual() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	double antes = jugador.getCapacidadTanque();
-    	jugador.agregarCapacidadAlTanque(20);
-    	double despues = jugador.getCapacidadTanque();
+    	Nave nave = new Nave();
+    	double antes = nave.getCapacidadTanque();
+    	nave.agregarCapacidadAlTanque(20);
+    	double despues = nave.getCapacidadTanque();
     	assertNotEquals(antes,despues);
     }
     
     @Test
     public void jugadorNoTieneUsable() {
-    	Jugador jugador = new Jugador(5,0,10,10);
+    	Inventario inv = new Inventario();
     	Usable usable = new MejoraTeleport();
-    	assertFalse(jugador.tieneUsable(usable));
+    	assertFalse(inv.tieneUsable(usable));
     }
     
     @Test
     public void losUsablesSeAgreganCorrectamente() {
-    	Jugador jugador = new Jugador(5,0,10,10);
+    	Inventario inv = new Inventario();
     	Usable usable = new MejoraTeleport();
-    	jugador.agregarUsable(usable);
-    	assertTrue(jugador.tieneUsable(usable));
+    	inv.agregarUsable(usable);
+    	assertTrue(inv.tieneUsable(usable));
     }
     
     @Test
     public void losUsablesSeEliminanCorrectamente() {
-    	Jugador jugador = new Jugador(5,0,10,10);
+    	Inventario inv = new Inventario();
     	Usable usable = new MejoraTeleport();
-    	jugador.agregarUsable(usable);
-    	int antes = jugador.getMejoras().size();
-    	jugador.eliminarMejora(usable);
-    	int despues = jugador.getMejoras().size();
+    	inv.agregarUsable(usable);
+    	int antes = inv.getUsables().size();
+    	inv.eliminarUsable(usable);
+    	int despues = inv.getUsables().size();
     	assertNotEquals(antes,despues);
     }
     
@@ -151,25 +151,25 @@ public class JugadorTest {
     
     @Test
     public void seGastaCombustibleSuficienteParaQueElJugadorSeQuedeSinCombustible() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	jugador.gastarCombustible(100);
-    	assertTrue(jugador.seQuedoSinCombustible());
+    	Nave nave = new Nave();
+    	nave.gastarCombustible(100);
+    	assertTrue(nave.seQuedoSinCombustible());
     }
       
     @Test
     public void elCombustibleSeGastaCorrectamente() {
-       	Jugador jugador = new Jugador(5,0,10,10);
-    	double antes = jugador.nivelDeCombustible();
-    	jugador.gastarCombustible(5);
-    	double despues = jugador.nivelDeCombustible();
+       	Nave nave = new Nave();
+    	double antes = nave.getNivelDeCombustible();
+    	nave.gastarCombustible(5);
+    	double despues = nave.getNivelDeCombustible();
     	assertNotEquals(antes,despues);
     }
     
     @Test
     public void seRecibeDanioSuficienteParaQueElJugadorSeEstrelle() {
-    	Jugador jugador = new Jugador(5,0,10,10);
-    	jugador.recibirDanio(100);
-    	assertTrue(jugador.seEstrello());
+    	Nave nave = new Nave();
+    	nave.recibirDanio(100);
+    	assertTrue(nave.seEstrello());
     }
 
     /*

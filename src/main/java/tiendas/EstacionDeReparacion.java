@@ -28,18 +28,18 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 	
 	public void vender(Jugador jugador, double gasto) {
 		double hpPedidos = gasto/PRECIO_REPARACION;
-		double hpFaltante = jugador.getMaxHP() - jugador.getHp();
+		double hpFaltante = jugador.getNave().getMaxHP() - jugador.getNave().getHP();
 		double hpReparados = hpPedidos < hpFaltante ? hpPedidos : hpFaltante;
 		double gastoEfectivo = (hpReparados * PRECIO_REPARACION) < gasto ? (hpReparados * PRECIO_REPARACION) : gasto;
 		
 		if(jugador.hacerCompra(gastoEfectivo)) {
-			jugador.repararDmg((int)hpReparados);
+			jugador.getNave().repararDmg((int)hpReparados);
 		}
 	}
 
 	@Override
 	public void interactuar(Jugador jugador) {
-		prompt_reparacion(jugador.getHp());
+		prompt_reparacion(jugador.getNave().getHP());
 		this.sc = new Scanner(System.in);
 		int cantidadPlata = sc.nextInt();
 		vender(jugador, cantidadPlata);

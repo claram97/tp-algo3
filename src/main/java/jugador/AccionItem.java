@@ -13,9 +13,9 @@ public class AccionItem implements Accion{
 
 	@Override
 	public boolean aplicar() {
-		if(pj.tieneUsable(mejora)) {
+		if(pj.getInventario().tieneUsable(mejora)) {
 			mejora.utilizar(pj);
-			pj.eliminarMejora(mejora);
+			pj.getInventario().eliminarUsable(mejora);
 			return true;
 		}
 		return false;

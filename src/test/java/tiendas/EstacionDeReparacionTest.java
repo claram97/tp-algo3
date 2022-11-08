@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import jugador.Inventario;
 import jugador.Jugador;
 
 public class EstacionDeReparacionTest {
@@ -11,50 +12,49 @@ public class EstacionDeReparacionTest {
 	@Test
 	public void venderFull() {
 		Jugador jugador = new Jugador(5,0,10,10);
-		jugador.setHP(1);
+		jugador.getNave().setHP(1);
 		jugador.setDinero(1000);
 		
 		var mecanico = new EstacionDeReparacion(10);
 		mecanico.vender(jugador, 1000);
 		
-		assertEquals(jugador.getHP(), jugador.getMaxHP());
+		assertEquals(jugador.getNave().getHP(), jugador.getNave().getMaxHP());
 	}
 	
 	@Test
 	public void vender100Gasto() {
 		Jugador jugador = new Jugador(5,0,10,10);
-		jugador.setHP(0);
-		jugador.setMaxHP(100);
+		jugador.getNave().setHP(0);
+		jugador.getNave().setMaxHP(100);
 		jugador.setDinero(1000);
 		
 		var mecanico = new EstacionDeReparacion(10);
 		mecanico.vender(jugador, 100);
 		
-		assertEquals(jugador.getHP(), 100/PRECIO_REPARACION);
+		assertEquals(jugador.getNave().getHP(), 100/PRECIO_REPARACION);
 	}
 	
 	@Test
 	public void venderSinDinero() {
 		Jugador jugador = new Jugador(5,0,10,10);
-		jugador.setHP(0);
+		jugador.getNave().setHP(0);
 		jugador.setDinero(0);
 		
 		var mecanico = new EstacionDeReparacion(10);
 		mecanico.vender(jugador, 100);
 		
-		assertEquals(jugador.getHP(), 0);
+		assertEquals(jugador.getNave().getHP(), 0);
 	}
 	
 	@Test
 	public void gastoCorrecto() {
 		Jugador jugador = new Jugador(5,0,10,10);
-		jugador.setHP(1);
-		jugador.setMaxHP(100);
+		jugador.getNave().setHP(1);
+		jugador.getNave().setMaxHP(100);
 		jugador.setDinero(55);
 		
 		var mecanico = new EstacionDeReparacion(10);
 		mecanico.vender(jugador, 50);
-		
 		assertEquals(5, jugador.getDinero());
 	}
 

@@ -17,9 +17,11 @@ public class MejoraCapacidadDelTanque extends MejoraInstantanea {
 			this.cantidad = 0;
 		}
 	}
+	
 	public void utilizar(Jugador jugador) {
-		jugador.agregarCapacidadAlTanque(this.cantidad);
+		jugador.ampliarTanque(this.cantidad);
 	}
+	
 	@Override
 	public int getValor() {
 		return this.valor;

@@ -13,7 +13,7 @@ import terreno.Suelo1;
 public class AccionMovimientoTest {
 	@Test
 	public void MovimientoIzquierda() {
-		Jugador jugador = new Jugador(5, 0,10,10);
+		Jugador jugador = new Jugador(5, 0, 10, 10);
 		int vieja = jugador.getPosicion().getX();
 		ConfigSuelo configSuelo = new Suelo1(10,10);
 		Suelo suelo = new Suelo(configSuelo);
@@ -37,7 +37,7 @@ public class AccionMovimientoTest {
 	
 	@Test
 	public void MovimientoAbajo() {
-		Jugador jugador = new Jugador(5,0,10,10);
+		Jugador jugador = new Jugador(5, 0, 10, 10);
 		int vieja = jugador.getPosicion().getY();
 		ConfigSuelo configSuelo = new Suelo1(10,10);
 		Suelo suelo = new Suelo(configSuelo);

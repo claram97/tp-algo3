@@ -47,7 +47,7 @@ public class TiendaDeConsumibles implements Entidad {
 		}
 		
 		if(jugador.hacerCompra(objeto.getCosto())) {
-			jugador.agregarUsable(objeto);
+			jugador.getInventario().agregarUsable(objeto);
 		}
 	}
 	
@@ -57,7 +57,6 @@ public class TiendaDeConsumibles implements Entidad {
 		Scanner scanner = new Scanner(System.in);
 		prompt_consumibles();
 		char opcion = scanner.next().charAt(0);
-		//str es un manejo choto pero no puedo buscar que es mejor.
 		vender(jugador, opcion);
 	}
 
@@ -75,7 +74,4 @@ public class TiendaDeConsumibles implements Entidad {
 	public char getLetra() {
 		return '*';
 	}
-	
-	
-	
 }

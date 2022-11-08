@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import jugador.AccionItem;
+import jugador.Inventario;
 import jugador.Jugador;
 import jugador.Posicion;
 import terreno.Aire;
@@ -17,10 +18,10 @@ public class MejoraDinamitaTest {
 	@Test
 	public void explotaCorrectamente() {
 		ConfigSuelo config = new Suelo1(10, 10);
-		Jugador jugador = new Jugador(5, 5, 10, 10);
+        Jugador jugador = new Jugador(5, 5,10,10);
 		Suelo suelo = new Suelo(config);
 		var dinamita = new MejoraDinamita(suelo);
-		jugador.agregarUsable(dinamita);
+		jugador.getInventario().agregarUsable(dinamita);
 		var accion = new AccionItem(jugador, dinamita);
 		accion.aplicar();
 		
@@ -36,10 +37,10 @@ public class MejoraDinamitaTest {
 	@Test
 	public void explotaBordeSuperior() {
 		ConfigSuelo config = new Suelo1(10, 10);
-		Jugador jugador = new Jugador(5, 0, 10, 10);
+        Jugador jugador = new Jugador(5, 0,10,10);
 		Suelo suelo = new Suelo(config);
 		var dinamita = new MejoraDinamita(suelo);
-		jugador.agregarUsable(dinamita);
+		jugador.getInventario().agregarUsable(dinamita);
 		var accion = new AccionItem(jugador, dinamita);
 		accion.aplicar();
 		

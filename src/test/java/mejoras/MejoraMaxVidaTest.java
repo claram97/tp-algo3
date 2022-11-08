@@ -10,30 +10,30 @@ public class MejoraMaxVidaTest {
 
 	@Test
 	public void mejoraCorrectamente() {
-		Jugador pj = new Jugador(5, 0, 0, 0);
+		Jugador pj = new Jugador(5, 0, 10, 10);
 		int capacidadNueva = 80;
 		var mejora = new MejoraMaxVida(capacidadNueva, 100);
 		mejora.utilizar(pj);
-		assertEquals(pj.getMaxHP(), capacidadNueva);
+		assertEquals(pj.getNave().getMaxHP(), capacidadNueva);
 	}
 	
 	@Test
 	public void noAceptaNegativos() {
-		Jugador pj = new Jugador(5, 0, 0, 0);
+		Jugador pj = new Jugador(5, 0, 10, 10);
 		int capacidadNueva = -80;
 		var mejora = new MejoraMaxVida(capacidadNueva, 100);
-		int capacidadVieja = pj.getMaxHP();
+		int capacidadVieja = pj.getNave().getMaxHP();
 		mejora.utilizar(pj);
-		assertEquals(pj.getMaxHP(), capacidadVieja);
+		assertEquals(pj.getNave().getMaxHP(), capacidadVieja);
 	}
 	
 	@Test
-	public void noAchicaElInventario() {
-		Jugador pj = new Jugador(5, 0, 0, 0);
+	public void noAchicaHP() {
+		Jugador pj = new Jugador(5, 0, 10, 10);
 		int capacidadNueva = 5;
 		var mejora = new MejoraMaxVida(capacidadNueva, 100);
-		int capacidadVieja = pj.getMaxHP();
+		int capacidadVieja = pj.getNave().getMaxHP();
 		mejora.utilizar(pj);
-		assertEquals(pj.getMaxHP(), capacidadVieja);
+		assertEquals(pj.getNave().getMaxHP(), capacidadVieja);
 	}
 }

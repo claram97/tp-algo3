@@ -13,7 +13,7 @@ public class MejoraTanqueExtra implements Usable {
 
 	//Hay que ver qué hacemos si no se gasta todo :P
 	public void utilizar(Jugador jugador) {
-		jugador.cargarCombustible(cantidadCombustible, 0);
+		jugador.getNave().cargarCombustible(cantidadCombustible, 0);
 	}
 
 	@Override

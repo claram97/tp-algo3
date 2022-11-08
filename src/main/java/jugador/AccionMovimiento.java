@@ -1,6 +1,5 @@
 package jugador;
 
-import minerales.Mineral;
 import terreno.PisoSuperior;
 import terreno.Suelo;
 import terreno.Tierra;
@@ -38,7 +37,7 @@ public class AccionMovimiento implements Accion{
 	}
 	
 	private int calcularDanio(int altura) {
-		return (int)(altura * 0.02); //<-------------------- Este calculo es muy probable que de 0.
+		return (int)(altura * 0.2);
 	}
 	
 	private int caer() {
@@ -62,12 +61,8 @@ public class AccionMovimiento implements Accion{
 			if(pj.getY() == 0 && tiendas.colisionEntidad(pos).getTipoEntidad() == TipoEntidad.TIENDA) {
 				return;
 			}
-		}
-		//Tuve que agregar un casteo por lo que puse en Jugador xdd el if está por si después le querés cambiar algo
-		//No sé fijate vos :P
-		if(suelo.getBloque(pos) instanceof Mineral) {
-			pj.agregarInventario((Mineral)suelo.getBloque(pos));
-		}
+		}		
+		pj.observarBloque(suelo.getBloque(pos));
 	}
 	
 	public boolean aplicar() {		
@@ -96,9 +91,9 @@ public class AccionMovimiento implements Accion{
 		suelo.destruirBloque(pj.getPosicion());
 		
 		if(this.dy >= 0) {
-			this.pj.recibirDanio(this.caer());
+			this.pj.getNave().recibirDanio(this.caer());
 		}
-		this.pj.gastarCombustible((float)0.15);
+		this.pj.getNave().gastarCombustible((float)0.15);
 		return true;
 	}
 }
