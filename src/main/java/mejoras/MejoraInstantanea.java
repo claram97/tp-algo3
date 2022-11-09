@@ -8,5 +8,7 @@ public abstract class MejoraInstantanea {
 	
 	public abstract void utilizar(Jugador jugador);
 	
-	public abstract int getValor();
+	public int getValor() {
+		return this.valor;
+	}
 }
