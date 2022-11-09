@@ -18,8 +18,4 @@ public class MejoraMaxInventario extends MejoraInstantanea {
 		jugador.ampliarInventario(super.cantidadAMejorar);
 	}
 
-	@Override
-	public int getValor() {
-		return this.valor;
-	}
 }
