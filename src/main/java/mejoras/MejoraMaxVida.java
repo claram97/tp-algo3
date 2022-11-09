@@ -19,8 +19,4 @@ public class MejoraMaxVida extends MejoraInstantanea {
 		jugador.ampliarMaxHP(super.cantidadAMejorar);
 	}
 
-	@Override
-	public int getValor() {
-		return this.valor;
-	}
 }
