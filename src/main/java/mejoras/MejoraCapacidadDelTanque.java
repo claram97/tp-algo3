@@ -21,5 +21,4 @@ public class MejoraCapacidadDelTanque extends MejoraInstantanea {
 	public void utilizar(Jugador jugador) {
 		jugador.ampliarTanque(this.cantidad);
 	}
-	
 }
