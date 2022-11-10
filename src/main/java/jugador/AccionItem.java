@@ -12,6 +12,7 @@ public class AccionItem implements Accion{
 	}
 
 	@Override
+	//Permite aplicar la mejora al jugador.
 	public boolean aplicar() {
 		if(pj.getInventario().tieneUsable(mejora)) {
 			mejora.utilizar(pj);
