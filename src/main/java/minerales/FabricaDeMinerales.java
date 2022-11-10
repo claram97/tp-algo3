@@ -2,6 +2,7 @@ package minerales;
 
 public class FabricaDeMinerales {
 	
+	//Crea el Mineral especificado según el Stirng recibido.
 	public static Mineral crear(String tipoMineral) {
 		if(tipoMineral == null) {
 			//throw an exception bc tipoMineral shouldn't be null
