@@ -17,11 +17,13 @@ public class EstacionDeVenta implements Entidad {
 		this.sc = null;
 	}
 	
+	//Imprime por pantalla el mensaje de la Tienda.
 	public void prompt_mensaje_venta() {
 		System.out.println("-----------------------------------");
 		System.out.println("Desea vender?");
 	}
 	
+	//Permite que la Tienda interactúe con el Jugador dado.
 	public void interactuar(Jugador jugador) {
 		prompt_mensaje_venta();
 		this.sc = new Scanner(System.in);
@@ -31,18 +33,22 @@ public class EstacionDeVenta implements Entidad {
 		}
 	}
 	
+	//Devuelve la letra de la Tienda actual.
 	public char getLetra() {
 		return EstacionDeVenta.LETRA;
 	}
 		
+	//Devuelve la posición de la Tienda.
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
 	
+	//Devuelve el tipo de entidad.
 	public TipoEntidad getTipoEntidad() {
 		return TipoEntidad.TIENDA;
 	}
 
+	//Permite vender los minerales al Jugador dado.
 	public void vender(Jugador jugador) {
 		jugador.venderMinerales();
 	}
