@@ -10,13 +10,17 @@ public class Tierra implements Bloque{
 		this.posicion = null;
 	}
 	
+	//Permite setear la posicion.
 	public void setPosicion(Posicion pos) {
 		if(pos == null) {
 			//throw an exception
 		}
-		this.posicion = pos;
+		if(pos.getX() >= 0 && pos.getY() >= 0){
+			this.posicion = pos;
+		}
 	}
 
+	//Devuelve la letra que representa la clase.
 	public char getLetra() {
 		return Tierra.LETRA;
 	}
