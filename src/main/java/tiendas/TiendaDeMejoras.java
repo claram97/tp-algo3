@@ -33,6 +33,14 @@ public class TiendaDeMejoras implements Entidad{
 		this.posicion.setY(posY);
 	}
 	
+	public TiendaDeMejoras(int tamanioTerreno) {
+		this.posicion = new Posicion((int)(tamanioTerreno * 0.9), 0);
+		this.mejoras = new HashMap<>();
+		this.inicializarMejoras();
+	}
+	
+	
+	//Inicializa las mejoras que se pueden comprar junto con sus precios.
 	private void inicializarMejoras() {
 		this.mejoras.put("I1", new MejoraMaxInventario(TIERS_MAX_CAPACIDAD.get(0), TIERS_PRECIO.get(0)));
 		this.mejoras.put("I2", new MejoraMaxInventario(TIERS_MAX_CAPACIDAD.get(1), TIERS_PRECIO.get(1)));
@@ -57,16 +65,12 @@ public class TiendaDeMejoras implements Entidad{
 		
 	}
 	
+	//Elimina la mejora según el código especificado.
 	private void eliminarMejora(String codigo) {
 		this.mejoras.remove(codigo);
 	}
 	
-	public TiendaDeMejoras(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.9), 0);
-		this.mejoras = new HashMap<>();
-		this.inicializarMejoras();
-	}
-	
+	//Recibe la opcion elegida y genera el código de búsqueda.
 	private String codigoMejora(char opcion, int tier) {
 		String busqueda = "";
 		busqueda += opcion;
@@ -74,6 +78,7 @@ public class TiendaDeMejoras implements Entidad{
 		return busqueda;
 	}
 	
+	//Imprime por pantalla las opciones que hay para comprar.
 	private void promptMejoras() {
 		System.out.println("----------------------------------------");
 		System.out.println("Mejora a comprar:");
@@ -81,6 +86,7 @@ public class TiendaDeMejoras implements Entidad{
 		System.out.print("Opcion: ");
 	}
 	
+	//Imprime por pantalla las mejoras que hay para comprar según la opción elegida.
 	private void promptOpciones(char opcion) {
 		if(opcion == 'I') {
 			System.out.println("Seleccione el tier de mejora: ");
@@ -100,13 +106,14 @@ public class TiendaDeMejoras implements Entidad{
 	}
 	
 	
-	//Tenemos que ver bien cómo el Jugador elige la mejora
+	//Permite vender la Mejora dada al Jugador dado.
 	public void vender(Jugador jugador, MejoraInstantanea mejora) {
 		mejora.utilizar(jugador);
 		jugador.hacerCompra(mejora.getValor());	
 	}
 
 	@Override
+	//Permite al Jugador dado interactuar con la Tienda actual.
 	public void interactuar(Jugador jugador) {
 		this.input = new Scanner(System.in);
 		promptMejoras();
@@ -126,17 +133,21 @@ public class TiendaDeMejoras implements Entidad{
 		eliminarMejora(codigo);
 	}
 
+	//Esta parte es código repetido en todas las clases, chusmealo xfi
 	@Override
+	//Devuelve la posicion.
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
 
 	@Override
+	//Devuelve el tipo.
 	public TipoEntidad getTipoEntidad() {
 		return TipoEntidad.TIENDA;
 	}
 
 	@Override
+	//Devuelve la letra que representa la Tienda.
 	public char getLetra() {
 		return TiendaDeMejoras.LETRA;
 	}
