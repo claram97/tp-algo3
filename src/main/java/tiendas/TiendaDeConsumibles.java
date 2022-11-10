@@ -18,13 +18,6 @@ public class TiendaDeConsumibles implements Entidad {
 	Posicion posicion;
 	Map<Character, Usable> usables;
 	
-	public void inicializarConsumibles() {
-		this.usables.put('R', new MejoraHullRepairNanobots());
-		this.usables.put('X', new MejoraTanqueExtra());
-		this.usables.put('T', new MejoraTeleport());
-		this.usables.put('D', new MejoraDinamita(null));
-	}
-	
 	public TiendaDeConsumibles(int ancho) {
 		super();
 		this.posicion = new Posicion((int)(ancho * 0.7), 0);
@@ -32,6 +25,15 @@ public class TiendaDeConsumibles implements Entidad {
 		inicializarConsumibles();
 	}
 	
+	//Inicializa las mejoras en el map.
+	public void inicializarConsumibles() {
+		this.usables.put('R', new MejoraHullRepairNanobots());
+		this.usables.put('X', new MejoraTanqueExtra());
+		this.usables.put('T', new MejoraTeleport());
+		this.usables.put('D', new MejoraDinamita(null));
+	}
+	
+	//Imprime por pantalla las opciones de Mejora que se pueden comprar.
 	public void prompt_consumibles() {
 		System.out.println("---------------------------------------");
 		System.out.println("Consumible a comprar: ");
@@ -39,6 +41,7 @@ public class TiendaDeConsumibles implements Entidad {
 		System.out.print("Opcion: ");
 	}
 	
+	//Le vende la opción dada al Jugador dado.
 	public void vender(Jugador jugador, char opcion) {
 		Usable objeto = usables.get(opcion);
 		
@@ -53,6 +56,7 @@ public class TiendaDeConsumibles implements Entidad {
 	
 
 	@Override
+	//Permite al Jugador dado interactuar con la Tienda actual.
 	public void interactuar(Jugador jugador) {
 		Scanner scanner = new Scanner(System.in);
 		prompt_consumibles();
@@ -61,16 +65,19 @@ public class TiendaDeConsumibles implements Entidad {
 	}
 
 	@Override
+	//Devuelve la posicion actual.
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
 
 	@Override
+	//Devuelve el tipo de entidad.
 	public TipoEntidad getTipoEntidad() {
 		return TipoEntidad.TIENDA;
 	}
 
 	@Override
+	//Devuelve la letra que representa la Tienda.
 	public char getLetra() {
 		return '*';
 	}
