@@ -42,6 +42,10 @@ public class Juego {
 		this.controles = controles;
 	}
 	
+	//Indica el estado del juego actual.
+	//Si el jugador no puede continuar, devuelve PERDIDO.
+	//Si el jugador llegó al final del terreno, devuelve GANADO.
+	//En todo otro caso, devuelve JUGANDO.
 	private EstadoDelJuego estadoJuego(){
 		if(jugador.noPuedeContinuar()){
 			return EstadoDelJuego.PERDIDO;
@@ -52,6 +56,7 @@ public class Juego {
 		return EstadoDelJuego.JUGANDO;
 	}
 	
+	//Recibe un movimiento y lo convierte en una Accion, que será añadida a la lista de acciones si es válida.
 	public void convertirInput(char movimiento, ArrayList<Accion> acciones) {
 		Accion accion = controles.get(movimiento);
 		if(accion != null) {
@@ -59,6 +64,7 @@ public class Juego {
 		}
 	}
 	
+	//Realiza las acciones que encuentra en la lista de acciones y las remueve de la misma.
 	public void realizarAccion(ArrayList<Accion> acciones) {
 		//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
 		if(acciones.size() > 0) {
@@ -69,6 +75,7 @@ public class Juego {
 		}
 	}
 	
+	//Genera el loop del juego: ingresa un movimiento e imprime el Terreno mientras el estado del juego sea JUGANDO.
 	public void gameLoop() {
 		this.input = new Scanner(System.in);
 		var acciones = new ArrayList<Accion>();
