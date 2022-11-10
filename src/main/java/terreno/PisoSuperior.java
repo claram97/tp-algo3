@@ -6,9 +6,7 @@ import jugador.Posicion;
 
 public class PisoSuperior {
 	ConfigPiso config;
-	
-	//I did my best para separar la inicialización del piso superior del piso superior en sí :P
-	//Ahora el piso no se crea siempre igual, sino que le pasas una configuración y te crea el Piso Superior jeje
+
 	public PisoSuperior(ConfigPiso config) {
 		if(config == null) {
 			//throw an exception
@@ -16,6 +14,7 @@ public class PisoSuperior {
 		this.config = config;
 	}
 	
+	//Verifica si hay colision con una entidad.
 	public Entidad colisionEntidad(Posicion pos) {
 		if(this.config.getTiendas() != null) {
 			return this.config.getTiendas().get(pos.getX());
@@ -23,6 +22,7 @@ public class PisoSuperior {
 		return null;
 	}
 	
+	//Devuelve las tiendas.
 	public List<Entidad> devolverTiendas(){
 		return this.config.getTiendas();
 	}
