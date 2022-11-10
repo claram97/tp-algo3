@@ -14,14 +14,11 @@ import java.util.ArrayList;
 public class ConfigPisoSuperior implements ConfigPiso {
 	List<Entidad> tiendas;
 
-	//Esto medio que tiene dependencias implícitas pero no sé cómo se solucionaría
-	//Lo que ganamos es que podemos crear distintas configuraciones y pasárselas a PisoSuperior y que las use
-	//Entonces podemos ir cambiando el PisoSuperior a nuestro antojo sin tocar PisoSuperior
-	//Sería Strategy, en el fondo, pero lo hice sin darme cuenta de eso :P
 	public ConfigPisoSuperior(){
 		this.crearConfiguracion();
 	}
 
+	//Crear una configuracion especificada.
 	public void crearConfiguracion() {
 		var ypf = new EstacionDeServicio(Main.ANCHO);
 		var mecanico = new EstacionDeReparacion(Main.ANCHO);
@@ -42,6 +39,7 @@ public class ConfigPisoSuperior implements ConfigPiso {
 		tiendas.add(estacionDeVentas.getPosicion().getX(),estacionDeVentas);
 	}
 	
+	//Devuelve la lista de Tiendas.
 	public List<Entidad> getTiendas(){
 		return this.tiendas;
 	}
