@@ -28,6 +28,7 @@ public class Vista {
 	}
 
 
+	//Imprime el terreno y los datos del jugador recibido.
 	public void imprimir(Jugador pj) {
 		int x = pj.getX();
 		int y = pj.getY();
