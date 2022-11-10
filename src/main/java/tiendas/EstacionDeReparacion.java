@@ -18,6 +18,7 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 		this.sc = null;
 	}
 	
+	//Imprime por pantalla las opciones de reparación.
 	public void prompt_reparacion(int vidaActual) {
 		System.out.println("-----------------------------------");
 		System.out.println("Su vida actual es " + vidaActual);
@@ -26,6 +27,7 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 		System.out.print("Opcion: ");
 	}
 	
+	//Repara la nave del Jugador elegido según la opción de gasto elegido.
 	public void vender(Jugador jugador, double gasto) {
 		double hpPedidos = gasto/PRECIO_REPARACION;
 		double hpFaltante = jugador.getNave().getMaxHP() - jugador.getNave().getHP();
@@ -38,6 +40,7 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 	}
 
 	@Override
+	//Realiza la interacción entre el Jugador y la Tienda.
 	public void interactuar(Jugador jugador) {
 		prompt_reparacion(jugador.getNave().getHP());
 		this.sc = new Scanner(System.in);
@@ -46,16 +49,19 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 	}
 
 	@Override
+	//Devuelve la Posicion de la Tienda.
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
 
 	@Override
+	//Devuelve de qué tipo de entidad se trata.
 	public TipoEntidad getTipoEntidad() {
 		return TipoEntidad.TIENDA;
 	}
 
 	@Override
+	//Devuelve la letra correspondiente a la Tienda actual.
 	public char getLetra() {
 		return EstacionDeReparacion.LETRA;
 	}
