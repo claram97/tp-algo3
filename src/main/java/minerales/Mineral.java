@@ -24,10 +24,12 @@ public abstract class Mineral implements Bloque {
 		this.posicion = posicion;
 		
 	}
+	//Devuelve el precio.
 	public int getPrecio() {
 		return this.precio;
 	}
 	
+	//Devuelve la letra que representa al Mineral actual.
 	public char getLetra() {
 		return this.letra;
 	}
