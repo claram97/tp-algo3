@@ -24,6 +24,7 @@ public class AccionMovimiento implements Accion{
 		this.dy = dy;
 	}
 
+	//Devuelve true si choca con algo arriba o false si no se choca con nada.
 	private boolean chocaArriba() {
 		if(pj.getY() == 0) {
 			return false;
@@ -36,10 +37,12 @@ public class AccionMovimiento implements Accion{
 		return true;
 	}
 	
+	//Calcula el daño según la altura desde la que cae.
 	private int calcularDanio(int altura) {
 		return (int)(altura * 0.2);
 	}
 	
+	//Si no hay Tierra o Minerales debajo, el Jugador cae.
 	private int caer() {
 		int altura = 0;
 		if(pj.getY() < Main.ALTURA) {
@@ -53,6 +56,7 @@ public class AccionMovimiento implements Accion{
 		return this.calcularDanio(altura);
 	}
 	
+	//Permite al Jugador taladrar y ver si debe recolectar un Mineral o no.
 	private void taladrar(Posicion pos) {
 		if(suelo.casilleroVacio(pos) || suelo.getBloque(pos) instanceof Tierra) {
 			return;
@@ -65,6 +69,7 @@ public class AccionMovimiento implements Accion{
 		pj.observarBloque(suelo.getBloque(pos));
 	}
 	
+	//Permite aplicar la accion de movimiento al Jugador.
 	public boolean aplicar() {		
 		Posicion nueva = new Posicion(pj.getX(), pj.getY());
 		if(this.dy != 0) {
