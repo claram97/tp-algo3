@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import jugador.Inventario;
 import jugador.Jugador;
+import jugador.Posicion;
 
 public class EstacionDeServicioTest {
 
@@ -15,7 +16,7 @@ public class EstacionDeServicioTest {
 		Jugador jugador = new Jugador(5,0,10,10);
 		jugador.getNave().setNivelDeCombustible(0);
 		jugador.setDinero(100);
-		var estacion = new EstacionDeServicio(10);
+		var estacion = new EstacionDeServicio(new Posicion(5, 0));
 		//100 por ahora significa llenar el tanque, no 100 litros.
 		estacion.vender(jugador, 100);
 		
@@ -28,7 +29,7 @@ public class EstacionDeServicioTest {
 		Jugador jugador = new Jugador(5,0,10,10);
 		jugador.getNave().setNivelDeCombustible(0);
 		jugador.setDinero(100);;
-		var estacion = new EstacionDeServicio(10);
+		var estacion = new EstacionDeServicio(new Posicion(5, 0));
 		estacion.vender(jugador, 5);
 		boolean naftaCorrecta = (jugador.getNave().getNivelDeCombustible() == 5);
 		boolean plataCorrecta = (jugador.getDinero() == 95);
@@ -43,7 +44,7 @@ public class EstacionDeServicioTest {
 		jugador.getNave().setCapacidadDelTanque(10);
 		jugador.setDinero(0);
 		
-		var estacion = new EstacionDeServicio(10);
+		var estacion = new EstacionDeServicio(new Posicion(5, 0));
 		estacion.vender(jugador, 10);
 		
 		boolean naftaCorrecta = (jugador.getNave().getNivelDeCombustible() == 0);
@@ -60,7 +61,7 @@ public class EstacionDeServicioTest {
 		jugador.getNave().setCapacidadDelTanque(10);
 		jugador.setDinero(3);
 		
-		var estacion = new EstacionDeServicio(10);
+		var estacion = new EstacionDeServicio(new Posicion(5, 0));
 		estacion.vender(jugador, 10);
 		
 		boolean naftaCorrecta = (jugador.getNave().getNivelDeCombustible() == 0);
@@ -76,7 +77,7 @@ public class EstacionDeServicioTest {
 		jugador.getNave().setCapacidadDelTanque(10);
 		jugador.setDinero(100);
 		
-		var estacion = new EstacionDeServicio(10);
+		var estacion = new EstacionDeServicio(new Posicion(5, 0));
 		estacion.vender(jugador, 33);
 		
 		boolean naftaCorrecta = (jugador.getNave().getNivelDeCombustible() == 1);

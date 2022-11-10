@@ -17,8 +17,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class TiendaDeMejoras implements Entidad{
+public class TiendaDeMejoras extends Entidad{
 	private static final char LETRA = '+';
+	private static final TipoEntidad TIPO = TipoEntidad.TIENDA;
 	private static final List<Integer> TIERS_PRECIO = Arrays.asList(750, 2000, 5000, 20000, 100000, 150000);
 	private static final List<Integer> TIERS_MAX_CAPACIDAD = Arrays.asList(15, 25, 40, 60, 70, 120);
 	Scanner input;
@@ -26,20 +27,13 @@ public class TiendaDeMejoras implements Entidad{
 	Map<String, MejoraInstantanea> mejoras;
 	Map<String, Usable> usables;
 	
-	
-	public TiendaDeMejoras(int posX, int posY) {
-		this.input = null;
-		this.posicion.setX(posX);
-		this.posicion.setY(posY);
-	}
-	
-	public TiendaDeMejoras(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.9), 0);
+	public TiendaDeMejoras(Posicion posicion) {
+		super(posicion, TIPO, LETRA);
+		this.posicion = posicion;
 		this.mejoras = new HashMap<>();
 		this.inicializarMejoras();
 	}
-	
-	
+
 	//Inicializa las mejoras que se pueden comprar junto con sus precios.
 	private void inicializarMejoras() {
 		this.mejoras.put("I1", new MejoraMaxInventario(TIERS_MAX_CAPACIDAD.get(0), TIERS_PRECIO.get(0)));
@@ -112,8 +106,8 @@ public class TiendaDeMejoras implements Entidad{
 		jugador.hacerCompra(mejora.getValor());	
 	}
 
-	@Override
 	//Permite al Jugador dado interactuar con la Tienda actual.
+	@Override
 	public void interactuar(Jugador jugador) {
 		this.input = new Scanner(System.in);
 		promptMejoras();
@@ -131,24 +125,5 @@ public class TiendaDeMejoras implements Entidad{
 		
 		vender(jugador, mejora);
 		eliminarMejora(codigo);
-	}
-
-	//Esta parte es código repetido en todas las clases, chusmealo xfi
-	@Override
-	//Devuelve la posicion.
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
-
-	@Override
-	//Devuelve el tipo.
-	public TipoEntidad getTipoEntidad() {
-		return TipoEntidad.TIENDA;
-	}
-
-	@Override
-	//Devuelve la letra que representa la Tienda.
-	public char getLetra() {
-		return TiendaDeMejoras.LETRA;
 	}
 }

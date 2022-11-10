@@ -9,17 +9,16 @@ import jugador.Posicion;
 import terreno.Entidad;
 import terreno.TipoEntidad;
 
-public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
-	public Posicion posicion;
+public class EstacionDeServicio extends Entidad implements EstacionDeMantenimiento {
+	private static final char LETRA = '#';
+	private static final TipoEntidad TIPO = TipoEntidad.TIENDA;
 	private static final List<Integer> LITROS_DISPONIBLES = Arrays.asList(5, 10, 25, 50, 100);
 	private static final int PRECIO_COMBUSTIBLE = 1;
 	private int cantidad;
 	private Scanner sc;
 	
-	public EstacionDeServicio(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.3), 0);
-		this.cantidad = 0;
-		this.sc = null;
+	public EstacionDeServicio(Posicion posicion) {
+		super(posicion, TIPO, LETRA);
 	}
 	
 	//Calcula la cantidad de combustible que se cargará efectivamente en base a
@@ -27,7 +26,7 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 	public double cantidadDeCombustible(double cantidadCombustible, double capacidadTanque, double cantidadActual) {
 		if(!LITROS_DISPONIBLES.contains((int)cantidadCombustible)) {
 			return -1;
-			//throw exception
+
 		}
 		int i = LITROS_DISPONIBLES.indexOf((int)cantidadCombustible);
 		if(LITROS_DISPONIBLES.get(i) == 100) {
@@ -36,7 +35,6 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 		
 		double faltante = capacidadTanque - cantidadActual;
 		double cantidadCargar = faltante < cantidadCombustible ? faltante: cantidadCombustible;
-		
 		return cantidadCargar;
 	}
 	
@@ -75,23 +73,4 @@ public class EstacionDeServicio implements EstacionDeMantenimiento, Entidad {
 			vender(jugador,this.cantidad);
 		}
 	}
-
-	@Override
-	//Devuelve la posición de la Tienda actual.
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
-
-	@Override
-	//Devuelve la letra correspondiente a la Tienda actual.
-	public char getLetra() {
-		return '#';
-	}
-
-	@Override
-	//Devuelve el tipo de entidad.
-	public TipoEntidad getTipoEntidad() {
-		return TipoEntidad.TIENDA;
-	}
-	
 }

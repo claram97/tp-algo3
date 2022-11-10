@@ -6,7 +6,9 @@ public class Posicion {
 	
 	public Posicion(int posicionX, int posicionY) {
 		if(posicionX < 0 || posicionY < 0) {
-			//throw an exception
+			this.posicionX = 0;
+			this.posicionY = 0;
+			return;
 		}
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;

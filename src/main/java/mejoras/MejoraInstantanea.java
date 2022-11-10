@@ -1,7 +1,7 @@
 package mejoras;
 
 import jugador.Jugador;
-
+//Mejora que se acciona al momento de la compra.
 public abstract class MejoraInstantanea {
 	public int cantidadAMejorar;
 	public int valor;

@@ -85,7 +85,7 @@ public class Inventario{
 			this.maxInventario = maxInventario;
 		}
 		else {
-			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+			return;
 		}
 	}
 	

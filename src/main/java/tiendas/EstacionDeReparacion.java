@@ -7,17 +7,18 @@ import jugador.Posicion;
 import terreno.Entidad;
 import terreno.TipoEntidad;
 
-public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
+public class EstacionDeReparacion extends Entidad implements EstacionDeMantenimiento {
 	public Posicion posicion;
-	private static final int PRECIO_REPARACION = 15;
+	private static final int PRECIO_REPARACION = 10;
 	private static final char LETRA = '!';
+	private static final TipoEntidad TIPO = TipoEntidad.TIENDA;
 	private Scanner sc;
 	
-	public EstacionDeReparacion(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.6), 0);
-		this.sc = null;
-	}
 	
+	public EstacionDeReparacion(Posicion posicion) {
+		super(posicion, TIPO, LETRA);
+	}
+
 	//Imprime por pantalla las opciones de reparación.
 	public void prompt_reparacion(int vidaActual) {
 		System.out.println("-----------------------------------");
@@ -46,23 +47,5 @@ public class EstacionDeReparacion implements EstacionDeMantenimiento, Entidad {
 		this.sc = new Scanner(System.in);
 		int cantidadPlata = sc.nextInt();
 		vender(jugador, cantidadPlata);
-	}
-
-	@Override
-	//Devuelve la Posicion de la Tienda.
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
-
-	@Override
-	//Devuelve de qué tipo de entidad se trata.
-	public TipoEntidad getTipoEntidad() {
-		return TipoEntidad.TIENDA;
-	}
-
-	@Override
-	//Devuelve la letra correspondiente a la Tienda actual.
-	public char getLetra() {
-		return EstacionDeReparacion.LETRA;
 	}
 }

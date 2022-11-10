@@ -15,6 +15,7 @@ public class MejoraExplosivos extends Usable {
 		this.suelo = suelo;
 	}
 	
+	//Rompe los bloques a distancia 2 del pj.
 	@Override
 	public void utilizar(Jugador jugador) {
 		Posicion actual = jugador.getPosicion();

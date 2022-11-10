@@ -14,14 +14,16 @@ import mejoras.Usable;
 import terreno.Entidad;
 import terreno.TipoEntidad;
 
-public class TiendaDeConsumibles implements Entidad {
+public class TiendaDeConsumibles extends Entidad {
 	Posicion posicion;
+	private static final char LETRA = '*';
+	private static final TipoEntidad TIPO = TipoEntidad.TIENDA;
 	Map<Character, Usable> usables;
 	private Scanner sc;
 	
-	public TiendaDeConsumibles(int ancho) {
-		super();
-		this.posicion = new Posicion((int)(ancho * 0.7), 0);
+	public TiendaDeConsumibles(Posicion posicion) {
+		super(posicion, TIPO, LETRA);
+		this.posicion = posicion;
 		this.usables = new HashMap<>();
 		inicializarConsumibles();
 	}
@@ -63,23 +65,5 @@ public class TiendaDeConsumibles implements Entidad {
 		prompt_consumibles();
 		char opcion = sc.next().charAt(0);
 		vender(jugador, opcion);
-	}
-
-	@Override
-	//Devuelve la posicion actual.
-	public Posicion getPosicion() {
-		return this.posicion;
-	}
-
-	@Override
-	//Devuelve el tipo de entidad.
-	public TipoEntidad getTipoEntidad() {
-		return TipoEntidad.TIENDA;
-	}
-
-	@Override
-	//Devuelve la letra que representa la Tienda.
-	public char getLetra() {
-		return '*';
 	}
 }

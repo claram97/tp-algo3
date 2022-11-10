@@ -1,6 +1,6 @@
 package terreno;
 
-public class Tierra implements Bloque{
+public class Tierra implements Bloque {
 	private static final char LETRA = 'T';
 	
 	public Tierra() {

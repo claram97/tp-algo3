@@ -16,6 +16,7 @@ public class MejoraDinamita extends Usable {
 		this.suelo = suelo;
 	}
 
+	//Rompe los bloques a distancia 1 del pj.
 	@Override
 	public void utilizar(Jugador pj) {
 		Posicion actual = pj.getPosicion();

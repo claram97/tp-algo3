@@ -1,6 +1,8 @@
 package terreno;
 
 import java.util.Map;
+
+import jugador.Posicion;
 import tiendas.EstacionDeReparacion;
 import tiendas.EstacionDeServicio;
 import tiendas.EstacionDeVenta;
@@ -18,11 +20,11 @@ public class ConfigPisoSuperior implements ConfigPiso {
 
 	//Crear una configuracion especificada.
 	public void crearConfiguracion() {
-		var ypf = new EstacionDeServicio(Main.ANCHO);
-		var mecanico = new EstacionDeReparacion(Main.ANCHO);
-		var mejoras = new TiendaDeMejoras(Main.ANCHO);
-		var consumibles = new TiendaDeConsumibles(Main.ANCHO);
-		var estacionDeVentas = new EstacionDeVenta(Main.ANCHO);
+		var ypf = new EstacionDeServicio(new Posicion((int)(Main.ANCHO * 0.3), 0));
+		var mecanico = new EstacionDeReparacion(new Posicion((int)(Main.ANCHO * 0.6), 0));
+		var mejoras = new TiendaDeMejoras(new Posicion((int)(Main.ANCHO * 0.9), 0));
+		var consumibles = new TiendaDeConsumibles(new Posicion((int)(Main.ANCHO * 0.7), 0));
+		var estacionDeVentas = new EstacionDeVenta(new Posicion((int)(Main.ANCHO * 0.4), 0));
 
 		this.tiendas = new HashMap<Integer, Entidad>();
 	

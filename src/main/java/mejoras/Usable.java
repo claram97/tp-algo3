@@ -14,7 +14,6 @@ public abstract class Usable {
 	}
 
 	public void utilizar(Jugador jugador) {
-		return;
 	}
 	
 	public char getLetra() {

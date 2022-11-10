@@ -3,12 +3,29 @@ package terreno;
 import jugador.Jugador;
 import jugador.Posicion;
 
-public interface Entidad {
-	public void interactuar(Jugador jugador);
+public abstract class Entidad {
+	private Posicion posicion;
+	private TipoEntidad tipo;
+	private char letra;
 	
-	public Posicion getPosicion();
+	public Entidad(Posicion posicion, TipoEntidad tipo, char letra) {
+		this.posicion = posicion;
+		this.tipo = tipo;
+		this.letra = letra;
+	}
+
+	public void interactuar(Jugador jugador) {
+	}
 	
-	public TipoEntidad getTipoEntidad();
+	public Posicion getPosicion() {
+		return this.posicion;
+	}
 	
-	public char getLetra();
+	public TipoEntidad getTipoEntidad() {
+		return this.tipo;
+	}
+	
+	public char getLetra() {
+		return this.letra;
+	}
 }

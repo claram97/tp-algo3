@@ -11,7 +11,7 @@ public class MejoraHullRepairNanobots extends Usable {
 	public MejoraHullRepairNanobots() {
 		super(LETRA, TIPO, VALOR);
 	}
-
+	
 	public void utilizar(Jugador jugador) {
 		jugador.getNave().repararDmg(MejoraHullRepairNanobots.VIDA_REGENERADA);
 	}

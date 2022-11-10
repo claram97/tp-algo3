@@ -6,13 +6,14 @@ import org.junit.Test;
 
 import jugador.Inventario;
 import jugador.Jugador;
+import jugador.Posicion;
 import mejoras.MejoraHullRepairNanobots;
 
 public class TiendaDeConsumiblesTest {
 
 	@Test
 	public void compraExitosa() {
-		var tienda = new TiendaDeConsumibles(10);
+		var tienda = new TiendaDeConsumibles(new Posicion(5, 0));
 		Jugador jugador = new Jugador(5, 0, 10, 10);
 		jugador.setDinero(10000);
 		tienda.vender(jugador, 'R');
@@ -25,7 +26,7 @@ public class TiendaDeConsumiblesTest {
 	
 	@Test
 	public void admiteComprasMultiples() {
-		var tienda = new TiendaDeConsumibles(10);
+		var tienda = new TiendaDeConsumibles(new Posicion(5, 0));
 		Jugador jugador = new Jugador(5, 0, 10, 10);
 		jugador.setDinero(100000);
 		tienda.vender(jugador, 'R');
@@ -40,7 +41,7 @@ public class TiendaDeConsumiblesTest {
 	
 	@Test
 	public void descuentaDineroCorrectamente() {
-		var tienda = new TiendaDeConsumibles(10);
+		var tienda = new TiendaDeConsumibles(new Posicion(5, 0));
 		Jugador jugador = new Jugador(5, 0, 10, 10);
 		jugador.setDinero(100000);
 		tienda.vender(jugador, 'R');
@@ -51,7 +52,7 @@ public class TiendaDeConsumiblesTest {
 	
 	@Test
 	public void itemNoExistente() {
-		var tienda = new TiendaDeConsumibles(10);
+		var tienda = new TiendaDeConsumibles(new Posicion(5, 0));
 		Jugador jugador = new Jugador(5, 0, 10, 10);
 		jugador.setDinero(100000);
 		tienda.vender(jugador, 'B');

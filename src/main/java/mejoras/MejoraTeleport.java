@@ -16,7 +16,7 @@ public class MejoraTeleport extends Usable {
 	
 	public void utilizar(Jugador jugador) {
 		jugador.setX(new Random().nextInt(Main.ANCHO));
-		jugador.setY(0); //0 o donde sea que sea la superficie :P
+		jugador.setY(0); //Siempre es a la superficie.
 	}
 }
 

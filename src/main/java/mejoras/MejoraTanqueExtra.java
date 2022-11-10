@@ -14,7 +14,7 @@ public class MejoraTanqueExtra extends Usable {
 		super(LETRA, TIPO, VALOR);
 		this.cantidadCombustible = CANTIDAD_COMBUSTIBLE;
 	}
-
+	//Carga combustible sin pasar por la estacion de servicio.
 	public void utilizar(Jugador jugador) {
 		jugador.getNave().cargarCombustible(cantidadCombustible, 0);
 	}

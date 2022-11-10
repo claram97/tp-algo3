@@ -6,14 +6,17 @@ import jugador.Posicion;
 import terreno.Entidad;
 import terreno.TipoEntidad;
 
-public class EstacionDeVenta implements Entidad {
+public class EstacionDeVenta extends Entidad {
 	public Posicion posicion;
 	private static final char RESPUESTA_AFIRMATIVA = 'S';
 	private static final char LETRA = '/';
+	private static final TipoEntidad TIPO = TipoEntidad.TIENDA;
 	private Scanner sc;
 	
-	public EstacionDeVenta(int tamanioTerreno) {
-		this.posicion = new Posicion((int)(tamanioTerreno * 0.4), 0);
+
+	public EstacionDeVenta(Posicion pos) {
+		super(pos, TIPO, LETRA);
+		this.posicion = pos;
 		this.sc = null;
 	}
 	

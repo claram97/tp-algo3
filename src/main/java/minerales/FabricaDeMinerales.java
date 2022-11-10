@@ -4,10 +4,7 @@ public class FabricaDeMinerales {
 	
 	//Crea el Mineral especificado según el String recibido.
 	public static Mineral crear(String tipoMineral) {
-		if(tipoMineral == null) {
-			//throw an exception bc tipoMineral shouldn't be null
-		}
-		else if(tipoMineral == "Cobre") {
+		if(tipoMineral == "Cobre") {
 			return new Cobre();
 		}
 		else if(tipoMineral == "Bronce") {

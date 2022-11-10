@@ -46,9 +46,9 @@ public class AccionMovimiento implements Accion{
 	//Si no hay Tierra o Minerales debajo, el Jugador cae.
 	private int caer() {
 		int altura = 0;
-		if(pj.getY() < Main.ALTURA) {
+		if(pj.getY() < pj.getLimiteAlto()){
 			Posicion debajo = new Posicion(pj.getX(), pj.getY() + 1);
-			while(suelo.casilleroVacio(debajo) && pj.getY() < Main.ALTURA - 2) {
+			while(suelo.casilleroVacio(debajo) && pj.getY() < pj.getLimiteAlto() - 2) {
 				pj.setY(pj.getY() + 1);
 				debajo.setY(debajo.getY() + 1);
 				altura++;
@@ -75,10 +75,10 @@ public class AccionMovimiento implements Accion{
 	public boolean aplicar() {		
 		Posicion nueva = new Posicion(pj.getX(), pj.getY());
 		
-		if(nueva.getY() + this.dy < 0 || nueva.getY() + this.dy >= pj.getLimiteAncho()) {
+		if(nueva.getY() + this.dy < 0 || nueva.getY() + this.dy >= pj.getLimiteAlto()) {
 			return false;
 		}
-		if(nueva.getX() + this.dx < 0 || nueva.getX() + this.dx >= pj.getLimiteAlto()) {
+		if(nueva.getX() + this.dx < 0 || nueva.getX() + this.dx >= pj.getLimiteAncho()) {
 			return false;
 		}
 		

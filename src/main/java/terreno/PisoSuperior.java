@@ -9,6 +9,7 @@ public class PisoSuperior {
 	public PisoSuperior(ConfigPiso config) {
 		if(config == null) {
 			//throw an exception
+			return;
 		}
 		this.config = config;
 	}
