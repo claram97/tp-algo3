@@ -1,19 +1,24 @@
 package tp;
 
+import jugador.Jugador;
+import terreno.ConfigPisoSuperior;
+import terreno.ConfigSuelo;
+import terreno.PisoSuperior;
+import terreno.Suelo;
+import terreno.Suelo1;
+
 public class Main {
-	public static final int ALTURA = 20;
+	public static final int ALTURA = 30;
 	public static final int ANCHO = 20;
 
 	public static void main(String[] args) {
-		Suelo suelo = new Suelo(ALTURA, ANCHO);
-		var ypf = new EstacionDeServicio(ANCHO);
-		var mecanico = new EstacionDeReparacion(ANCHO);
-		var tiendita = new TiendaDeMejoras(ANCHO);
-		var tiendaConsumibles = new TiendaDeConsumibles(ANCHO);
-		PisoSuperior tiendas = new PisoSuperior(ANCHO, ypf, mecanico, tiendita, tiendaConsumibles);
-		Jugador pj = new Jugador(5, 0);
-		Juego juego = new Juego(suelo, tiendas, pj);
-		System.out.println("Holaaaaaaa");
+		ConfigSuelo configSuelo = new Suelo1(ALTURA,ANCHO);
+		Suelo suelo = new Suelo(configSuelo);
+		ConfigPisoSuperior config = new ConfigPisoSuperior();
+		PisoSuperior pisoSuperior = new PisoSuperior(config);
+		Jugador pj = new Jugador(5, 0, ALTURA, ANCHO);
+		Juego juego = new Juego(suelo,pisoSuperior,pj);
+		System.out.println("El juego está a punto de comenzar...");
 		juego.gameLoop();
 	}
 
