@@ -18,7 +18,7 @@ public class MejoraCapacidadDelTanque extends MejoraInstantanea {
 		}
 	}
 	
-	//Utiliza la mejora
+	//Utiliza la mejora en el jugador especificado
 	public void utilizar(Jugador jugador) {
 		jugador.ampliarTanque(this.cantidad);
 	}
