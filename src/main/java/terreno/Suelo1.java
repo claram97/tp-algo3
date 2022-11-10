@@ -11,6 +11,7 @@ public class Suelo1 implements ConfigSuelo {
 	private int ancho;
 	private Random rand;
 	
+	//Dispone los bloques en el suelo
 	private Bloque ponerBloque() {
 		this.rand = new Random();
 		int valor = rand.nextInt(100);
@@ -52,14 +53,18 @@ public class Suelo1 implements ConfigSuelo {
 		this.bloques = bloques;
 	}
 	
+	//Devuelve el bloque de la posicion dada
 	public Bloque getBloque(Posicion pos) {
 		return(bloques[pos.getY()][pos.getX()]);
 	}
 	
+	
+	//Destruye el bloque de la posicion dada
 	public void destruirBloque(Posicion pos) {
 		bloques[pos.getY()][pos.getX()] = new Aire();
 	}
 	
+	//Devuelve true si el casillero de la posicion dada está vacío y false en caso contrario.
 	public boolean casilleroVacio(Posicion posicion) {
 		if(posicion.getY() == this.alto - 1) {
 			return false;
@@ -70,6 +75,7 @@ public class Suelo1 implements ConfigSuelo {
 
 
 	@Override
+	//Devuelve el alto del suelo.
 	public int getAlto() {
 		return this.alto;
 	}
