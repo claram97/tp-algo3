@@ -22,6 +22,7 @@ public class Inventario{
 	//          		MINERALES
 	//------------------------------------------------
 
+	//Permite vender los minerales, recogiendo el dinero correspondiente a cada uno de ellos.
 	public int venderMinerales() {
 		int total = 0;
 		for(Mineral mineral: mineralesRecolectados) {
@@ -31,20 +32,24 @@ public class Inventario{
 		return total;
 	}
 	
+	//Permite agregar un Mineral dado al Inventario.
 	public void agregarInventario(Mineral mineral) {
 		if(mineralesRecolectados.size() < this.maxInventario) {
 			mineralesRecolectados.add(mineral);
 		}
 	}
 	
+	//Devuelve la lista de minerales recolectados.
 	public List<Mineral> getMinerales() {
 		return this.mineralesRecolectados;
 	}
 	
+	//Devuelve la cantidad de minerales que el Jugador tiene en su inventario.
 	public int getCantidadDeMinerales() {
 		return this.mineralesRecolectados.size();
 	}
 	
+	//Devuelve el máximo del Inventario del Jugador.
 	public int getMaxInventario() {
 		return this.maxInventario;
 	}
@@ -53,11 +58,12 @@ public class Inventario{
 	//          		MEJORAS
 	//------------------------------------------------
 
-	
+	//Devuelve la lista de Mejoras del Jugador.
 	public List<Usable> getUsables() {
 		return this.usables;
 	}
 	
+	//Devuelve true si el usable dado está en la lista de Mejoras del Jugador, false en caso contrario.
 	public boolean tieneUsable(Usable item) {
 		for(Usable usable: this.usables) {
 			if(item.getTipo() == usable.getTipo()) {
@@ -67,11 +73,13 @@ public class Inventario{
 		return false;
 	}
 	
+	//Permite agregar una mejora a la lista del Jugador.
 	public void agregarUsable(Usable item) {
 		this.usables.add(item);
 	}
 	
 
+	//Permite cambiar el máximo del inventario si el valor ingresado es mayor al que se tenía antes, sino no hace nada.
 	public void setMaxInventario(int maxInventario) {
 		if(maxInventario > this.maxInventario) {
 			this.maxInventario = maxInventario;
@@ -81,6 +89,7 @@ public class Inventario{
 		}
 	}
 	
+	//Busca un usable y si está, lo remueve.
 	public void eliminarUsable(Usable buscado) {
 		for(int i = 0; i < this.usables.size(); i++) {
 			if(usables.get(i).getTipo() == buscado.getTipo()) {
