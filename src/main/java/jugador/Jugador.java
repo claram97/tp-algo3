@@ -15,6 +15,7 @@ public class Jugador implements Bloque {
 	private int anchoTerreno;
 	
 	//Cuidado con los limites a las pos, las pruebas usan y != 0
+	//Entonces cambiá las pruebas xD
 	public Jugador(int posX, int posY,int altoTerreno, int anchoTerreno) {
 		if(posX < 0 || altoTerreno < 10 || anchoTerreno < 10) {
 			return;
@@ -35,6 +36,7 @@ public class Jugador implements Bloque {
 	//------------------------------------------------
 	//          		DINERO
 	//------------------------------------------------
+	//Devuelve true si se pudo efectuar la compra y false en caso contrario.
 	public boolean hacerCompra(double gasto) {
 		if(gasto > this.dinero) {
 			return false;
@@ -44,6 +46,7 @@ public class Jugador implements Bloque {
 		return true;
 	}
 	
+	//Setea la cantidad de dinero actual.
 	public void setDinero(int dinero) {
 		if(dinero < 0) {
 			//throw an exception
@@ -51,10 +54,12 @@ public class Jugador implements Bloque {
 		this.dinero = dinero;
 	}
 	
+	//Devuelve el dinero actual.
 	public int getDinero() {
 		return this.dinero;
 	}
 	
+	//Vende los minerales.
 	public void venderMinerales() {
 		this.dinero = inventario.venderMinerales();
 	}
@@ -62,28 +67,35 @@ public class Jugador implements Bloque {
 	//------------------------------------------------
 	//          		POSICION
 	//------------------------------------------------
+	
+	//Devuelve la letra que representa a la clase.
 	public char getLetra() {
 		return Jugador.LETRA;
 	}
 	
+	//Devuelve la coordenada X del Jugador.
 	public int getX() {
 		return this.posicion.getX();
 	}
 	
+	//Devuelve la coordenada Y del Jugador.
 	public int getY() {
 		return this.posicion.getY();
 	}
 	
+	//Devuelve la posicion actual del Jugador.
 	public Posicion getPosicion() {
 		return this.posicion;
 	}
 	
+	//Setea la componente Y del personaje si está entre 0 y el alto del terreno
 	public void setY(int i) {
-		if(i <= this.altoTerreno) {
+		if(i >= 0 && i <= this.altoTerreno) {
 			this.posicion.setY(i);
 		}
 	}
 
+	//Setea la componente Y del personaje si está entre 0 y el ancho del terreno
 	public void setX(int i) {
 		if(i <= this.anchoTerreno) {
 			this.posicion.setX(i);
@@ -94,39 +106,45 @@ public class Jugador implements Bloque {
 	//          		DEMAS
 	//------------------------------------------------
 
+	//Permite agregar al inventario los bloques si son minerales.
 	public void observarBloque(Bloque bloque) {
 		if(bloque instanceof Mineral) {
 			inventario.agregarInventario((Mineral)bloque);
 		}
 	}
 	
+	//Devuelve el inventario.
 	public Inventario getInventario() {
 		return this.inventario;
 	}
 	
+	//Devuelve la nave.
 	public Nave getNave() {
 		return this.nave;
 	}
 
+	//Permite ampliar el inventario.
 	public void ampliarInventario(int nuevoMax) {
 		inventario.setMaxInventario(nuevoMax);
 		
 	}
 
+	//Permite ampliar el tanque.
 	public void ampliarTanque(double cantidad) {
 		nave.setCapacidadDelTanque(cantidad);
 	}
 
+	//Permite ampliar el HP max.
 	public void ampliarMaxHP(int cantidad) {
 		if(cantidad > nave.getMaxHP()) {
 			nave.setMaxHP(cantidad);			
 		}
 	}
 
+	//Devuelve true si no puede continuar, false en caso contrario.
 	public boolean noPuedeContinuar() {
 		return (nave.seEstrello() || nave.seQuedoSinCombustible());
 	}
-
 
 }
 
