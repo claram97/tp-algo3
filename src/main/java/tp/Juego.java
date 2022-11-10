@@ -53,6 +53,7 @@ public class Juego {
 		if(jugador.getY() == suelo.getAlto()) {
 			return EstadoDelJuego.GANADO;
 		}
+		
 		return EstadoDelJuego.JUGANDO;
 	}
 	
@@ -65,8 +66,9 @@ public class Juego {
 	}
 	
 	//Realiza las acciones que encuentra en la lista de acciones y las remueve de la misma.
+	//De momento, para ser utilizada por consola funciona de esta manera, pero la idea es que sea un loop que ejecute todas las acciones,
+	//una por cada una de las teclas que estan siendo presionadas de momento.
 	public void realizarAccion(ArrayList<Accion> acciones) {
-		//Una especie de "cola de acciones". Creo que se puede trasladar a una version mas dinamica con fps y actualizacion y eso :D.
 		if(acciones.size() > 0) {
 			if(acciones.get(0) != null) {
 				acciones.get(0).aplicar();

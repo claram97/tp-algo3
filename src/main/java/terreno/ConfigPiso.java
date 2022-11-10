@@ -1,8 +1,9 @@
 package terreno;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ConfigPiso {
 	public void crearConfiguracion();
-	public List<Entidad> getTiendas();
+	public Map<Integer, Entidad> getTiendas();
+	public Entidad getTiendaPos(int posX);
 }

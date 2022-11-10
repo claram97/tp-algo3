@@ -17,6 +17,7 @@ import terreno.TipoEntidad;
 public class TiendaDeConsumibles implements Entidad {
 	Posicion posicion;
 	Map<Character, Usable> usables;
+	private Scanner sc;
 	
 	public TiendaDeConsumibles(int ancho) {
 		super();
@@ -58,9 +59,9 @@ public class TiendaDeConsumibles implements Entidad {
 	@Override
 	//Permite al Jugador dado interactuar con la Tienda actual.
 	public void interactuar(Jugador jugador) {
-		Scanner scanner = new Scanner(System.in);
+		this.sc = new Scanner(System.in);
 		prompt_consumibles();
-		char opcion = scanner.next().charAt(0);
+		char opcion = sc.next().charAt(0);
 		vender(jugador, opcion);
 	}
 

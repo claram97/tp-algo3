@@ -4,27 +4,17 @@ import jugador.Jugador;
 import jugador.Posicion;
 import terreno.Suelo;
 
-public class MejoraExplosivos extends MejoraDeTerreno {
+public class MejoraExplosivos extends Usable {
 	public static int VALOR = 5000;
 	public static char LETRA = 'C';
-	
+	public static TipoUsable TIPO = TipoUsable.EXPLOSIVOS;
 	private Suelo suelo;
 	
-	public MejoraExplosivos(Suelo suelo, Jugador pj) {
-		super(LETRA, suelo);
+	public MejoraExplosivos(Suelo suelo) {
+		super(LETRA, TIPO, VALOR);
 		this.suelo = suelo;
 	}
 	
-	@Override
-	public char getLetra() {
-		return LETRA;
-	}
-
-	@Override
-	public TipoUsable getTipo() {
-		return TipoUsable.EXPLOSIVOS;
-	}
-
 	@Override
 	public void utilizar(Jugador jugador) {
 		Posicion actual = jugador.getPosicion();
@@ -35,10 +25,5 @@ public class MejoraExplosivos extends MejoraDeTerreno {
 				suelo.destruirBloque(aRomper);
 			}
 		}
-	}
-
-	@Override
-	public int getCosto() {
-		return VALOR;
 	}
 }

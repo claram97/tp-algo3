@@ -102,6 +102,14 @@ public class Jugador implements Bloque {
 		}
 	}
 	
+	public int getLimiteAlto() {
+		return this.altoTerreno;
+	}
+	
+	public int getLimiteAncho() {
+		return this.anchoTerreno;
+	}
+	
 	//------------------------------------------------
 	//          		DEMAS
 	//------------------------------------------------
@@ -126,7 +134,6 @@ public class Jugador implements Bloque {
 	//Permite ampliar el inventario.
 	public void ampliarInventario(int nuevoMax) {
 		inventario.setMaxInventario(nuevoMax);
-		
 	}
 
 	//Permite ampliar el tanque.

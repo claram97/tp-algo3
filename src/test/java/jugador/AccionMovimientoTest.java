@@ -85,6 +85,44 @@ public class AccionMovimientoTest {
 	}
 	
 	@Test
+	public void noSaleDeLosLimitesX() {
+		Jugador jugador = new Jugador(9, 0, 10, 10);
+		ConfigSuelo configSuelo = new Suelo1(10, 10);
+		Suelo suelo = new Suelo(configSuelo);
+		AccionMovimiento mov = new AccionMovimiento(jugador, suelo, null, 1, 0);
+		mov.aplicar();
+		assertEquals(jugador.getX(), 9);
+	}
+	
+	public void noSaleDeLosLimitesY() {
+		Jugador jugador = new Jugador(0, 9, 10, 10);
+		ConfigSuelo configSuelo = new Suelo1(10, 10);
+		Suelo suelo = new Suelo(configSuelo);
+		AccionMovimiento mov = new AccionMovimiento(jugador, suelo, null, 0, 1);
+		mov.aplicar();
+		assertEquals(jugador.getY(), 9);
+	}
+	
+	@Test
+	public void sufreFallDamage() {
+		Jugador jugador = new Jugador(5, 0, 20, 20);
+		ConfigSuelo configSuelo = new Suelo1(20, 20);
+		Suelo suelo = new Suelo(configSuelo);
+		int hpViejo = jugador.getNave().getHP();
+		for(int i = 1; i < 10; i++) {
+			suelo.destruirBloque(new Posicion(5, i));
+		}
+		AccionMovimiento mov = new AccionMovimiento(jugador, suelo, null, 0, 1);
+		mov.aplicar();
+		boolean posicionCorrecta = jugador.getY() == 9;
+		boolean dmg = jugador.getNave().getHP() < hpViejo;
+		
+		assertTrue(posicionCorrecta && dmg);
+	}
+	
+	
+	
+	@Test
 	public void Taladrar() {
 		
 	}

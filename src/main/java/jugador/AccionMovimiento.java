@@ -7,6 +7,7 @@ import terreno.TipoEntidad;
 import tp.Main;
 
 public class AccionMovimiento implements Accion{
+	private static final double GASTO_COMBUSTIBLE_MOVIMIENTO = 0.15;
 	private Jugador pj;
 	private Suelo suelo;
 	private PisoSuperior tiendas;
@@ -61,22 +62,30 @@ public class AccionMovimiento implements Accion{
 		if(suelo.casilleroVacio(pos) || suelo.getBloque(pos) instanceof Tierra) {
 			return;
 		}
+		
 		if(this.tiendas != null) {
 			if(pj.getY() == 0 && tiendas.colisionEntidad(pos).getTipoEntidad() == TipoEntidad.TIENDA) {
 				return;
 			}
-		}		
+		}
 		pj.observarBloque(suelo.getBloque(pos));
 	}
 	
 	//Permite aplicar la accion de movimiento al Jugador.
 	public boolean aplicar() {		
 		Posicion nueva = new Posicion(pj.getX(), pj.getY());
+		
+		if(nueva.getY() + this.dy < 0 || nueva.getY() + this.dy >= pj.getLimiteAncho()) {
+			return false;
+		}
+		if(nueva.getX() + this.dx < 0 || nueva.getX() + this.dx >= pj.getLimiteAlto()) {
+			return false;
+		}
+		
+		
 		if(this.dy != 0) {
 			if(this.dy > 0 || !chocaArriba()) {
 				nueva.setY(this.pj.getY() + dy);
-				//Si se le pasa un valor negativo deberia funcionar igual.
-				//Falta excepcion para que no se escape por los bordes
 			}
 		}
 		if(this.dx != 0) {
@@ -87,7 +96,7 @@ public class AccionMovimiento implements Accion{
 		pj.setX(nueva.getX());
 		pj.setY(nueva.getY());
 		
-		if(pj.getY() == 0 && this.tiendas != null) {
+		if(pj.getY() == 0 && this.tiendas != null && tiendas.devolverTiendas().get(pj.getX()) != null) {
 			if(tiendas.colisionEntidad(pj.getPosicion()).getTipoEntidad() == TipoEntidad.TIENDA) {
 				tiendas.colisionEntidad(pj.getPosicion()).interactuar(pj);
 			}
@@ -98,7 +107,7 @@ public class AccionMovimiento implements Accion{
 		if(this.dy >= 0) {
 			this.pj.getNave().recibirDanio(this.caer());
 		}
-		this.pj.getNave().gastarCombustible((float)0.15);
+		this.pj.getNave().gastarCombustible(GASTO_COMBUSTIBLE_MOVIMIENTO);
 		return true;
 	}
 }

@@ -10,7 +10,8 @@ public class MejoraMaxInventario extends MejoraInstantanea {
 			super.valor = valor;
 		}
 		else {
-			//throw an exception
+			super.cantidadAMejorar = 0;
+			super.valor = 0;
 		}
 	}
 	

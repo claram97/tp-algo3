@@ -2,33 +2,20 @@ package mejoras;
 
 import jugador.Jugador;
 
-public class MejoraTanqueExtra implements Usable {
+public class MejoraTanqueExtra extends Usable {
 	private static final char LETRA = 'F';
 	public static final int VALOR = 2000;
-	private int cantidadCombustible;
+	private static final TipoUsable TIPO = TipoUsable.TANQUE_EXTRA;
+	private static final double CANTIDAD_COMBUSTIBLE = 25.0;
+	
+	private double cantidadCombustible;
 	
 	public MejoraTanqueExtra() {
-		this.cantidadCombustible = 25;
+		super(LETRA, TIPO, VALOR);
+		this.cantidadCombustible = CANTIDAD_COMBUSTIBLE;
 	}
 
-	//Hay que ver qué hacemos si no se gasta todo :P
 	public void utilizar(Jugador jugador) {
 		jugador.getNave().cargarCombustible(cantidadCombustible, 0);
 	}
-
-	@Override
-	public char getLetra() {
-		return LETRA;
-	}
-
-	@Override
-	public TipoUsable getTipo() {
-		return TipoUsable.TANQUE_EXTRA;
-	}
-
-	@Override
-	public int getCosto() {
-		return VALOR;
-	}
-
 }

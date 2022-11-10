@@ -1,7 +1,6 @@
 package tp;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -79,26 +78,4 @@ public class JuegoTest {
 		juego.realizarAccion(acciones);
 		assertEquals(pj.getPosicion().getY(), 0);
 	}
-	
-	@Test
-	public void funcionaComoCola() {
-		var acciones = new ArrayList<Accion>();
-		Jugador pj = new Jugador(3, 1,10,10);
-		ConfigSuelo configSuelo = new Suelo1(4,4);
-		Suelo suelo = new Suelo(configSuelo);
-		Juego juego = new Juego(suelo, null, pj);
-		juego.convertirInput('W', acciones);
-		juego.convertirInput('S', acciones);
-		juego.convertirInput('S', acciones);
-		juego.convertirInput('S', acciones);
-		juego.convertirInput('S', acciones);
-		juego.realizarAccion(acciones);
-		
-		boolean posCorrecta = pj.getPosicion().getY() == 0;
-		boolean cantidadCorrecta = acciones.size() == 4;
-		
-		assertTrue(posCorrecta && cantidadCorrecta);
-	}
-	
-
 }

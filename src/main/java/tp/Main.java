@@ -1,8 +1,6 @@
 package tp;
 
-import jugador.Inventario;
 import jugador.Jugador;
-import jugador.Nave;
 import terreno.ConfigPisoSuperior;
 import terreno.ConfigSuelo;
 import terreno.PisoSuperior;

@@ -4,14 +4,15 @@ import jugador.Jugador;
 import jugador.Posicion;
 import terreno.Suelo;
 
-public class MejoraDinamita extends MejoraDeTerreno {
+public class MejoraDinamita extends Usable {
 	public static int VALOR = 20;
 	public static char LETRA = 'X';
+	public static TipoUsable TIPO = TipoUsable.DINAMITA;
 	
 	private Suelo suelo;
 	
 	public MejoraDinamita(Suelo suelo) {
-		super(MejoraDinamita.LETRA, suelo);
+		super(MejoraDinamita.LETRA, TIPO, VALOR);
 		this.suelo = suelo;
 	}
 
@@ -25,20 +26,5 @@ public class MejoraDinamita extends MejoraDeTerreno {
 				suelo.destruirBloque(aRomper);
 			}
 		}
-	}
-
-	@Override
-	public char getLetra() {
-		return LETRA;
-	}
-
-	@Override
-	public TipoUsable getTipo() {
-		return TipoUsable.DINAMITA;
-	}
-
-	@Override
-	public int getCosto() {
-		return VALOR;
 	}
 }

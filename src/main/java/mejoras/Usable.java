@@ -2,13 +2,30 @@ package mejoras;
 
 import jugador.Jugador;
 
-public interface Usable {
+public abstract class Usable {
+	private char letra;
+	private TipoUsable tipo;
+	private int costo;
+
+	public Usable(char letra, TipoUsable tipo, int costo) {
+		this.letra = letra;
+		this.tipo = tipo;
+		this.costo = costo;
+	}
+
+	public void utilizar(Jugador jugador) {
+		return;
+	}
 	
-	public void utilizar(Jugador jugador);
+	public char getLetra() {
+		return this.letra;
+	}
 	
-	public char getLetra();
+	public TipoUsable getTipo() {
+		return this.tipo;
+	}
 	
-	public TipoUsable getTipo();
-	
-	public int getCosto();	
+	public int getCosto() {
+		return this.costo;
+	}
 }

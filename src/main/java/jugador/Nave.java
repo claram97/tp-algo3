@@ -34,16 +34,15 @@ public class Nave {
 	}
 	
 	//Permite aumentar la cantidad de combustible.
-	public void setNivelDeCombustible(double nivelDeCombustible) {
-		if(nivelDeCombustible < 0) {
-			//throw an exception
+	public void setNivelDeCombustible(double cantidad) {
+		if(cantidad < 0) {
+			return;
 		}
-		if(nivelDeCombustible > this.capacidadTanque) {
-			//throw an exception
-			//o no, creo que acá llenaría el tanque y ya.
+		if(cantidad > this.capacidadTanque) {
+			this.nivelCombustible = capacidadTanque;
 		}
 		
-		this.nivelCombustible = nivelDeCombustible;
+		this.nivelCombustible = cantidad;
 	}
 	
 	//Permite cargar una cantidad de combustible deseada por la cantidad de plata especificada.
@@ -51,11 +50,10 @@ public class Nave {
 		this.nivelCombustible += cantidadCombustible;
 	}
 	
-	//Estas funciones actualizan el máximo y el nivel actual también, viola el SRP? (Agregar esta duda en el Notion y sacar este comentario)
 	//Aumenta la capacidad máxima del tanque, seteando el nivel actual al máximo.
 	public void agregarCapacidadAlTanque(double cantidad) {
 		if(cantidad < 0) {
-			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+			return;
 		}
 		this.setCapacidadDelTanque(cantidad);
 		this.setNivelDeCombustible(cantidad);
@@ -64,11 +62,9 @@ public class Nave {
 	//Aumenta la capacidad del tanque si la capacidad recibida es mayor a la actual.
 	public void setCapacidadDelTanque(double capacidad) {
 		if(capacidad < 0) {
-			//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
 			return;
 		}
 		if(capacidad < this.capacidadTanque) {
-			//throw an exception (no deberíamos achicar el tanque) -> esta excepción consistiría en tirar un mensaje por pantalla quizás?
 			return;
 		}
 		this.capacidadTanque = capacidad;
@@ -77,7 +73,7 @@ public class Nave {
 	//Permite gastar combustible en una cantidad dada.
 	public void gastarCombustible(double cantidad) {
 		if(cantidad <= 0) {
-		//throw an exception -> o no, quizás simplemente dejaríamos que no haga nada si el valor no es válido? AAA no sé jkldjklfj
+			return;
 		}
 		this.nivelCombustible -= cantidad;
 	}
@@ -112,7 +108,7 @@ public class Nave {
 	//Setea el hp en un hp dado.
 	public void setHP(int hp) {
 		if(hp < 0) {
-			//throw exception
+			return;
 		}
 		if(hp > this.maxHP){
 			this.hp = maxHP;
@@ -132,12 +128,12 @@ public class Nave {
 	}
 	
 	//Recibe daño mientras este sea un valor positivo.
-	public void recibirDanio(int danio) {
-		if(danio < 0) {
+	public void recibirDanio(int dmg) {
+		if(dmg < 0) {
 			return;
 		}
 		
-		this.hp -= danio;
+		this.hp -= dmg;
 		if(this.hp < 0) {
 			this.hp = 0;
 		}

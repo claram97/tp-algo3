@@ -1,11 +1,10 @@
 package terreno;
 
-import java.util.List;
-
+import java.util.Map;
 import jugador.Posicion;
 
 public class PisoSuperior {
-	ConfigPiso config;
+	public ConfigPiso config;
 
 	public PisoSuperior(ConfigPiso config) {
 		if(config == null) {
@@ -17,14 +16,13 @@ public class PisoSuperior {
 	//Verifica si hay colision con una entidad.
 	public Entidad colisionEntidad(Posicion pos) {
 		if(this.config.getTiendas() != null) {
-			return this.config.getTiendas().get(pos.getX());
+			return this.config.getTiendaPos(pos.getX());
 		}
 		return null;
 	}
 	
 	//Devuelve las tiendas.
-	public List<Entidad> devolverTiendas(){
+	public Map<Integer, Entidad> devolverTiendas(){
 		return this.config.getTiendas();
 	}
-	
 }

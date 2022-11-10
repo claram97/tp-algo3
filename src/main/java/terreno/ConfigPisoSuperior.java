@@ -1,18 +1,16 @@
 package terreno;
 
-import java.util.List;
-
+import java.util.Map;
 import tiendas.EstacionDeReparacion;
 import tiendas.EstacionDeServicio;
 import tiendas.EstacionDeVenta;
 import tiendas.TiendaDeConsumibles;
 import tiendas.TiendaDeMejoras;
 import tp.Main;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ConfigPisoSuperior implements ConfigPiso {
-	List<Entidad> tiendas;
+	Map<Integer, Entidad> tiendas;
 
 	public ConfigPisoSuperior(){
 		this.crearConfiguracion();
@@ -26,21 +24,22 @@ public class ConfigPisoSuperior implements ConfigPiso {
 		var consumibles = new TiendaDeConsumibles(Main.ANCHO);
 		var estacionDeVentas = new EstacionDeVenta(Main.ANCHO);
 
-		this.tiendas = new ArrayList<>();
+		this.tiendas = new HashMap<Integer, Entidad>();
 	
-		for(int i = 0; i < Main.ANCHO; i++) {
-			tiendas.add(new Aire());
-		}
-		
-		tiendas.add(ypf.getPosicion().getX(), ypf);
-		tiendas.add(mecanico.getPosicion().getX(), mecanico);
-		tiendas.add(mejoras.getPosicion().getX(), mejoras);
-		tiendas.add(consumibles.getPosicion().getX(), consumibles);
-		tiendas.add(estacionDeVentas.getPosicion().getX(),estacionDeVentas);
+		tiendas.put(ypf.getPosicion().getX(), ypf);
+		tiendas.put(mecanico.getPosicion().getX(), mecanico);
+		tiendas.put(mejoras.getPosicion().getX(), mejoras);
+		tiendas.put(consumibles.getPosicion().getX(), consumibles);
+		tiendas.put(estacionDeVentas.getPosicion().getX(),estacionDeVentas);
 	}
 	
-	//Devuelve la lista de Tiendas.
-	public List<Entidad> getTiendas(){
+	//Devuelve el diccionario de las tiendas
+	public Map<Integer, Entidad> getTiendas(){
 		return this.tiendas;
+	}
+	
+	@Override
+	public Entidad getTiendaPos(int posX) {
+		return tiendas.get(posX);
 	}
 }

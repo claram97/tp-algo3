@@ -30,7 +30,7 @@ public class Posicion {
 	//Setea la componente X si es positiva.
 	public void setX(int posicionX) {
 		if(posicionX < 0) {
-			//throw an exception
+			return;
 		}
 		this.posicionX = posicionX;
 	}
@@ -38,7 +38,7 @@ public class Posicion {
 	//Setea la componente Y si es positiva.
 	public void setY(int posicionY) {
 		if(posicionY < 0) {
-			//throw an exception
+			return;
 		}
 		this.posicionY = posicionY;
 	}
@@ -46,7 +46,7 @@ public class Posicion {
 	//Setea las posiciones X e Y si son positivas.
 	public void set(int posicionX, int posicionY) {
 		if(posicionX < 0 || posicionY < 0) {
-			//throw an exception
+			return;
 		}
 		else {
 			this.setX(posicionX);

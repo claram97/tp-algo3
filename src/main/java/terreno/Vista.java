@@ -18,7 +18,6 @@ public class Vista {
 		if(tiendas == null || suelo == null || pj == null) {
 			//throw an exception
 		}
-		
 		this.tiendas = tiendas;
 		this.suelo = suelo;
 		this.pj = pj;
@@ -38,7 +37,12 @@ public class Vista {
 			if(pj.getPosicion().getX() == i && pj.getPosicion().getY() == 0) {
 				System.out.print(this.pj.getLetra());
 			} else{
-				System.out.print(tiendas.devolverTiendas().get(i).getLetra());
+				Entidad tiendaActual = tiendas.devolverTiendas().get(i);
+				if(tiendaActual != null) {
+					System.out.print(tiendaActual.getLetra());
+				} else {
+					System.out.print(' ');
+				}
 			}
 			System.out.print(' ');
 		}
