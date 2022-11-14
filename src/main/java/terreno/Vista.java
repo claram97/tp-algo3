@@ -37,7 +37,7 @@ public class Vista {
 			if(pj.getPosicion().getX() == i && pj.getPosicion().getY() == 0) {
 				System.out.print(this.pj.getLetra());
 			} else{
-				Entidad tiendaActual = tiendas.devolverTiendas().get(i);
+				Entidad tiendaActual = tiendas.getTiendaPos(i);
 				if(tiendaActual != null) {
 					System.out.print(tiendaActual.getLetra());
 				} else {
